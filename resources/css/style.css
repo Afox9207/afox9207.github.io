@@ -1,3 +1,39 @@
+body {
+    margin: 0;
+}
+
 h1 {
     text-align: center;
+}
+
+ul {
+    list-style: none; /*get rid of bullets*/
+    margin: 0;
+    padding: 0;
+    width: 12rem;
+    background-color: lightgray;
+    border: 1px solid black;
+}
+
+li {
+    border-bottom: 1px solid black; /*draw line under button*/
+}
+
+.last-link { 
+    border: 0; /*don't need border-bottem on last link*/
+}
+
+li a {
+    display: block;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none; /*get rid of underline*/
+}
+
+li a:visited {
+    color: black; /*visited links appear same color as before*/
+}
+
+li a:hover {
+    background-color: gray; /*button gets darker when mouse is over it*/
 }

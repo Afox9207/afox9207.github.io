@@ -1,16 +1,33 @@
+@media screen only and (max-width: 400px) {
+    html {
+        font-size: 32px; /*double font-size for cellphones*/
+    }
+}
+
 body {
     margin: 0;
 }
 
 h1 {
+    margin: 0;
+    padding: 1.5rem 0 1.5rem;
+    text-align: center;
+    background-color: orangered;
+}
+
+h2 {
     text-align: center;
 }
+
+/*Nav Bar*/
 
 ul {
     list-style: none; /*get rid of bullets*/
     margin: 0;
     padding: 0;
     width: 12rem;
+    height: 100%;
+    position: fixed;
     background-color: lightgray;
     border: 1px solid black;
 }
@@ -19,12 +36,8 @@ li {
     border-bottom: 1px solid black; /*draw line under button*/
 }
 
-.last-link { 
-    border: 0; /*don't need border-bottem on last link*/
-}
-
 li a {
-    display: block;
+    display: block; /*make whole button clickable*/
     padding: 0.5rem 1rem;
     text-align: center;
     text-decoration: none; /*get rid of underline*/
@@ -37,4 +50,9 @@ li a:visited {
 
 li a:hover {
     background-color: gray; /*button gets darker when mouse is over it*/
+}
+
+.active {
+    background-color: orange;
+    color: blue !important; /*override a:visited color*/
 }

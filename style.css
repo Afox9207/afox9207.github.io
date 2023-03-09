@@ -8,17 +8,6 @@ body {
     margin: 0;
 }
 
-h1 {
-    margin: 0;
-    padding: 1.5rem 0 1.5rem;
-    text-align: center;
-    background-color: orangered;
-}
-
-h2 {
-    text-align: center;
-}
-
 /*Nav Bar*/
 
 ul {
@@ -30,6 +19,7 @@ ul {
     position: fixed;
     background-color: lightgray;
     border: 1px solid black;
+    z-index: 1;
 }
 
 li {
@@ -55,4 +45,22 @@ li a:hover {
 .active {
     background-color: orange;
     color: blue !important; /*override a:visited color*/
+}
+
+/*main content*/
+
+.push-right {
+    position: relative;
+    left: 6rem; /*half navbar width*/
+}
+
+h1 {
+    margin: 0;
+    padding: 1.5rem 0 1.5rem;
+    text-align: center;
+    background-color: orangered;
+}
+
+h2 {
+    text-align: center;
 }

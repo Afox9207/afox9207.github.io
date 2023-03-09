@@ -6,6 +6,7 @@
 
 body {
     margin: 0;
+    text-align: center;
 }
 
 /*Nav Bar*/
@@ -57,10 +58,6 @@ li a:hover {
 h1 {
     margin: 0;
     padding: 1.5rem 0 1.5rem;
-    text-align: center;
     background-color: orangered;
 }
 
-h2 {
-    text-align: center;
-}

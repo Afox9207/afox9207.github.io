@@ -1,0 +1,68 @@
+/*grow text*/
+
+.orange {
+    color: orange;
+}
+
+.grow-text {
+    transition: all 1s linear 250ms;
+}
+
+.grow-text:hover {
+    font-size: 2rem;
+}
+
+/*change color*/
+
+.flex-container-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex-container-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 90%;
+    margin: auto;
+}
+
+h3 {
+    width: 6rem;
+    margin: 0;
+}
+
+.color-button {
+    display: inline-block;
+    height: 2rem;
+    width: 4rem;
+    margin: auto;
+    background-color: orange;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.cb1 {
+    transition: all 1s ease 250ms;
+}
+
+.cb2 {
+    transition: all 1s linear 250ms;
+}
+
+.cb3 {
+    transition: all 1s ease-in 250ms;
+}
+
+.cb4 {
+    transition: all 1s ease-out 250ms;
+}
+
+.cb5 {
+    transition: all 1s ease-in-out 250ms;
+}
+
+.color-button:hover {
+    background-color: blue;
+}

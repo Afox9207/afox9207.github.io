@@ -1,0 +1,12 @@
+#home {
+    height: 3rem;
+    width: 6rem;
+    border: 1px solid black;
+    position: fixed;
+    top: .25rem;
+    right: .25rem;
+    text-align: center;
+    line-height: 1.5rem;
+    z-index: 1;
+    background-color: white;
+}

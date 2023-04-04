@@ -4,8 +4,14 @@
     }
 }
 
-h1 {
+body {
+    background-color: wheat;
+}
+
+.welcome {
     text-align: center;
+    border-bottom: 1px solid black;
+    padding-bottom: 1rem;
 }
 
 .flex {
@@ -14,9 +20,15 @@ h1 {
 
 nav {
     flex: 1;
+    padding-right: 8px;
 }
 
 #main-text {
     flex: 3;
+    padding: 0 2rem;
 }
 
+ul {
+    background-color: slategray;
+    border: 5px inset gray;
+}

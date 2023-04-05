@@ -13,6 +13,12 @@ h1.welcome {
 
 /*Nav Bar*/
 
+@media screen and (max-device-width: 480px) {
+    html {
+        font-size: 32px;
+    }
+}
+
 nav {
     width: 10rem;
     border: 2px inset gray;
@@ -59,10 +65,16 @@ nav ul li a:visited {
 
 /*main content*/
 
-.main-text {
+div.main-text {
     display: inline-block;
     width: 12rem;
     line-height: 2rem;
     margin-left: 21.5rem;
     height: 1000px;
+}
+
+@media screen and (max-device-width: 480px) {
+    div.main-text {
+        margin-left: 2rem;
+    }
 }

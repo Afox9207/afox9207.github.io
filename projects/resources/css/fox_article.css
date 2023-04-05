@@ -4,7 +4,7 @@
     }
 }
 
-#home {
+.home {
     height: 3rem;
     width: 6rem;
     border: 1px solid black;
@@ -17,7 +17,7 @@
     background-color: white;
 }
 
-#back-to-top {
+.back-to-top {
     height: 1.5rem;
     width: 6rem;
     border: 1px solid black;
@@ -28,4 +28,17 @@
     line-height: 1.5rem;
     z-index: 1;
     background-color: white;
+}
+
+.home a, .back-to-top a {
+    display: block;
+}
+
+.home a:link, .back-to-top a:link {
+    text-decoration: none;
+    color: black;
+}
+
+.home a:visited, .back-to-top a:visited {
+    color: black;
 }

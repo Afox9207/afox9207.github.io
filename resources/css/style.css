@@ -1,34 +1,68 @@
-@media only screen and (max-device-width: 480px) {
-    html {
-        font-size: 32px;
-    }
-}
-
 body {
     background-color: wheat;
+    box-sizing: border-box;
 }
 
-.welcome {
+h1.welcome {
     text-align: center;
-    border-bottom: 1px solid black;
-    padding-bottom: 1rem;
+    width: 8rem;
+    margin: auto;
+    padding: 1rem 0 2rem;
+    font-size: 2rem;
 }
 
-.flex {
-    display: flex;
-}
+/*Nav Bar*/
 
 nav {
-    flex: 1;
-    padding-right: 8px;
+    width: 10rem;
+    border: 2px inset gray;
+    background-color: lightgray;
+    margin: 0 2rem 0 1rem;
+    position: sticky;
+    top: 0;
+    display: inline-block;
 }
 
-#main-text {
-    flex: 3;
-    padding: 0 2rem;
+nav h1 {
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 1.5rem;
 }
 
-ul {
-    background-color: slategray;
-    border: 5px inset gray;
+nav ul {
+    margin: 0 1rem 1rem 1rem;
+    border: 1px inset gray;
+}
+
+nav ul li {
+    text-align: center;
+    margin: .5rem .5rem;
+    border: 1px outset gray;
+}
+
+nav ul li a {
+    display: block;
+    padding: 1rem;
+}
+
+nav ul li a:link {
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    background-color: darkgray;
+}
+
+nav ul li a:visited {
+    color: black;
+}
+
+/*main content*/
+
+.main-text {
+    display: inline-block;
+    width: 12rem;
+    line-height: 2rem;
+    margin-left: 21.5rem;
+    height: 1000px;
 }

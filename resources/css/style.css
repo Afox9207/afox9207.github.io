@@ -1,32 +1,40 @@
-body {
-    background-color: wheat;
-    box-sizing: border-box;
-}
-
-h1.welcome {
-    text-align: center;
-    width: 8rem;
-    margin: auto;
-    padding: 1rem 0 2rem;
-    font-size: 2rem;
-}
-
-/*Nav Bar*/
-
 @media screen and (max-device-width: 480px) {
     html {
         font-size: 32px;
     }
 }
 
+.flex {
+    display: flex;
+}
+
+body {
+    background-color: wheat;
+}
+
+h1.welcome {
+    text-align: center;
+    width: 8rem;
+    padding: 1rem calc(((100% - 8rem) / 2) - 13rem) 2rem;
+    margin: auto;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    border-right: 5px double black;
+    border-bottom: 5px double black;
+    border-left: 5px double black;
+}
+
+/*Nav*/
+
 nav {
     width: 10rem;
     border: 2px inset gray;
     background-color: lightgray;
-    margin: 0 2rem 0 1rem;
+    margin: 0rem 2rem 0 1rem;
     position: sticky;
     top: 0;
-    display: inline-block;
+    align-self: flex-start;
+    height: auto;
 }
 
 nav h1 {
@@ -49,32 +57,27 @@ nav ul li {
 nav ul li a {
     display: block;
     padding: 1rem;
-}
-
-nav ul li a:link {
     text-decoration: none;
-}
-
-nav ul li a:hover {
-    background-color: darkgray;
+    color: black;
 }
 
 nav ul li a:visited {
     color: black;
 }
 
-/*main content*/
+nav ul li a:hover {
+    background-color: darkgray;
+}
+
+/*main text*/
 
 div.main-text {
-    display: inline-block;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 0 1rem;
     width: 12rem;
-    line-height: 2rem;
-    margin-left: 21.5rem;
     height: 1000px;
+    line-height: 2rem;
+    margin-left: calc(50% - 7rem - 13rem - 4px) /*half of right side - half width of main-text with padding - navbar*/
 }
 
-@media screen and (max-device-width: 480px) {
-    div.main-text {
-        margin-left: 2rem;
-    }
-}

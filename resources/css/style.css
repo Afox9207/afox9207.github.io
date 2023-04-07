@@ -83,7 +83,10 @@ div.main-text {
         width: 8rem;
         padding: 1rem 4rem; 
     }
+    nav {
+        width: 9rem;
+    }
     div.main-text {
-        margin-left: 1rem;
+        margin-left: 1.5rem;
     }
 }

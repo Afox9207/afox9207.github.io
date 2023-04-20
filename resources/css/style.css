@@ -51,7 +51,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 4rem;
+    height: 6rem;
     position: sticky;
     top: 0;
     z-index: 1;
@@ -63,7 +63,7 @@ nav {
 
 nav h1 {
     font-family: "logo";
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     padding-left: 2rem;
 }
 
@@ -72,9 +72,13 @@ nav ul {
     font-family: "navbar";
 }
 
+nav li {
+    font-size: 2rem;
+}
+
 nav a {
     display: inline-block;
-    padding: 1.5rem;
+    padding: 2rem;
     border-left: 2px solid black;
 }
 
@@ -103,7 +107,7 @@ nav a:hover {
 
 #about_me img {
     width: 30%;
-    margin: 0 2rem 1rem 1rem;
+    margin: 0 2rem 0rem 1rem;
     border: 1px solid black;
     float: left;
 }
@@ -164,6 +168,18 @@ nav a:hover {
 /*desktop*/
 
 @media only screen and (orientation: landscape) {
+    nav {
+        height: 4rem;
+    }
+    nav h1 {
+        font-size: 2.5rem;
+    }
+    nav li {
+        font-size: 1rem;
+    }
+    nav a {
+        padding: 1.5rem;
+    }
     #about_me, #projects, #contact {
         padding: 0rem 24rem;
     }

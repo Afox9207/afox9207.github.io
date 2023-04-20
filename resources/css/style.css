@@ -103,7 +103,7 @@ nav a:hover {
 
 #about_me img {
     width: 30%;
-    margin: 0 2rem 0 1rem;
+    margin: 0 2rem 1rem 1rem;
     border: 1px solid black;
     float: left;
 }
@@ -160,3 +160,15 @@ nav a:hover {
 #contact p {
     text-align: center;
 }
+
+/*desktop*/
+
+@media only screen and (orientation: landscape) {
+    #about_me, #projects, #contact {
+        padding: 0rem 24rem;
+    }
+    #about_me img {
+        width: 40%;
+    }
+}
+

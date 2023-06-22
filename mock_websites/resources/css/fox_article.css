@@ -1,0 +1,44 @@
+@media only screen and (max-device-width: 480px) {
+    html {
+        font-size: 32px;
+    }
+}
+
+.home {
+    height: 3rem;
+    width: 6rem;
+    border: 1px solid black;
+    position: fixed;
+    top: .25rem;
+    right: .25rem;
+    text-align: center;
+    line-height: 1.5rem;
+    z-index: 1;
+    background-color: white;
+}
+
+.back-to-top {
+    height: 1.5rem;
+    width: 6rem;
+    border: 1px solid black;
+    position: fixed;
+    bottom: .25rem;
+    right: .25rem;
+    text-align: center;
+    line-height: 1.5rem;
+    z-index: 1;
+    background-color: white;
+}
+
+.home a, .back-to-top a {
+    display: block;
+}
+
+.home a:link, .back-to-top a:link {
+    text-decoration: none;
+    color: black;
+}
+
+.home a:visited, .back-to-top a:visited {
+    color: black;
+}

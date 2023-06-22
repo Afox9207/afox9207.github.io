@@ -1,46 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Fox Den</title>
     <link href="./resources/css/reset.css" rel="stylesheet">
     <link href="./resources/css/style.css" rel="stylesheet">
-    <title>The Fox Den</title>
+    <script src="./resources/js/index.js"></script>
 </head>
 <body>
     <header>
-        <img src="./resources/images/fox_resting.jpg" alt="A fox resting">
-        <h1>Welcome to the <span style="color:hsl(30,100%,50%)">Fox</span> Den</h1>
+        <nav>
+            <div id="navbar">
+                <img id="bars" onclick="openMenu()" src="./resources/icons/bars.svg">
+                <h1>The Fox Den</h1>
+            </div>
+            <div id="menu">
+                <ul>
+                    <li><a href="#about_me">About Me</a></li>
+                    <li onclick="dropMockMenu()"><img id="mock_arrow" src="./resources/icons/angle-right.svg">Mock Websites</li>
+                        <ul id="mock_list">
+                            <li><a href="./mock_websites/fox_article.html">Fox Article</a></li>
+                            <li><a href="./mock_websites/blog.html">Blog</a></li>
+                            <li><a href="./mock_websites/schedule.html">Schedule</a></li>
+                            <li><a href="./mock_websites/pizza.html">Pizza Shop</a></li>
+                        </ul>
+                    <li onclick="dropJavaMenu()"><img id="java_arrow" src="resources/icons/angle-right.svg">Java Fun</li>
+                        <ul id="java_list">
+                            <li><a href="./java_fun/dice.html">Dice Roller</a></li>
+                        </ul>
+                    <li>Contact</li>
+                </ul>
+            </div>
+        </nav>
+        <div class="welcome">
+            <img src="./resources/images/fox_resting.jpg">
+            <h1>Welcome to the <span style="color: hsl(30,100%,50%)">Fox</span> Den</h1>
+        </div>
     </header>
-    <nav>
-        <h1>Fox Den</h1>
-        <ul>
-            <li><a href="#about_me">About me</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact info</a></li>
-        </ul>
-    </nav>
     <div id="about_me">
-        <h1>About me</h1>
-        <img src="./resources/images/artic_fox_iceland.jpg" alt="avatar picture of arctic fox">
-        <p>Hello, and thank you for visiting my website. My name is Adam. I'll be using this page as a portfolio to show my work as a web designer. First let me tell you a little about myself.</p>
-        <p>I was born and raised in Northern Maine. I have three siblings, two of which I share the same birthday with, but do <strong>not</strong> share the same birth year. The chances of that randomly happening are 1 in 48,627,125. That's my go to ice breaker, but why did I decide to start coding?</p>
-        <p>Since I was young I've always been interested in coding due to being interested in how video games work. I felt that web design would be a great start to learning to code, and also have a real world application. It's been a lot of fun learning how HTML and CSS work. I hope you enjoy my site as much as I did making it.</p>
-    </div>
-    <div id="projects">
-        <h1>Projects</h1>
-        <ul>
-            <li><a href="./projects/fox_article.html">Fox Article</a></li>
-            <li><a href="./projects/blog.html">Blog</a></li>
-            <li><a href="./projects/schedule.html">Schedule</a></li>
-            <li><a href="./projects/shop/shop.html">Shop</a></li>
-        </ul>
-        <h1>Java Fun</h1>
-        <ul>
-            <li><a href="./java_fun/dice.html">Dice Roller</a></li>
-        </ul>
-    </div>
-    <div id="contact">
-        <h1>Contact</h1>
-        <p>More to come</p>
+        <h1>About Me</h1>
+        <p>Thank you for visiting my website. I'll be using this site as a portfolio of the work I've done as a web designer</p>
     </div>
 </body>
 </html>

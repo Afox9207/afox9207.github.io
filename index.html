@@ -1,45 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Fox Den</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./resources/css/reset.css" rel="stylesheet">
     <link href="./resources/css/style.css" rel="stylesheet">
-    <script src="./resources/js/index.js"></script>
+    <script src="./resources/js/script.js"></script>
 </head>
 <body>
     <header>
         <nav>
-            <div id="navbar">
-                <img id="bars" onclick="openMenu()" src="./resources/icons/bars.svg">
-                <h1>The Fox Den</h1>
-            </div>
-            <div id="menu">
-                <ul>
-                    <li><a href="#about_me">About Me</a></li>
-                    <li onclick="dropMockMenu()"><img id="mock_arrow" src="./resources/icons/angle-right.svg">Mock Websites</li>
-                        <ul id="mock_list">
-                            <li><a href="./mock_websites/fox_article.html">Fox Article</a></li>
-                            <li><a href="./mock_websites/blog.html">Blog</a></li>
-                            <li><a href="./mock_websites/schedule.html">Schedule</a></li>
-                            <li><a href="./mock_websites/pizza.html">Pizza Shop</a></li>
-                        </ul>
-                    <li onclick="dropJavaMenu()"><img id="java_arrow" src="resources/icons/angle-right.svg">Java Fun</li>
-                        <ul id="java_list">
-                            <li><a href="./java_fun/dice.html">Dice Roller</a></li>
-                        </ul>
-                    <li>Contact</li>
-                </ul>
-            </div>
+            <img onclick="openMenu()" id="bars" src="./resources/icons/bars.svg">
+            <h1>The Fox Den</h1>
         </nav>
-        <div class="welcome">
+        <ul id="menu">
+            <li><a href="#about_me">About Me</a></li>
+            <li onclick="openMockMenu()"><img id="mock_arrow" src="./resources/icons/angle-right.svg">Mock Websites</li>
+            <ul id="mock_menu">
+                <li><a href="./mock_websites/fox_article.html">Fox Article</a></li>
+                <li><a href="./mock_websites/blog.html">Video Game Blog</a></li>
+                <li><a href="./mock_websites/schedule.html">Schedule</a></li>
+            </ul>
+            <li onclick="openJavaMenu()"><img id="java_arrow" src="./resources/icons/angle-right.svg">Java Fun</li>
+            <ul id="java_menu">
+                <li><a href="./java_fun/dice.html">Dice Roller</a></li>
+            </ul>
+        </ul>
+        <div id="banner">
             <img src="./resources/images/fox_resting.jpg">
-            <h1>Welcome to the <span style="color: hsl(30,100%,50%)">Fox</span> Den</h1>
+            <h1>Welcome to the <span style="color: hsl(30, 75%, 50%)">Fox</span> Den</h1>
         </div>
     </header>
     <div id="about_me">
         <h1>About Me</h1>
-        <p>Thank you for visiting my website. I'll be using this site as a portfolio of the work I've done as a web designer</p>
+    </div>
+    <div class="text">
+        <img class="avatar" src="./resources/images/artic_fox_iceland.jpg">
+        <p>Thank you for visiting my website. I'll be using this page as a portfolio of my work as a web designer.</p>
     </div>
 </body>
 </html>

@@ -1,108 +1,122 @@
 /*navbar*/
-#navbar {
+
+nav {
     display: flex;
+    align-items: center;
     position: fixed;
-    height: 2rem;
-    background-color: hsl(250, 50%, 35%);
-    color: hsl(250, 100%, 90%);
     z-index: 1;
+    height: 2rem;
+    font-size: 1.25rem;
     width: 100%;
-    border-bottom: 1px solid black;
+    background-color: hsl(240, 50%, 50%);
+    color: hsl(240, 50%, 75%);
+    border: 1px solid black;
 }
 
-#navbar img {
-    margin: .25rem;
+#bars {
+    height: 100%;
+    width: auto;
+    padding: .25rem;
+    margin-right: 3rem;
     transition: transform 250ms;
 }
 
-#navbar h1 {
-    line-height: 2rem;
-    padding-left: 1rem;
-    margin-left: .25rem;
-    border-left: 1px solid black;
-}
+/*drop menu*/
 
-/*drop down menu*/
 #menu {
-    position: fixed;
-    left: calc(-75% - 4px);
-    top: calc(2rem + 1px);
-    width: 75%;
     background-color: black;
     color: white;
-    transition: left 500ms;
-    border: 2px inset slategray;
+    width: calc(75% - 4px); /*take into account border*/
+    position: fixed;
+    top: calc(2rem + 2px); /*height of navbar*/
+    left: -75%;
     z-index: 1;
-}
-
-#menu ul li {
-    padding: 1rem;
-}
-
-#menu ul li a {
-    display: block;
-}
-
-#menu a:link, #menu a:visited {
-    color: white;
-    text-decoration: none;
-}
-
-#menu li:hover {
-    background: slategray;
+    transition: left 250ms;
+    border: 2px inset gray;
 }
 
 #menu img {
-    height: 1rem;
-    padding-right: 0.25rem;
+    height: .75rem;
 }
 
-#mock_list, #java_list {
-    display: none;
-    margin-left: 1rem;
+#menu li {
+    padding: 1rem;
+}
+
+#menu li:hover {
+    background-color: slategray;
+}
+
+#mock_menu li, #java_menu li {  
+    padding: 0;                 /* take padding away from <li> */
+}
+
+#mock_menu a, #java_menu a {
+    display: block;
+    padding: 1rem;              /*give padding to <a> */
+} 
+
+#menu a:link, #menu a:visited, #menu a:active, #menu a:hover{
+    text-decoration: none;
+    color: white;
 }
 
 #mock_arrow, #java_arrow {
+    padding-right: .50rem;
     transition: transform 250ms;
 }
 
-.welcome img {
-    width: 100%;
+#mock_menu, #java_menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 250ms;
+}
+
+/*banner*/
+
+#banner {
+    position: relative;
+}
+
+#banner img {
+   width: 100%;
+   height: auto;
+   display: block; /*fixes gap*/
+}
+
+#banner h1 {
+    font-size: 3rem;
+    position: absolute;
+    top: 9rem;
+    left: 6rem;
+}
+
+/*main*/
+
+#about_me {
+    height: 4rem;
+    padding-left: 2rem;
+    font-size: 2rem;
+    line-height: 4rem;
     border: 2px solid black;
 }
 
-.welcome h1 {
-    font-size: 4rem;
-    position: absolute;
-    top: 10rem;
-    left: 4rem;
+.text {
+    width: 90%;
+    margin: auto;
+    
 }
 
-#about_me h1 {
-    font-size: 2rem;
-    padding: 1rem 4rem;
-    border-bottom: 2px solid black;
+.avatar {
+    width: calc(25% - 2rem);
+    float: left;
+    margin: auto;
+    padding: 2rem 2rem 2rem 0;
 }
 
-#about_me p {
-    margin: 2rem 2rem 1rem;
-}
-
-/*mobile*/
-
-@media (orientation: portrait) {
-    .welcome h1 {
-        font-size: 1.5rem;
-        top: 4rem;
-        left: 2rem;
-    }
-
-    #about_me h1 {
-        font-size: 1.5rem;
-        padding: .5rem 2rem;
-    }
-
-    #about_me p {
-        margin: 1rem 2rem;
-    }
+.text p {
+    width: 75%;
+    display: inline-block;
+    margin: auto;
+    padding-top: 4rem;
 }

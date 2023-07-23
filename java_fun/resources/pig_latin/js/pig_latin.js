@@ -1,146 +1,138 @@
-//open and close info
+const btn = document.getElementById('btn');
+btn.addEventListener('click', translate);
 
-const openInfo = () => document.getElementById("info").style.display = "block";
-const closeInfo = () => document.getElementById("info").style.display = "none";
+function translate() {
 
-//translate English Word
+    const translatedPhrase = document.getElementById('translated_phrase');
 
-const translateEnglishWord = (englishWord) => {
+    translatedPhrase.innerHTML = '';
 
-    //check for punctuation
+    let englishPhrase = document.getElementById('user_input').value; //get user input
 
-    let isPunctuation;
+    const englishWords = englishPhrase.split(' '); //make phrase an array of words
 
-    (englishWord[englishWord.length - 1] === '.' || englishWord[englishWord.length - 1] === ',' || englishWord[englishWord.length - 1] === '?' || englishWord[englishWord.length - 1] === '!' || englishWord[englishWord.length - 1] === ';' || englishWord[englishWord.length - 1] === ':') ? isPunctuation = true : isPunctuation = false;
-
-    //check for capitol letter
-
-    let isCapitol;
-
-    (englishWord[0] === englishWord[0].toUpperCase()) ? isCapitol = true : isCapitol = false;
-
-    //turn word lowercase
-
-    englishWord = englishWord.toLowerCase();
+    englishWords.forEach(translateWord);
     
-    //check if first letter is a vowel
-
-    let isFirstLetterAVowel;
-
-    (englishWord[0] === 'a' || englishWord[0] === 'e' || englishWord[0] === 'i' || englishWord[0] === 'o' || englishWord[0] === 'u') ? isFirstLetterAVowel = true : isFirstLetterAVowel = false;
-
-    //check if second letter is a vowel
-
-    let isSecondLetterAVowel;
-
-    (englishWord[1] === 'a' || englishWord[1] === 'e' || englishWord[1] === 'i' || englishWord[1] === 'o' || englishWord[1] === 'u') ? isSecondLetterAVowel = true : isSecondLetterAVowel = false;
-
-    //turn word into array and make array for pig latin letters
-
-    let englishWordLetters = englishWord.split('');
-    let pigLatinLetters = [];
-
-    //pig latin rules
-
-    let pigLatinWord;
-
-    //if first letter is a consonant and second a vowel
-
-    if (!isFirstLetterAVowel && isSecondLetterAVowel) {
-
-        if (isPunctuation) {
-            pigLatinLetters = englishWordLetters.slice(1, englishWordLetters.length - 1);
-        } else {
-            pigLatinLetters = englishWordLetters.slice(1);
-        }
-
-        pigLatinLetters.push(englishWordLetters[0]);
-        pigLatinLetters.push('a', 'y');
-
-        if (isPunctuation) {
-            pigLatinLetters.push(englishWordLetters[englishWordLetters.length - 1]);
-        }
-
-        if (isCapitol) {
-            pigLatinLetters[0] = pigLatinLetters[0].toUpperCase();
-        }
-
-        pigLatinWord = pigLatinLetters.join('');
-
-    }
-
-    //if first and second letters are consonants
-
-    if (!isFirstLetterAVowel && !isSecondLetterAVowel) {
-
-        if (isPunctuation) {
-            pigLatinLetters = englishWordLetters.slice(2, englishWordLetters.length - 1);
-        } else {
-            pigLatinLetters = englishWordLetters.slice(2);
-        }
-
-        pigLatinLetters.push(englishWordLetters[0], englishWordLetters[1]);
-        pigLatinLetters.push('a', 'y');
-
-        if (isPunctuation) {
-            pigLatinLetters.push(englishWordLetters[englishWordLetters.length - 1]);
-        }
-
-        if (isCapitol) {
-            pigLatinLetters[0] = pigLatinLetters[0].toUpperCase();
-        }
-
-        pigLatinWord = pigLatinLetters.join('');
-
-    }
-
-    //if the first letter is a vowel
-
-    if (isFirstLetterAVowel) {
-
-        if (isPunctuation) {
-            pigLatinLetters = englishWordLetters.splice(0, englishWordLetters.length - 1);
-        } else {
-            pigLatinLetters = englishWordLetters;
-        }
-
-        pigLatinLetters.push('w', 'a', 'y');
-
-        if (isPunctuation) {
-            pigLatinLetters.push(englishWordLetters[englishWordLetters.length - 1]);
-        }
-
-        if (isCapitol) {
-            pigLatinLetters[0] = pigLatinLetters[0].toUpperCase();
-        }
-
-        pigLatinWord = pigLatinLetters.join('');
-
-    }
-
-    pigLatinWords = [];
-
-    return pigLatinWords.push(pigLatinWord);
-
-};
-
-//put Pig Latin phrase together
-
-let pigLatin = [];
-
-function translateEnglishPhrase() {
+    function translateWord(word) {
     
-    let translatedPhrase = document.getElementById('translated-phrase')
+        //check if there is punctuation
 
-    let englishPhrase = document.getElementById("phrase").value;
+        let isPunctuation;
 
-    let englishWords = englishPhrase.split(' ');
+        let lastIndex = word.length - 1;
 
-    englishWords.forEach(translateEnglishWord);
+        (word[lastIndex] === '.' || word[lastIndex] === ',' || word[lastIndex] === '?' || word[lastIndex] === '!' || word[lastIndex] === ';' || word[lastIndex] === ':' ) ? isPunctuation = true : isPunctuation = false;
 
-    let pigLatinPhrase = pigLatinWords.join(' ');
+        //check if first letter is capitol
 
-    translatedPhrase.innerHTML = pigLatinPhrase;
+        let isCapitol;
 
+        (word[0] === word[0].toUpperCase()) ? isCapitol = true : isCapitol = false;
+
+        //get rid of uppercase
+
+        word = word.toLowerCase();
+        
+        //check if the first letter is a vowel
+
+        let isFirstLetterAVowel;
+
+        (word[0] === 'a' || word[0] === 'e' || word[0] === 'i' || word[0] === 'o' || word[0] === 'o') ? isFirstLetterAVowel = true : isFirstLetterAVowel = false;
+
+        //check if the second letter is a vowel
+
+        let isSecondLetterAVowel;
+
+        (word[1] === 'a' || word[1] === 'e' || word[1] === 'i' || word[1] === 'o' || word[1] === 'o') ? isSecondLetterAVowel = true : isSecondLetterAVowel = false;
+
+        //Pig Latin Rules
+
+        let englishWordLetters = word.split('');
+        let pigLatinLetters = [];
+
+        //if the first letter is a consonant followed by a vowel
+
+        if (!isFirstLetterAVowel && isSecondLetterAVowel) {
+            
+            if (isPunctuation) {
+                pigLatinLetters = englishWordLetters.slice(1, lastIndex);
+            } else {
+                pigLatinLetters = englishWordLetters.slice(1);
+            }
+
+            pigLatinLetters.push(englishWordLetters[0], 'a', 'y')
+
+            if (isPunctuation) {
+                pigLatinLetters.push(englishWordLetters[lastIndex]); //add punctuation back
+            }
+
+            if (isCapitol) {
+                pigLatinLetters[0] = pigLatinLetters[0].toUpperCase(); //make word capitol again
+            }
+
+        }
+
+        //if the first two letters are consonant
+
+        if (!isFirstLetterAVowel && !isSecondLetterAVowel) {
+
+            if (isPunctuation) {
+                pigLatinLetters = englishWordLetters.slice(2, lastIndex);
+            } else {
+                pigLatinLetters = englishWordLetters.slice(2);
+            }
+
+            pigLatinLetters.push(englishWordLetters[0], englishWordLetters[1], 'a', 'y');
+
+            if (isPunctuation) {
+                pigLatinLetters.push(englishWordLetters[lastIndex]);
+            }
+
+            if (isCapitol) {
+                pigLatinLetters[0] = pigLatinLetters[0].toUpperCase();
+            }
+
+        }
+
+        //if the first letter is a vowel
+
+        if (isFirstLetterAVowel) {
+
+            if (isPunctuation) {
+                pigLatinLetters = englishWordLetters.slice(0, lastIndex);
+            } else {
+                pigLatinLetters = englishWordLetters;
+            }
+
+            pigLatinLetters.push('w', 'a', 'y')
+
+            if (isPunctuation) {
+                pigLatinLetters.push(englishWordLetters[lastIndex]);
+            }
+
+            if (isCapitol) {
+                pigLatinLetters[0] = pigLatinLetters[0].toUpperCase();
+            }
+
+        }
+
+        let pigLatinWord = pigLatinLetters.join(''); 
+
+        const result = document.createTextNode(pigLatinWord + ' ');
+
+        translatedPhrase.appendChild(result);
+
+        //logs
+
+        console.log(`isPunctuation: ${isPunctuation}`);
+        console.log(`isCapitol: ${isCapitol}`);
+        console.log(`isFirstLetterAVowel: ${isFirstLetterAVowel}`);
+        console.log(`isSecondLetterAVowel: ${isSecondLetterAVowel}`);
+        console.log(`englishWordLetters: ${englishWordLetters}`);
+        console.log(`pigLatinLetters: ${pigLatinLetters}`);
+        console.log(`pigLatinWord: ${pigLatinWord}`);
+    }
+    
 }
+
 

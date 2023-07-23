@@ -5,26 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pig Latin</title>
     <link rel="stylesheet" href="../resources/pig_latin/css/pig_latin.css">
-    <script src="../resources/pig_latin/js/pig_latin.js"></script>
+    <script src="../resources/pig_latin/js/pig_latin.js" defer></script>
 </head>
 <body>
     <div class="container">
-        <button class="button center" type="button" onclick="openInfo()">What is Pig Latin?</button>
-        <div id="info">
-            <img class="x-mark" onclick="closeInfo()" src="../resources/pig_latin/icons/xmark.svg">
-            <p>According to the <a target="_blank" href="https://web.ics.purdue.edu/~morelanj/RAO/prepare2.html">Perdue University website</a>, Pig Latin has three rules, when translating from English.</p>
-            <ol>
-                <li><strong>If the first letter is a consonant followed by a vowel:</strong> take the first letter and put it at the end of the word. Then add 'ay' to the end.</li>
-                <li><strong>If the first two letters are consonants:</strong> take the first two letters and put them at the end of the word. Then add 'ay' to the end.</li>
-                <li><strong>If the first letter is a vowel:</strong> add 'way' to the end.</li>
-            </ol>
-        </div>
-        <h2>Enter an English phrase you want translated.</h2>
-        <!-- <input type="text" id="phrase"> -->
-        <textarea name="" id="phrase" cols="30" rows="10"></textarea>
-        <button class="button center" onclick="translateEnglishPhrase()">Translate</button>
-        <h2>Phrase translated into Pig Latin</h2>
-        <p id="translated-phrase"></p>
+        <h2>English</h2>
+        <textarea class="center" id="user_input" cols="30" rows="10">Type an English phrase to be translated.</textarea>
+        <button class="btn center" id="btn">Translate</button>
+        <h2>Pig Latin</h2>
+        <p id="translated_phrase"></p>
     </div>
 </body>
 </html>

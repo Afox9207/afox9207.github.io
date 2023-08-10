@@ -1,0 +1,64 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+}
+
+.wrapper {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    perspective: 100px;
+}
+
+header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    transform-style: preserve-3d;
+    z-index: -1;
+}
+
+.sky,
+.mountain,
+.background_trees,
+.foreground_trees {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.sky {
+    transform: translateZ(-300px) scale(4);
+}
+
+.mountain {
+    transform: translateZ(-100px) scale(2);
+    filter: brightness(.5);
+}
+
+.background_trees {
+    transform: translateZ(-75px) scale(1.75);
+    filter: brightness(.6);
+}
+
+.foreground_trees {
+    transform: translateZ(-25px) scale(1.25);
+    filter: brightness(.6);
+}
+
+.title {
+    font-size: clamp(2.5rem, 10vw, 6rem);
+    color: #FFF;
+    text-shadow: 0 0 5px black;
+}
+
+section {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    font-size: 2rem;
+}

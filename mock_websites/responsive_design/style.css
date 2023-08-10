@@ -116,8 +116,8 @@ header {
 .hero-title {
     font-size: 5.625rem;
     line-height: 1;
-    font-size: clamp(4rem, 15vw, 5.625rem);
-    padding-right: 1em;
+    font-size: clamp(4.5rem, 15vw, 5.625rem);
+    padding-right: .5em;
 }
 
 .hero-title span {

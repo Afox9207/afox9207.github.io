@@ -5,7 +5,8 @@
 }
 
 nav,
-.hero_desktop {
+.hero_desktop,
+.btn_desktop {
     display: none;
 }
 
@@ -49,16 +50,19 @@ body {
 }
 
 .btn {
-    display: inline-block;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
     color: black;
     text-shadow: none;
     text-decoration: none;
     padding: 1em;
     margin: 2em 0;
     background-color: white;
+}
+
+.btn_mobile {
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .btn:hover,
@@ -130,7 +134,8 @@ body {
         justify-content: space-between;
     }
 
-    .hero_mobile {
+    .hero_mobile,
+    .btn_mobile {
         display: none;
     }
 
@@ -144,10 +149,12 @@ body {
         top: 50%;
     }    
 
-   .btn {
+    .btn_desktop {
+        display: inline-block;
         position: relative;
         left: 25%;
-   }
+        transform: translateX(-50%);
+    }
 
    .about_me {
         width: 50%;

@@ -1,4 +1,138 @@
-a {
+* {
+    box-sizing: content-box;
+    margin: 0;
+    padding: 0;
+}
+
+.hero_desktop {
+    display: none;
+}
+
+body {
+    background-color: black;
+    color: white;
+    font-family: sans-serif;
+    text-shadow: 0 0 5px black;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.nav_list {
+    display: flex;
+    justify-content: end;
+    list-style-type: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.nav_list_inside {
+    list-style-type: none;
+    max-height: 0;
+    transition: max-height 250ms;
+    overflow: hidden;
+}
+
+.nav_link {
+    color: white;
+    text-decoration: none;
+}
+
+.nav_link:hover,
+.nav_link:focus {
+    opacity: .75;
+}
+
+.nav_item_title {
+    padding: .5em .25em;
+}
+
+.nav_item_title:hover,
+.nav_item_title:focus {
+    color: #EBC600;
+    cursor: pointer;
+}
+
+.nav_item {
+    padding-top: 1em;
+}
+
+.hero {
+    position: relative;
+}
+
+.avatar {
+    max-width: 100%;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.name {
+    font-size: clamp(4rem, 10vw, 7rem);
+    text-align: right;
+    max-width: max-content;
+    padding: 1em 0;
+}
+
+.profession {
     display: block;
-    padding: 1rem;
+    font-size: clamp(2rem, 2vw, 3.5rem);
+}
+
+.btn {
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    color: black;
+    text-shadow: none;
+    text-decoration: none;
+    padding: 1em;
+    margin: 2em 0;
+    background-color: white;
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: #EBC600;
+}
+
+@media (min-width: 800px) {
+    
+    .row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .hero_mobile {
+        display: none;
+    }
+
+    .hero_desktop {
+        display: block;
+        width: 50%;
+    }
+
+    .nav_list {
+        position: relative;
+        top: 50%;
+    }    
+
+   .btn {
+    position: relative;
+    left: 25%;
+   }
+
+   .about_me {
+    width: 50%;
+   }
+
 }

@@ -71,7 +71,9 @@ body {
     text-align: center;
 }
 
-.link {
+.link,
+.link:link,
+.link:visited {
     color: #EBC600;
     text-decoration: none;
 }

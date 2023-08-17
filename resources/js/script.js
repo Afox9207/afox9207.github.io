@@ -11,7 +11,7 @@ const mockWebsiteList = document.getElementById("mock_website_list").style;
 const javaFunList = document.getElementById("java_fun_list").style;
 
 function openMockWebsiteList() {
-    mockWebsiteList.maxHeight = "8rem";
+    mockWebsiteList.maxHeight = "10rem";
 }
 
 function closeMockWebsiteList() {
@@ -19,7 +19,7 @@ function closeMockWebsiteList() {
 }
 
 function openJavaFunList() {
-    javaFunList.maxHeight = "8rem";
+    javaFunList.maxHeight = "10rem";
 }
 
 function closeJavaFunList() {

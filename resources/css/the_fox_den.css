@@ -1,0 +1,36 @@
+* {
+    box-sizing: content-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+    font-family: sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.project_title {
+
+}
+
+.project_list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.project_item {
+    padding: .25em 0;
+    margin: .25em 0;
+}
+
+.project_link {
+    color: #EBC600;
+}

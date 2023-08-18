@@ -153,10 +153,17 @@ body {
         justify-content: space-between;
         align-items: center;
     }
+    
+    .hero_img {
+       position: absolute;
+       top: 1rem;
+       left: 100%;
+       transform: translateX(-50%);
+    }
 
     .name {
-        width: 100%;
         margin: 1.5em 0;
+        width: 100%;
     }
 
     .nav_list {

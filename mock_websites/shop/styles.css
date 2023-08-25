@@ -79,12 +79,31 @@ footer div {
     font-style: italic;
 }
 
+.product_name {
+    color: var(--accent-color);
+    text-shadow: 0 0 5px black;
+}
+
 @media (min-width: 676px) { /*max width of img + 2em for padding + 4px for border*/
     
     img {
         padding: 1em;
         background-color: white;
         border: 2px solid var(--accent-color);
+    }
+
+    .row img,
+    .row h1,
+    .row h2,
+    .row p {
+        margin-left: 1em;
+        margin-right: auto;
+    }
+
+    .reverse img,
+    .reverse p{
+        margin-left: auto;
+        margin-right: 1em;
     }
 
 }

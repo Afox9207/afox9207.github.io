@@ -60,14 +60,31 @@ h1 {
 
 .contact_info {
     text-align: center;
+    padding-bottom: 0;
+}
+
+header {
+    padding-bottom: 18px;
+}
+
+main {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .padding_top {
-    padding-top: 1em;
+    padding: 1em;
 }
 
 .product_name {
     text-align: center;
+    color: var(--accent-color);
+    text-shadow: 0 0 5px black;
+}
+
+.image_container {
+    max-width: 600px;
+    line-height: 2;
 }
 
 footer {
@@ -79,10 +96,17 @@ footer div {
     font-style: italic;
 }
 
-.product_name {
-    color: var(--accent-color);
-    text-shadow: 0 0 5px black;
+@media (min-width: 550px) {
+
+    footer .container {
+        display: flex;
+        justify-content: space-between;
+        max-width: 450px;
+        margin: auto;
+    }
+
 }
+
 
 @media (min-width: 676px) { /*max width of img + 2em for padding + 4px for border*/
     
@@ -155,7 +179,6 @@ footer div {
 
     .image_container {
         max-width: 400px;
-        line-height: 2;
     }
 
     .primary_color,

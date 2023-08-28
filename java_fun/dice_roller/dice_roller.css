@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.row {
+    display: flex;
+}
+
+.user_input {
+    padding: 1em;
+    width: min-content;
+}
+
+img {
+    width: 4em;
+    padding: .25em;
+}
+

@@ -22,11 +22,24 @@ body {
 
 .title {
     text-align: center;
+    font-size: 1rem;
+}
+
+form {
+    text-align: center;
 }
 
 h3 {
     flex: 1;
     font-size: 1rem;
+}
+
+span {
+    font-weight: 400;
+}
+
+.dice_area {
+    padding-bottom: 130px;
 }
 
 img {

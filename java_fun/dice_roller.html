@@ -8,25 +8,38 @@
     <script src="./dice_roller/dice_roller.js" defer></script>
 </head>
 <body>
-    <div class="row">
+    <!-- <div class="user_input">
+        <h1 class="title">Dice Roller</h1>
+        <form>
+            <label for="num_of_dice">How many dice to roll?</label>
+            <input id="num_of_dice" type="number" min="1">
+            <button id="btn_roll" type="button">Roll!</button>
+        </form>
+        <h2>Number of dice that are</h2>
+        <h3>Two or higher: <span id="two"></span></h3>
+        <h3>Three or higher: <span id="three"></span></h3>
+        <h3>Four or higher: <span id="four"></span></h3>
+        <h3>Five or higher: <span id="five"></span></h3>
+        <h3>Six: <span id="six"></span></h3>
+    </div> -->
 
-        <div class="user_input">
-            <h1 class="title">Dice Roller</h1>
-            <form>
-                <label for="num_of_dice">How many dice to roll?</label>
-                <input id="num_of_dice" type="number" min="1">
-                <button id="btn_roll" type="button">Roll!</button>
-            </form>
-            <h2>Number of dice that are</h2>
-            <h3>Two or higher: <span id="two"></span></h3>
-            <h3>Three or higher: <span id="three"></span></h3>
-            <h3>Four or higher: <span id="four"></span></h3>
-            <h3>Five or higher: <span id="five"></span></h3>
-            <h3>Six: <span id="six"></span></h3>
+    <div class="user_input">
+        <h1 class="title">Dice Roller</h1>
+        <form>
+            <label for="num_of_dice">How many dice to roll?</label>
+            <input type="number" id="num_of_dice" min="1">
+            <button id="btn_roll" type="button">Roll!</button>
+        </form>
+        <div class="row">
+            <h3>2's or higher: <span id="two"></span></h3>
+            <h3>3's or higher: <span id="three"></span></h3>
+            <h3>4's or higher: <span id="four"></span></h3>
+            <h3>5's or higher: <span id="five"></span></h3>
+            <h3>6's: <span id="six"></span></h3>
         </div>
-
-        <div class="dice_area" id="dice_area"></div>
-
     </div>
+
+    <div class="dice_area" id="dice_area"></div>
+
 </body>
 </html>

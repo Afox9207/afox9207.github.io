@@ -4,6 +4,7 @@
 
 body {
     margin: 0;
+    font-family: sans-serif;
 }
 
 .row {
@@ -11,12 +12,25 @@ body {
 }
 
 .user_input {
-    padding: 1em;
-    width: min-content;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    border-top: 1px solid black;
+    z-index: 1;
+}
+
+.title {
+    text-align: center;
+}
+
+h3 {
+    flex: 1;
+    font-size: 1rem;
 }
 
 img {
-    width: 4em;
-    padding: .25em;
+    width: 10%;
+    padding: .1em;
 }
 

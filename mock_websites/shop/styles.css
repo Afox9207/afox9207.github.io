@@ -44,11 +44,7 @@ img {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
-}
-
-.reverse img {
-    box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
 .image_container {
@@ -119,6 +115,11 @@ footer div {
         padding: 1em;
         background-color: white;
         border: 2px solid var(--accent-color);
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .reverse img {
+        box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.5);
     }
 
     .row img,

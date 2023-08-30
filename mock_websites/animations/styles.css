@@ -1,0 +1,63 @@
+* {
+    box-sizing: border-box;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.box {
+    height: 110px;
+    width: 110px;
+    line-height: 110px;
+    text-align: center;
+    border: 1px solid black;
+    margin: 2em auto;
+}
+
+@keyframes rotate {
+    from {transform: rotate(0);}
+    to {transform: rotate(360deg);}
+}
+
+.box-rotate:hover {
+    animation-name: rotate;
+    animation-duration: 1s;
+}
+
+@keyframes hover {
+    0% {transform: translateY(0); box-shadow: 0px 0px;}
+    50% {transform: translateY(-.5em); box-shadow: 5px 5px 5px;}
+    100% {transform: translateY(0); box-shadow: 0px 0px;}
+
+}
+
+.box-hover:hover {
+    animation-name: hover;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes across-x-axis {
+    from {transform: translateY(-1em);}
+    to {transform: translateY(1em);}
+}
+
+@keyframes across-screen {
+    from {margin-left: 0%; margin-right: auto;}
+    to {margin-left: calc(100% - 110px); margin-right: auto;}
+}
+
+.container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.box-bounce {
+    animation-name: across-x-axis, across-screen;
+    animation-duration: 500ms, 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+    
+}

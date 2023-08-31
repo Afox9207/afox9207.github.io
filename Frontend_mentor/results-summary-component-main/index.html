@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Results summary component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+
+  <link rel="stylesheet" href="./styles.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <div class="flex">
+    <section class="results">
+    
+      <div class="results-container">
+        <h1>Your Result</h1>
+    
+        <div class="circle">
+          <div class="score">76</div>
+          <div>of 100</div>
+        </div>
+        <div class="rating">Great</div>
+        <p class="percentile">You scored higher than 65% of the people who have taken these tests.</p>
+      </div>
+    </section>
+    <section class="summary">
+    
+      <h2>Summary</h2>
+    
+      <div class="box red">
+        <div class="category">
+          <img src="./assets/images/icon-reaction.svg" alt="lightning bolt">
+          <div>Reaction</div>
+        </div>
+        <div class="category-score">80 <span>/ 100</span></div>
+      </div>
+    
+      <div class="box yellow">
+        <div class="category">
+          <img src="./assets/images/icon-memory.svg" alt="brain">
+          <div>Memory</div>
+        </div>
+        <div class="category-score">92 <span>/ 100</span></div>
+      </div>
+      <div class="box green">
+        <div class="category">
+          <img src="./assets/images/icon-verbal.svg" alt="speech bubble">
+          <div>Verbal</div>
+        </div>
+        <div</div>
+        <div class="category-score">61 <span>/ 100</span></div>
+      </div>
+      <div class="box blue">
+        <div class="category">
+          <img src="./assets/images/icon-visual.svg" alt="eye">
+          <div>Visual</div>
+        </div>
+        <div class="category-score">72 <span>/ 100</span></div>
+      </div>
+      <button>Continue</button>
+    </section>
+  </div>
+  
+</body>
+<footer class="attribution">
+  Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+  Coded by <a href="#">Adam Fox</a>.
+</footer>
+</html>

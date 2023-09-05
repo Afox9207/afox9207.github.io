@@ -1,0 +1,122 @@
+/*font weights 500, 700, 900*/
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --pale-blue: hsl(225, 100%, 94%);
+    --bright-blue: hsl(245, 75%, 52%);
+    --very-pale-blue: hsl(225, 100%, 98%);
+    --desaturated-blue: hsl(224, 23%, 55%);
+    --dark-blue: hsl(223, 47%, 23%);
+    --bright-blue-hover: hsl(245, 75%, 65%);
+}
+
+body {
+    margin: 0;
+    font-family: 'Red Hat Display', sans-serif;
+    background-color: var(--desaturated-blue);
+}
+
+.card {
+    max-width: 375px;
+    margin: 0 auto;
+    background-color: var(--very-pale-blue);
+    color: var(--desaturated-blue);
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    text-align: center;
+}
+
+.card-img-background {
+    background-color: var(--desaturated-blue);
+}
+
+.card-img {
+    max-width: 375px;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    display: block;
+}
+
+.card-container {
+    padding: 1em;
+}
+
+.summary {
+    color: var(--dark-blue);
+}
+
+.plan {
+    background-color: var(--very-pale-blue);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plan-left-side {
+    display: flex;
+    gap: 1em;
+    margin: 1em 0;
+}
+
+.music-note {
+    background-color: var(--pale-blue);
+    border-radius: 50%;
+}
+
+.plan-name {
+    font-size: 1rem;
+    margin: 0;
+    color: var(--dark-blue);
+}
+
+.change {
+    padding: 0;
+    border: none;
+    background-color: var(--very-pale-blue);
+    text-decoration: underline;
+    color: var(--bright-blue);
+    font-weight: 700;
+}
+
+.change:hover {
+    color: var(--bright-blue-hover);
+    cursor: pointer;
+}
+
+.proceed {
+    background-color: var(--bright-blue);
+    color: var(--very-pale-blue);
+    border-style: none;
+    width: 100%;
+    padding: .5em 1em;
+    border-radius: 1em;
+}
+
+.proceed:hover {
+    background-color: var(--bright-blue-hover);
+    cursor: pointer;
+}
+
+.cancel {
+    background-color: var(--very-pale-blue);
+    color: var(--desaturated-blue);
+    border-style: none;
+    width: 100%;
+}
+
+.cancel:hover {
+    color: var(--dark-blue);
+    cursor: pointer;
+}
+
+.attribution {
+    font-size: 11px; text-align: center; 
+    margin: 2em;
+}
+
+.attribution a {
+    color: hsl(228, 45%, 44%); 
+}

@@ -1,0 +1,127 @@
+/*400 and 700 font weight*/
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --orange: hsl(25, 97%, 53%);
+    --white: hsl(0, 0%, 100%);
+    --light-grey: hsl(217, 12%, 63%);
+    --medium-grey: hsl(216, 12%, 54%);
+    --dark-blue: hsl(213, 19%, 18%);
+    --darker-blue: hsl(216, 12%, 12%);
+    --very-dark-blue: hsl(216, 12%, 8%);
+}
+
+body {
+    margin: 0;
+    background-color: var(--very-dark-blue);
+    color: var(--light-grey);
+    font-family: 'Overpass', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+}
+
+.box {
+    background: linear-gradient(var(--dark-blue), var(--darker-blue));
+    margin: 1em;
+    border-radius: 1em;
+    max-width: 375px;
+    margin: 0 auto;
+}
+
+.box-container {
+    padding: 2em;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.star {
+    background-color: var(--dark-blue);
+    padding: 1em;
+    border-radius: 50%;
+}
+
+.title {
+    color: var(--white);
+    font-weight: 700;
+    margin: .25em 0;
+}
+
+.circle {
+    background-color: var(--dark-blue);
+    aspect-ratio: 1;
+    height: 3em;
+    line-height: 3em;
+    border-radius: 50%;
+    text-align: center;
+    transition: all 125ms;
+    margin: 1em 0;
+}
+
+button {
+    background-color: var(--orange);
+    color: var(--white);
+    text-transform: uppercase;
+    border-style: none;
+    padding: 1em 1em;
+    border-radius: 2em;
+    width: 100%;
+    margin: 1em 0;
+    transition: all 125ms;
+}
+
+button:hover,
+button:focus {
+    background-color: var(--white);
+    color: var(--orange);
+    cursor: pointer;
+}
+
+#thank_you {
+    display: none;
+    flex-direction: column;
+    text-align: center;
+}
+
+.thank_you-img {
+    margin: 2em;
+}
+
+.results {
+    background-color: var(--dark-blue);
+    color: var(--orange);
+    padding: .5em 1em;
+    border-radius: 2em;
+    margin-bottom: 1em;
+    display: inline-block;
+}
+
+.thanks {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 2rem;
+    margin: .5em;
+}
+
+#thank_you p {
+    line-height: 1.5;
+}
+
+.attribution {
+    font-size: 11px; text-align: center;
+    padding-top: 2em; 
+}
+
+.attribution a {
+    color: hsl(228, 45%, 44%); 
+}
+

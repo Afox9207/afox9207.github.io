@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Results summary component</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./results_summary.css">
+</head>
+<body>
+
+  <div class="vertical_center">
+    
+    <div class="row">
+    
+      <div class="background_color">
+        <div class="results_section">
+          <div class="container">
+            <h2 class="results">Your Result</h2>
+    
+            <div class="circle">
+              <div class="score">76</div>
+              <div class="score_total">of 100</div>
+            </div>
+            <div class="rating">Great</div>
+            <p class="percentile">You scored higher than 65% of the people who have taken these tests.</p>
+          </div>
+        </div>
+      </div>
+    
+      <div class="summary_section">
+        <div class="container">
+          <h2 class="summary">Summary</h2>
+    
+          <div class="area_results red">
+            <img src="./assets/images/icon-reaction.svg" alt="lightning bolt">
+            <div>Reaction</div>
+            <div class="area_score">80 <span class="area_score_total">/ 100</span></div>
+          </div>
+    
+          <div class="area_results yellow">
+            <img src="./assets/images/icon-memory.svg" alt="brain">
+            <div>Memory</div>
+            <div class="area_score">92 <span class="area_score_total">/ 100</span></div>
+          </div>
+    
+          <div class="area_results green">
+            <img src="./assets/images/icon-verbal.svg" alt="speech bubble">
+            <div>Verbal</div>
+            <div class="area_score">61 <span class="area_score_total">/ 100</span></div>
+          </div>
+    
+          <div class="area_results blue">
+            <img src="./assets/images/icon-visual.svg" alt="eye">
+            <div>Visual</div>
+            <div class="area_score">72 <span class="area_score_total">/ 100</span></div>
+          </div>
+          <button class="btn-continue" type="button">Continue</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="https://afox9207.github.io/">Adam Fox</a>.
+    </div>
+  </div>
+
+</body>
+</html>

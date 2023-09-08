@@ -28,6 +28,9 @@ ul li {
     margin: .25em 0;
 }
 
-ul li a {
+ul li a,
+ul li a:link,
+ul li a:visited,
+ul li a:active {
     color: #EBC600;
 }

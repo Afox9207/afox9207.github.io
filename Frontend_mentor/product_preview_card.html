@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Product preview card component</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./product_preview_card_resources/product_preview_card.css">
+
+</head>
+<body>
+
+  <div class="vertical_center">
+    <div class="row">
+      <img class="desktop_img" src="./product_preview_card_resources/images/image-product-desktop.jpg" alt="perfume">
+    
+      <div class="card">
+        <img class="mobile_img" src="./product_preview_card_resources/images/image-product-mobile.jpg" alt="perfume">
+        <div class="card-container">
+          <h3 class="product_type">Perfume</h3>
+          <h2 class="product_name">Gabrielle Essence Eau De Parfum</h2>
+          <p class="description">A floral, solar and voluptuous interpretation composed by Olivier Polge, Perfumer-Creator for the House of CHANEL.</p>
+          
+          <div class="price">
+            <div class="sale_price">$149.99</div>
+            <div class="retail_price">$169.99</div>
+          </div>
+
+          <button class="btn-add_to_cart" type="button">
+            <img src="./product_preview_card_resources/images/icon-cart.svg" alt="shopping cart">
+            <div>Add to Cart</div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="https://afox9207.github.io/">Adam Fox</a>.
+    </div>
+  </footer>
+
+</body>
+</html>

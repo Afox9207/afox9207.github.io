@@ -16,21 +16,18 @@ body {
     margin: 0 auto;
 }
 
-.project_title {
-
-}
-
-.project_list {
+ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-.project_item {
+ul p,
+ul li {
     padding: .25em 0;
     margin: .25em 0;
 }
 
-.project_link {
+ul li a {
     color: #EBC600;
 }

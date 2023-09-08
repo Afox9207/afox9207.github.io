@@ -1,0 +1,156 @@
+/*fonts
+
+Montserrat 500 / 700
+Fraunces 700*/
+
+/* font-family: 'Fraunces', serif;
+font-family: 'Montserrat', sans-serif; */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 62.5%;
+
+    /*Primary Colors*/
+    --dark-cyan: hsl(158, 36%, 37%);
+    --cream: hsl(30, 38%, 92%);
+
+    /*Neutral*/
+    --very-dark-blue: hsl(212, 21%, 14%);
+    --dark-gray-blue: hsl(228, 12%, 48%);
+    --white: hsl(0, 0%, 100%);
+}
+
+body {
+    margin: 0;
+    font-size: 1.4rem;
+    background-color: var(--cream);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+.vertical_center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.desktop_img {
+    display: none;
+}
+
+.mobile_img {
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+}
+
+.card {
+    max-width: 37.5rem;
+    margin: 0 auto;
+    background-color: var(--white);
+    border-radius: 1em;
+    color: var(--dark-gray-blue);
+}
+
+.card-container {
+    margin: 0 3em 0 3em;
+    padding: 2em 0;
+}
+
+.product_type {
+    font-weight: 500;
+    letter-spacing: .25em;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.product_name {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 4.2rem;
+    color: var(--very-dark-blue);
+}
+
+.description {
+    line-height: 2;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding: 1em 0;
+}
+
+.sale_price {
+    font-family: 'Fraunces', serif; 
+    font-weight: 700;
+    color: var(--dark-cyan);
+    font-size: 4.2rem;
+}
+
+.retail_price {
+    text-decoration: line-through;
+}
+
+.btn-add_to_cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .75em;
+    color: var(--white);
+    background-color: var(--dark-cyan);
+    border-style: none;
+    padding: 1em;
+    margin-top: 1em;
+    width: 100%;
+    border-radius: .5em;
+}
+
+.btn-add_to_cart:hover {
+    background-color: hsl(158, 36%, 25%);
+    cursor: pointer;
+}
+
+.attribution {
+    font-size: 1.1rem; text-align: center; 
+    margin: 2em;
+}
+
+.attribution a {
+    color: hsl(228, 45%, 44%); 
+}
+
+@media (min-width: 750px) {
+
+    .mobile_img {
+        display: none;
+    }
+
+    .row {
+        display: flex;
+        justify-content: center;
+    }
+
+    .desktop_img {
+        display: block;
+        max-width: 37.5rem;
+        border-top-left-radius: 1em;
+        border-bottom-left-radius: 1em;
+    }
+
+    .card {
+        margin: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+}

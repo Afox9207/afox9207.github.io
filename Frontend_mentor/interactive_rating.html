@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Interactive rating component</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./interactive_rating/interactive_rating.css">
+
+  <script src="./interactive_rating/interactive_rating.js" defer></script>
+</head>
+<body>
+
+  <div class="vertical_center">
+    <section id="rating" class="box">
+      <div class="box_container">
+        
+        <img class="star" src="./interactive_rating/images/icon-star.svg" alt="star">
+
+        <h2>How did we do?</h2>
+        <p>Please let us know how we did with your support request. All feedback is appreciated to help us improve our offering!</p>
+        
+        <div class="row">
+          <div id="one" class="circle">1</div>
+          <div id="two" class="circle">2</div>
+          <div id="three" class="circle">3</div>
+          <div id="four" class="circle">4</div>
+          <div id="five" class="circle">5</div>
+        </div>
+
+        <button id="btn-submit" type="button">Submit</button>
+      </div>
+    </section>
+
+    <section id="thank_you" class="box">
+      <div class="box_container">
+        <img src="./interactive_rating/images/illustration-thank-you.svg" alt="smart phone">
+        <div class="rating_results">You selected <span id="score_area"></span> out of 5</div>
+        <h2>Thank you!</h2>
+        We appreciate you taking the time to give a rating. If you ever need more support,
+        don’t hesitate to get in touch!
+      </div>
+    </section>
+    
+    <footer>
+      <div class="attribution">
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+        Coded by <a href="https://afox9207.github.io/">Adam Fox</a>.
+      </div>
+    </footer>
+  </div>
+
+</body>
+</html>

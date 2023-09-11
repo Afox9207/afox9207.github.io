@@ -15,45 +15,45 @@
   <link rel="stylesheet" href="./interactive_rating/interactive_rating.css">
 
   <script src="./interactive_rating/interactive_rating.js" defer></script>
+
 </head>
 <body>
 
-  <div class="vertical_center">
-    <section id="rating" class="box">
-      <div class="box_container">
-        
-        <img class="star" src="./interactive_rating/images/icon-star.svg" alt="star">
-
-        <h2>How did we do?</h2>
-        <p>Please let us know how we did with your support request. All feedback is appreciated to help us improve our offering!</p>
-        
-        <div class="row">
-          <div id="one" class="circle">1</div>
-          <div id="two" class="circle">2</div>
-          <div id="three" class="circle">3</div>
-          <div id="four" class="circle">4</div>
-          <div id="five" class="circle">5</div>
+  <div class="vertical-center">
+    <!-- Rating state start -->
+    <div id="rating-state" class="rating">
+      <div class="rating__container">
+        <div class="rating__circle rating__circle--no-hover">
+          <img class="rating__img-star" src="./interactive_rating/images/icon-star.svg" alt="star">
         </div>
-
-        <button id="btn-submit" type="button">Submit</button>
+        <h2 class="rating__title">How did we do?</h2>
+        <p class="rating__text">Please let us know how we did with your support request. All feedback is appreciated to help us improve our offering!</p>
+        <div class="rating__row">
+          <div id="one" class="rating__circle">1</div>
+          <div id="two" class="rating__circle">2</div>
+          <div id="three" class="rating__circle">3</div>
+          <div id="four" class="rating__circle">4</div>
+          <div id="five" class="rating__circle">5</div>
+        </div>
+        <button id="submit-btn" class="rating__btn" type="button">Submit</button>
       </div>
-    </section>
-
-    <section id="thank_you" class="box">
-      <div class="box_container">
-        <img src="./interactive_rating/images/illustration-thank-you.svg" alt="smart phone">
-        <div class="rating_results">You selected <span id="score_area"></span> out of 5</div>
-        <h2>Thank you!</h2>
-        We appreciate you taking the time to give a rating. If you ever need more support,
-        don’t hesitate to get in touch!
-      </div>
-    </section>
+    </div>
+    <!-- Rating state end -->
     
-    <footer>
-      <div class="attribution">
-        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-        Coded by <a href="https://afox9207.github.io/">Adam Fox</a>.
+    <!-- Thank you state start -->
+    <div id="thank-you-state" class="rating rating--center-text">
+      <div class="rating__container">
+        <img class="rating__img-thanks" src="./interactive_rating/images/illustration-thank-you.svg" alt="smart phone">
+        <div class="rating__results">You selected <span id="rating-area"></span> out of 5</div>
+        <h2 class="rating__title">Thank you!</h2>
+        <p>We appreciate you taking the time to give a rating. If you ever need more support, don’t hesitate to get in touch!</p>
       </div>
+    </div>
+    <!-- Thank you state end -->
+    
+    <footer class="footer">
+      Challenge by <a class="footer__link" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a class="footer__link" href="https://afox9207.github.io/">Adam Fox</a>.
     </footer>
   </div>
 

@@ -41,13 +41,13 @@ body {
 }
 
 .rating__container {
-    padding: 2em;
+    padding: 1.5em;
 }
 
 .rating__row {
     display: flex;
     justify-content: space-between;
-    margin: 1em 0;
+    margin: 1.75em 0 1em;
 }
 
 .rating__circle {
@@ -92,14 +92,13 @@ body {
 
 .rating__text {
     line-height: 1.5;
-    margin-bottom: 1.75em;
 }
 
 .rating__btn {
     background-color: var(--orange);
     color: var(--white);
     border-style: none;
-    margin-top: 1em;
+    margin: .5em 0 1em;
     padding: 1em;
     border-radius: 2em;
     text-transform: uppercase;
@@ -124,7 +123,7 @@ body {
 
 .rating__img-thanks {
     display: block;
-    margin: 1em auto;
+    margin: .5em auto;
 }
 
 .rating__results {

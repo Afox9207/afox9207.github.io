@@ -60,7 +60,11 @@ function makeFiveActive() {
 }
 
 function submitRating() {
-    ratingArea.innerHTML = rating;
-    ratingState.style.display = "none";
-    thankYouState.style.display = "block";
+    
+    if(rating){
+        ratingArea.innerHTML = rating;
+        ratingState.style.display = "none";
+        thankYouState.style.display = "block";
+    }
+
 }

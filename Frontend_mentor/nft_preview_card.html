@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./nft_preview_card_resources/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | NFT preview card component</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./nft_preview_card_resources/nft_preview_card.css">
+
+  <script src="./nft_preview_card_resources/nft_preview_card.js" defer></script>
+  
+</head>
+<body>
+
+  <div class="vertical-center">
+    <div class="card">
+      <div class="card__container">
+        
+        <header class="card__header">
+            <a href=""><img id="card-img-top" class="card__img-top" src="./nft_preview_card_resources/images/image-equilibrium.jpg" alt="crystal cube"></a>
+            <div id="card-filter" class="card__filter"></div>
+            <img id="card-filter-img" class="card__filter-img" src="./nft_preview_card_resources/images/icon-view.svg" alt="eye">
+        </header>
+
+        <main class="card__body">
+          <a class="card__title" href="">
+            <h1 class="card__title">Equilibrium #3429</h1>
+          </a>
+          <div class="card__text">Our Equilibrium collection promotes balance and calm.</div>
+          <div class="card__row card__row--space-between">
+            <div class="card__row card__row--sm-gap card__row--cyan">
+              <img src="./nft_preview_card_resources/images/icon-ethereum.svg" alt="ethereum">
+              <div>0.041 ETH</div>
+            </div>
+            <div class="card__row card__row--sm-gap">
+              <img src="./nft_preview_card_resources/images/icon-clock.svg" alt="clock">
+              <div>3 days left</div>
+            </div>
+          </div>
+        </main>
+
+        <footer class="card__footer">
+          <hr class="card__hr">
+          <div class="card__row card__row--lg-gap">
+            <img class="card__img-avatar" src="./nft_preview_card_resources/images/image-avatar.png" alt="creator avatar">
+            <div>Creation of <a href="" class="card__creator-name">Jules Wyvern</a></div>
+          </div>
+        </footer>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    Challenge by <a class="footer__link" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a class="footer__link" href="https://afox9207.github.io/">Adam Fox</a>.
+  </footer>
+
+</body>
+</html>

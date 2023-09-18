@@ -1,0 +1,139 @@
+/*font-weights 400/700*/
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 62.5%;
+
+    /*primary*/
+    --dark-desaturated-blue: hsl(238, 29%, 16%);
+    --soft-red: hsl(14, 88%, 65%);
+
+    /*gradient*/
+    --soft-violet: hsl(273, 75%, 66%);
+    --soft-blue: hsl(240, 73%, 65%);
+
+    /*neutral*/
+    --very-dark-grayish-blue: hsl(237, 12%, 33%);
+    --dark-grayish-blue: hsl(240, 6%, 50%);
+    --white: #fff;
+
+    /*dividers*/
+    --light-grayish-blue: hsl(240, 5%, 91%);
+
+}
+
+body {
+    font-size: 1.2rem;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-weight: 400;
+    background-image: linear-gradient(var(--soft-violet), var(--soft-blue));
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.vertical-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 14em 0 5em;
+}
+
+.faq {
+    position: relative;
+    max-width: 375px;
+    margin: 0 auto;
+    background-color: var(--white);
+    border-radius: 1em;
+}
+
+.faq__container {
+    padding: 10em 2em 4em;
+}
+
+.faq__img-mobile {
+    width: 75%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    filter: drop-shadow(0px 30px hsla(240, 73%, 65%, .1));
+}
+
+.faq__title {
+    text-align: center;
+    font-size: 2.4rem;
+    margin: .5em 0;
+}
+
+.faq__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    background-color: var(--white);
+    border: 0;
+    padding: 0;
+}
+
+.faq__row:hover {
+    cursor: pointer;
+}
+
+.faq__question {
+    font-size: 1.4rem;
+    margin: 1em 0;
+    font-weight: 400;
+    color: var(--very-dark-grayish-blue);
+}
+
+.faq__question--bold {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.faq__arrow {
+    transition: all 250ms;
+}
+
+.faq__arrow--180 {
+    transform: rotate(180deg);
+    transition: all 250ms;
+}
+
+.faq__arrow--180:hover {
+    cursor: pointer;
+}
+
+.faq__answer {
+    font-size: 1.2rem;
+    margin: 1em 0;
+    color: var(--dark-grayish-blue);
+    border-bottom: 1px solid var(--light-grayish-blue);
+    max-height: 0;
+    overflow: hidden;
+    transition: all 250ms;
+}
+
+.faq__answer--shown {
+    max-height: 6em;
+    padding-bottom: 2em;
+    border-bottom: 1px solid var(--light-grayish-blue);
+    transition: all 250ms;
+}
+
+.footer {
+    font-size: 1.1rem;
+    text-align: center; 
+    padding: 2em;
+}
+
+.footer__link {
+    color: hsl(228, 45%, 44%); 
+}

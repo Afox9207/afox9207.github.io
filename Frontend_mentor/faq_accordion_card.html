@@ -19,57 +19,67 @@
 </head>
 <body>
   <div class="vertical-center">
-    <div class="faq">
-      <div class="faq__container">
+    <div class="box-img-area">
+      <img id="box-img" src="./faq_accordion_card_resources/images/illustration-box-desktop.svg" alt="box" class="faq__img-box">
+      <div class="faq">
         <img src="./faq_accordion_card_resources/images/illustration-woman-online-mobile.svg" alt="woman online" class="faq__img-mobile">
-        <h1 class="faq__title">FAQ</h1>
-        <div>
-          <button id="row-one" type="button" class="faq__row">
-            <h2 id="question-one" class="faq__question">How many team members can I invite?</h2>
-            <img id="arrow-one" src="./faq_accordion_card_resources/images/icon-arrow-down.svg" alt="arrow" class="faq__arrow">
+        <img src="./faq_accordion_card_resources/images/illustration-woman-online-desktop.svg" alt="woman online" class="faq__img-desktop">
+        <div class="faq__container">
+          <h1 class="faq__title">FAQ</h1>
+            
+          <button id="row-one" type="button" class="faq__btn">
+            <div class="faq__btn-row">
+              <h2 id="question-one" class="faq__question">How many team members can I invite?</h2>
+              <img id="arrow-one" src="./faq_accordion_card_resources/images/icon-arrow-down.svg" alt="arrow" class="faq__arrow">
+            </div>
+            <p id="answer-one" class="faq__answer">
+              You can invite up to 2 additional users on the Free plan. There is no limit on
+              team members for the Premium plan.
+            </p>
           </button>
-          <p id="answer-one" class="faq__answer">
-            You can invite up to 2 additional users on the Free plan. There is no limit on
-            team members for the Premium plan.
-          </p>
-        </div>
-        <div>
-          <button id="row-two" type="button" class="faq__row">
-            <h2 id="question-two" class="faq__question">What is the maximum file upload size?</h2>
-            <img id="arrow-two" src="./faq_accordion_card_resources/images/icon-arrow-down.svg" alt="arrow" class="faq__arrow">
+          <button id="row-two" type="button" class="faq__btn">
+            <div class="faq__btn-row">
+              <h2 id="question-two" class="faq__question">What is the maximum file upload size?</h2>
+              <img id="arrow-two" src="./faq_accordion_card_resources/images/icon-arrow-down.svg" alt="arrow" class="faq__arrow">
+            </div>
+            <p id="answer-two" class="faq__answer">No more than 2GB. All files in your account must fit your allotted storage space.</p>
           </button>
-          <p id="answer-two" class="faq__answer">No more than 2GB. All files in your account must fit your allotted storage space.</p>
-        </div>
-        <div>
-          <button id="row-three" type="button" class="faq__row">
-            <h2 id="question-three" class="faq__question">How do I reset my password?</h2>
-            <img id="arrow-three" src="./faq_accordion_card_resources/images/icon-arrow-down.svg" alt="arrow" class="faq__arrow">
+          <button id="row-three" type="button" class="faq__btn">
+            <div class="faq__btn-row">
+              <h2 id="question-three" class="faq__question">How do I reset my password?</h2>
+              <img id="arrow-three" src="./faq_accordion_card_resources/images/icon-arrow-down.svg" alt="arrow" class="faq__arrow">
+            </div>
+            <p id="answer-three" class="faq__answer">
+              Click “Forgot password” from the login page or “Change password” from your profile page.
+              A reset link will be emailed to you.
+            </p>
           </button>
-          <p id="answer-three" class="faq__answer">
-            Click “Forgot password” from the login page or “Change password” from your profile page.
-            A reset link will be emailed to you.
-          </p>
-        </div>
-        <div>
-          <button id="row-four" type="button" class="faq__row">
-            <h2 id="question-four" class="faq__question">Can I cancel my subscription?</h2>
-            <img id="arrow-four" src="./faq_accordion_card_resources/images/icon-arrow-down.svg" alt="arrow" class="faq__arrow">
+            
+          <button id="row-four" type="button" class="faq__btn">
+            <div class="faq__btn-row">
+              <h2 id="question-four" class="faq__question">Can I cancel my subscription?</h2>
+              <img id="arrow-four" src="./faq_accordion_card_resources/images/icon-arrow-down.svg" alt="arrow" class="faq__arrow">
+            </div>
+            <p id="answer-four" class="faq__answer">Yes! Send us a message and we’ll process your request no questions asked.</p>
           </button>
-          <p id="answer-four" class="faq__answer">Yes! Send us a message and we’ll process your request no questions asked.</p>
-        </div>
-        <div>
-          <button id="row-five" type="button" class="faq__row">
-            <h2 id="question-five" class="faq__question">Do you provide additional support?</h2>
-            <img id="arrow-five" src="./faq_accordion_card_resources/images/icon-arrow-down.svg" alt="arrow" class="faq__arrow">
+            
+          <button id="row-five" type="button" class="faq__btn">
+            <div class="faq__btn-row">
+              <h2 id="question-five" class="faq__question">Do you provide additional support?</h2>
+              <img id="arrow-five" src="./faq_accordion_card_resources/images/icon-arrow-down.svg" alt="arrow" class="faq__arrow">
+            </div>
+            <p id="answer-five" class="faq__answer">Chat and email support is available 24/7. Phone lines are open during normal business hours.</p>
           </button>
-          <p id="answer-five" class="faq__answer">Chat and email support is available 24/7. Phone lines are open during normal business hours.</p>
         </div>
+    
       </div>
     </div>
+    
     <footer class="footer">
       Challenge by <a class="footer__link" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
       Coded by <a class="footer__link" href="https://afox9207.github.io/">Adam Fox</a>.
     </footer>
+
   </div>
 </body>
 </html>

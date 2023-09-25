@@ -1,0 +1,118 @@
+/*font weights 200/400/600*/
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 62.5%;
+
+    /*primary*/
+    --red: hsl(0, 78%, 62%);
+    --cyan: hsl(180, 62%, 55%);
+    --orange: hsl(34, 97%, 64%);
+    --blue: hsl(212, 86%, 64%);
+
+    /*neutral*/
+    --very-dark-blue: hsl(234, 12%, 34%);
+    --grayish-blue: hsl(229, 6%, 66%);
+    --very-light-gray: hsl(0, 0%, 98%);
+    --white: #fff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    background-color: var(--very-light-gray);
+}
+
+.container {
+    max-width: 375px;
+    margin: 0 auto;
+}
+
+.hero {
+    padding: 4em 0;
+    text-align: center;
+}
+
+.hero__title {
+    font-size: 2.5rem;
+    color: var(--very-dark-blue);
+    font-weight: 200;
+}
+
+.hero__title--bold {
+    font-weight: 600;
+}
+
+.hero__text {
+    color: var(--grayish-blue);
+    font-weight: 400;
+}
+
+.card {
+    background-color: var(--white);
+    margin: 2em;
+    height: 250px;
+    border-radius: 1em;
+    box-shadow: 0px 5px 15px var(--grayish-blue);
+}
+
+.card--cyan {
+    border-top: 4px solid var(--cyan);
+}
+
+.card--red {
+    border-top: 4px solid var(--red);
+}
+
+.card--orange {
+    border-top: 4px solid var(--orange);
+}
+
+.card--blue {
+    border-top: 4px solid var(--blue);
+}
+
+.card__container {
+    padding: 2em;
+    position: relative;
+    height: 100%;
+}
+
+.card__title {
+    font-weight: 600;
+    color: var(--very-dark-blue);
+    font-size: 2rem;
+}
+
+.card__description {
+    color: var(--grayish-blue);
+    font-weight: 400;
+}
+
+.card__image {
+    position: absolute;
+    right: 2em;
+    bottom: 2em;
+}
+
+.footer {
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 2em 0;
+}
+
+.footer__link {
+    color: hsl(228, 45%, 44%);
+}
+
+@media (min-width: 1000px) {
+
+    .grid {
+        display: grid;
+    }
+
+}

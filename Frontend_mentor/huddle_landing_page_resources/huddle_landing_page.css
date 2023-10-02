@@ -1,0 +1,167 @@
+/*font weights
+poppins 400/600
+open sans 400
+font-family: 'Open Sans', sans-serif;
+font-family: 'Poppins', sans-serif;*/
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 62.5%;
+
+    --Violet: hsl(257, 40%, 49%);
+    --Soft-Magenta: hsl(300, 69%, 71%);
+    --white: #fff;
+    --box-shadow: hsla(0, 0%, 0%, .5);
+}
+
+body {
+    margin: 0;
+    font-size: 1.6rem;
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--Violet);
+}
+
+header {
+    background: url(./images/bg-mobile.svg);
+    background-size: cover;
+}
+
+.container {
+    max-width: 375px;
+    margin: 0 auto;
+}
+
+.logo {
+    width: 40%;
+    margin: 2em 0 0;
+}
+
+.illustration {
+    width: 100%;
+    margin: 4em 0;
+}
+
+.title {
+    font-family: 'Poppins', sans-serif;
+    color: var(--white);
+    font-size: 3rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.text {
+    color: var(--white);
+    text-align: center;
+    line-height: 1.5;
+}
+
+.btn {
+    display: block;
+    width: 75%;
+    margin: 2em auto;
+    padding: 1em 0;
+    text-align: center;
+    background-color: var(--white);
+    color: var(--Violet);
+    border-radius: 2em;
+    text-decoration: none;
+    box-shadow: 0 5px 10px var(--box-shadow);
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn:active,
+.btn:visited {
+    color: var(--Violet);
+}
+
+.btn:hover {
+    color: white;
+    background-color: var(--Soft-Magenta);
+}
+
+.icon-list {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    list-style-type: none;
+    padding: 0;
+    margin: 6em 0 3em;
+}
+
+.icon {
+    color: white;
+    background-color: var(--Violet);
+    border-radius: 50%;
+    border: 1px solid var(--white);
+    padding: .5em;
+    height: 32px;
+    width: 32px;
+}
+
+.icon:hover {
+    cursor: pointer;
+    color: var(--Soft-Magenta);
+    border-color: var(--Soft-Magenta);
+}
+
+.footer {
+    font-size: 1.1rem;
+    text-align: center; 
+    padding: 2em 0;
+    background-color: white;
+    margin: 0;
+    border-top: 1px solid black;
+}
+
+.footer__link {
+    color: hsl(228, 45%, 44%); 
+}
+
+@media (min-width: 900px) {
+
+    body {
+        background-image: url(./images/bg-desktop.svg);
+    }
+
+    header {
+        background-image: none;
+    }
+
+    .row {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 2em;
+    }
+
+    .container {
+        max-width: 500px;
+        width: 90%;
+    }
+
+    .logo {
+        width: 35%;
+    }
+
+    .title {
+        text-align: left;
+    }
+
+    .text {
+        text-align: left;
+    }
+
+    .btn {
+        width: 250px;
+        margin: 2em 0;
+    }
+
+    .icon-list {
+        justify-content: flex-end;
+        margin: 5em 0 2em;
+    }
+
+}

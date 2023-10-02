@@ -1,0 +1,198 @@
+/*font weights 400/700*/
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 62.5%;
+
+    /*primary*/
+    --cyan: hsl(179, 62%, 43%);
+    --lighter-cyan: #4abebd;
+    --bright-yellow: hsl(71, 73%, 54%);
+
+    /*neutral*/
+    --light-gray:hsl(204, 43%, 93%);
+    --grayish-blue: hsl(218, 22%, 67%);
+    --white: #fff;
+    --box-shadow: hsla(0, 0%, 0%, .25);
+}
+
+body {
+    font-family: 'Karla', sans-serif;
+    font-size: 1.6rem;
+    margin: 0;
+    background-color: var(--light-gray);
+}
+
+.grid-container {
+    max-width: 375px;
+    margin: 0 auto;
+}
+
+.text-container {
+    padding: 2em;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+/*hero section*/
+
+.hero {
+    background-color: var(--white);
+    border-radius: 1em 1em 0 0;
+}
+
+.hero__title {
+    font-weight: 700;
+    font-size: 2.2rem;
+    margin-bottom: 1em;
+    color: var(--cyan);
+}
+
+.hero__guarantee {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--bright-yellow);
+}
+
+.hero__text {
+    line-height: 1.5;
+    color: var(--grayish-blue);
+    margin-bottom: 0;
+}
+
+/*sign-up section*/
+
+.sign-up {
+    background-color: var(--cyan);
+}
+
+.sign-up__title {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 1em;
+    color: var(--light-gray);
+}
+
+.sign-up__price {
+    font-weight: 700;
+    font-size: 3rem;
+    color: var(--light-gray);
+}
+
+.sign-up__per-month {
+    font-weight: 400;
+    font-size: 1.6rem;
+    color: var(--light-gray);
+    opacity: .75;
+}
+
+.sign-up__access {
+    color: var(--light-gray);
+    margin: .5em 0 2em;
+}
+
+.sign-up__btn {
+    display: block;
+    text-align: center;
+    padding: 1em;
+    background-color: var(--bright-yellow);
+    color: var(--light-gray);
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: .5em;
+    box-shadow: 0 5px 15px var(--box-shadow);
+    transition: transform 250ms;
+}
+
+.sign-up__btn:visited,
+.sign-up__btn:active {
+    color: var(--light-gray);
+}
+
+.sign-up__btn:hover {
+    text-shadow: -1px -1px var(--cyan);
+    text-shadow: -1px 1px var(--cyan);
+    text-shadow: 1px -1px var(--cyan);
+    text-shadow: 1px 1px var(--cyan);
+    transform: scale(1.05);
+}
+
+/*why us section*/
+
+.why-us {
+    background-color: var(--lighter-cyan);
+    border-radius: 0 0 1em 1em;
+}
+
+.why-us__title {
+    font-size: 2rem;
+    color: var(--light-gray);
+    font-weight: 700;
+    margin-bottom: 1em;
+}
+
+.why-us__list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.why-us__list-item {
+    color: var(--light-gray);
+    opacity: .75;
+    padding: .1em 0;
+}
+
+.why-us__list-item:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.footer {
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 2em 0;
+}
+
+.footer__link {
+    color: hsl(228, 45%, 44%);
+}
+
+@media (min-width: 1000px) {
+
+    .grid-container {
+        max-width: 750px;
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+        "hero hero"
+        "sign-up why-us";
+    }
+
+    .hero {
+        max-width: 750px;
+        grid-area: hero;
+    }
+
+    .sign-up {
+        max-width: 375px;
+        grid-area: sign-up;
+        border-radius: 0 0 0 1em;
+    }
+
+    .why-us {
+        max-width: 375px;
+        grid-area: why-us;
+        border-radius: 0 0 1em 0;
+    }
+
+
+}

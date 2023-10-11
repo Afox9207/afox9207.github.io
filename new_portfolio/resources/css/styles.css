@@ -87,9 +87,12 @@ body {
 .avatar {
     aspect-ratio: 1;
     width: 425px;
+    max-width: 90vw;
+    max-width: 90dvw;
     border-radius: 50%;
     outline: 1px solid white;
     background: url(../images/fox_avatar.png);
+    background-position: center;
     position: relative;
 }
 
@@ -104,11 +107,14 @@ body {
 .avatar__title {
     margin: 0;
     font-size: 8rem;
+    font-size: clamp(4rem, 15vw, 8rem);
+    white-space: nowrap;
 }
 
 .avatar__subtitle {
     display: block;
     font-size: 2rem;
+    font-size: clamp(1rem, 5vw, 2rem)
 }
 
 .navbar {

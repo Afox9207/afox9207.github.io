@@ -38,8 +38,6 @@ body {
     /*only show one section at a time*/
     overflow: hidden;
     display: grid;
-    /*make sections scroll horizontally*/
-    grid-auto-flow: column;
     scroll-behavior: smooth;
 }
 
@@ -150,12 +148,19 @@ body {
     color: var(--accent);
 }
 
-@media (min-width: 800px) {
-
+@media (orientation: portrait) {
     .viewport {
-        /*make sections scroll vertically*/
+        grid-auto-flow: column;
+    }
+}
+
+@media (orientation: landscape) {
+    .viewport {
         grid-auto-flow: row;
     }
+}
+
+@media (min-width: 800px) {
 
     .section {
         /*take into account fixed navbar*/

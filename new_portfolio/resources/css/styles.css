@@ -1,0 +1,204 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 62.5%;
+
+    --background-color: black;
+    --font-color: white;
+    --accent: green;
+    
+    --container-max-width: 1440px;
+    --container-max-height: calc(var(--container-max-width) * (9/16) ); /*maintain aspect*/
+    
+    --navbar-height:""; /*set by javascript*/
+    --navbar-width:"";
+}
+
+body {
+    margin: 0;
+    font-size: 1.6rem;
+    font-family: sans-serif;
+    background-color: var(--background-color);
+    color: var(--font-color);
+    /*center content*/
+    display: grid;
+    place-content: center;
+    height: 100vh;
+    height: 100dvh;
+    width: 100vw;
+    width: 100dvw;
+}
+
+.viewport {
+    /*size is determined by container, which is needed for anchoring navbar*/
+    height: 100%;
+    width: 100%;
+    /*only show one section at a time*/
+    overflow: hidden;
+    display: grid;
+    /*make sections scroll horizontally*/
+    grid-auto-flow: column;
+    scroll-behavior: smooth;
+}
+
+.section {
+    /*wants to be full screen*/
+    height: 100vh;
+    height: 100dvh;
+    width: 100vw;
+    width: 100dvw;
+    /*set max dimensions*/
+    max-width: var(--container-max-width);
+    max-height: var(--container-max-height);
+    /*take into account fixed navbar*/
+    padding-top: var(--navbar-height);
+    overflow: scroll;
+    /*hide scrollbar*/
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.section::-webkit-scrollbar {
+    display: none;
+}
+
+.section--center {
+    display: grid;
+    place-content: center;
+}
+
+.container {
+    /*give the navbar an anchor for when the screen gets too large*/
+    height: 100vh;
+    height: 100dvh;
+    width: 100vw;
+    width: 100dvw;
+    max-width: var(--container-max-width);
+    max-height: var(--container-max-height);
+    position: relative;
+}
+
+.section__heading {
+    text-align: center;
+}
+
+.avatar {
+    aspect-ratio: 1;
+    width: 425px;
+    border-radius: 50%;
+    outline: 1px solid white;
+    background: url(../images/fox_avatar.png);
+    position: relative;
+}
+
+.avatar__text {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: right;
+    text-shadow: 0 0 5px black;
+}
+
+.avatar__title {
+    margin: 0;
+    font-size: 8rem;
+}
+
+.avatar__subtitle {
+    display: block;
+    font-size: 2rem;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    position: absolute;
+    width: 100%;
+    background-color: var(--background-color);
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar__link {
+    text-decoration: none;
+    color: var(--font-color);
+    margin: 1em;
+    display: block;
+}
+
+.navbar__link:visited,
+.navbar__link:active {
+    color: var(--font-color);
+}
+
+.navbar__link--active {
+    color: var(--accent);
+}
+
+.navbar__link--active:visited,
+.navbar__link--active:active {
+    color: var(--accent);
+}
+
+@media (min-width: 800px) {
+
+    .viewport {
+        /*make sections scroll vertically*/
+        grid-auto-flow: row;
+    }
+
+    .section {
+        /*take into account fixed navbar*/
+        padding: 0;
+        padding-left: var(--navbar-width);
+        padding-right: var(--navbar-width);
+    }
+
+    .navbar {
+        flex-direction: column;
+        height: 100%;
+        width: max-content;
+    }
+
+    .navbar__link {
+        width: max-content;
+    }
+
+}
+
+@media (hover: hover) {
+
+    .navbar__link {
+        position: relative;
+    }
+
+    .navbar__link::before,
+    .navbar__link::after {
+        content: "";
+        height: 2px;
+        max-width: 0;
+        width: 50%;
+        background-color: var(--accent);
+        position: absolute;
+        bottom: 0;
+        transition: max-width 250ms;
+    }
+
+    .navbar__link::before {
+        left: 50%;
+    }
+
+    .navbar__link::after {
+        right: 50%;
+    }
+
+    .navbar__link:hover::before,
+    .navbar__link:hover::after {
+        max-width: 50%;
+    }
+
+}

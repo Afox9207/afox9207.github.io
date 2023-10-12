@@ -1,27 +1,56 @@
-const mockWebsiteTitle = document.getElementById("mock_website_title");
-mockWebsiteTitle.addEventListener("mouseenter", openMockWebsiteList);
-mockWebsiteTitle.addEventListener("mouseleave", closeMockWebsiteList);
+//active links
 
-const javaFunTitle = document.getElementById("java_fun_title");
-javaFunTitle.addEventListener("mouseenter", openJavaFunList);
-javaFunTitle.addEventListener("mouseleave", closeJavaFunList);
+const homeLink = document.getElementById("home-link");
+const aboutMeLink = document.getElementById("about-me-link");
+const projectsLink = document.getElementById("projects-link");
+const contactLink = document.getElementById("contact-link");
 
-const mockWebsiteList = document.getElementById("mock_website_list").style;
+homeLink.addEventListener("click", makeHomeLinkActive);
+aboutMeLink.addEventListener("click", makeAboutMeLinkActive);
+projectsLink.addEventListener("click", makeProjectsLinkActive);
+contactLink.addEventListener("click", makeContactLinkActive);
 
-const javaFunList = document.getElementById("java_fun_list").style;
+homeLink.className = "navbar__link navbar__link--active";
 
-function openMockWebsiteList() {
-    mockWebsiteList.maxHeight = "10rem";
+function resetActiveClass() {
+    homeLink.className = "navbar__link";
+    aboutMeLink.className = "navbar__link";
+    projectsLink.className = "navbar__link";
+    contactLink.className = "navbar__link";
 }
 
-function closeMockWebsiteList() {
-    mockWebsiteList.maxHeight = "";
+function makeHomeLinkActive() {
+    resetActiveClass();
+    homeLink.className += " navbar__link--active";
 }
 
-function openJavaFunList() {
-    javaFunList.maxHeight = "10rem";
+function makeAboutMeLinkActive() {
+    resetActiveClass();
+    aboutMeLink.className += " navbar__link--active";
 }
 
-function closeJavaFunList() {
-    javaFunList.maxHeight = "";
+function makeProjectsLinkActive() {
+    resetActiveClass();
+    projectsLink.className += " navbar__link--active";
 }
+
+function makeContactLinkActive() {
+    resetActiveClass();
+    contactLink.className += " navbar__link--active";
+}
+
+//determine size of navbar
+function calculateNavbarDimensions() {
+    let navbar = document.getElementById("navbar");
+    let navbarStyle = getComputedStyle(navbar);
+    let navbarHeight = navbarStyle.getPropertyValue("height");
+    let navbarWidth = navbarStyle.getPropertyValue("width");
+    
+    let root = document.querySelector(":root");
+    root.style.setProperty("--navbar-height", navbarHeight);
+    root.style.setProperty("--navbar-width", navbarWidth);
+}
+
+calculateNavbarDimensions();
+
+window.addEventListener("resize", calculateNavbarDimensions);

@@ -3,53 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adam Fox Front-End Web Developer</title>
-    <link rel="stylesheet" href="./resources/css/style.css">
+    <title>Adam Fox - Front-End Developer</title>
+    <link rel="stylesheet" href="./resources/css/styles.css">
     <script src="./resources/js/script.js" defer></script>
 </head>
 <body>
     <div class="container">
-
-        <div class="row">
-
-            <div class="hero">
-                <img src="./resources/images/fox_avatar_square.png" alt="fox painting" class="hero_img">
-                <h1 class="name">Adam Fox <span class="profession">Front-End Web Developer</span></h1>
-            </div>
-
-            <nav>
-                <ul class="nav_list">
-                    <li id="mock_website_title" class="nav_item_title">
-                        Mock Websites
-                        <ul id="mock_website_list" class="nav_list_inside">
-                            <li class="nav_item"><a href="./mock_websites/colmar_academy.html" class="nav_link">Colmar Academy</a></li>
-                            <li class="nav_item"><a href="./mock_websites/responsive_course_final_project.html" class="nav_link">Responsive Design</a></li>
-                            <li class="nav_item"><a href="./mock_websites/camping_store.html" class="nav_link">The Camping Store</a></li>
-                            <li class="nav_item"><a href="./mock_websites/shop.html" class="nav_link">Nana's</a></li>
-                        </ul>
+        <nav>
+            <ul id="navbar" class="navbar">
+                <li><a id="home-link" class="navbar__link" href="#home">Home</a></li>
+                <li><a id="about-me-link" class="navbar__link" href="#about-me">About Me</a></li>
+                <li><a id="projects-link" class="navbar__link" href="#projects">Projects</a></li>
+                <li><a id="contact-link" class="navbar__link" href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <main class="viewport">
+            <section id="home" class="section section--center">
+                <div class="avatar">
+                    <div class="avatar__text">
+                        <h1 class="avatar__title">Adam Fox
+                            <span class="avatar__subtitle">Front-End Developer</span>
+                        </h1>
+                    </div>
+                </div>
+            </section>
+            <section id="about-me" class="section">
+                <div class="section__coming-soon">Coming Soon</div>
+            </section>
+            <section id="projects" class="section">
+                <h2 class="section__heading">Projects</h2>
+                <ul class="project-list">
+                
+                <!--Template
+                    
+                    <li class="project-list__item">
+                        <a href="" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title"></div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
+                    </li> 
+                
+                -->
+                
+                    <li class="project-list__item">
+                        <a href="./mock_websites/colmar_academy.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">Colmar Academy</div>
+                                <div class="project-card__credit">Codecademy</div>
+                            </div>
+                        </a>
                     </li>
-                    <li id="java_fun_title" class="nav_item_title">
-                        Java Fun
-                        <ul id="java_fun_list" class="nav_list_inside">
-                            <li class="nav_item"><a href="./java_fun/dice_roller.html" class="nav_link">Dice Roller</a></li>
-                            <li class="nav_item"><a href="./java_fun/pig_latin.html" class="nav_link">Pig Latin</a></li>
-                        </ul>
+                    <li class="project-list__item">
+                        <a href="./mock_websites/responsive_course_final_project.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">Responsive Course Final Project</div>
+                                <div class="project-card__credit">Kevin Powell</div>
+                            </div>
+                        </a>
+                    </li> 
+                    <li class="project-list__item">
+                        <a href="./Frontend_mentor/results_summary.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">Result Summary Component</div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
                     </li>
-                    <li class="nav_item_title">About Me</li>
-                    <li class="nav_item_title">Contact</li>
+                    <li class="project-list__item">
+                        <a href="./Frontend_mentor/product_preview_card.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">Product Preview Card Component</div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="project-list__item">
+                        <a href="./Frontend_mentor/interactive_rating.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">Interactive Rating Component</div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="project-list__item">
+                        <a href="./Frontend_mentor/qr_code.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">QR code Component</div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="project-list__item">
+                        <a href="./Frontend_mentor/nft_preview_card.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">NFT Preview Card Component</div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="project-list__item">
+                        <a href="./Frontend_mentor/order_summary.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">Order Summary Component</div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
+                    </li>       
+                    <li class="project-list__item">
+                        <a href="./Frontend_mentor/stats_preview_card.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">Stats Preview Card Component</div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="project-list__item">
+                        <a href="./Frontend_mentor/3_column_preview_card.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">Three-Column Preview Card Component</div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="project-list__item">
+                        <a href="./Frontend_mentor/profile_card.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">Profile Card Component</div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="project-list__item">
+                        <a href="./Frontend_mentor/faq_accordion_card.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">FAQ Accordion Card</div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="project-list__item">
+                        <a href="./Frontend_mentor/social_proof_section.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">Social Proof Section</div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="project-list__item">
+                        <a href="./Frontend_mentor/four_card_feature_section.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">Four Card Feature Section</div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="project-list__item">
+                        <a href="./Frontend_mentor/base_apparel-coming-soon.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">Base Apparel Coming Soon Page</div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="project-list__item">
+                        <a href="./Frontend_mentor/single_price_grid_component.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">Single Price Grid Component</div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
+                    </li>        
+                    <li class="project-list__item">
+                        <a href="./Frontend_mentor/huddle_landing_page.html" class="project-list__link">
+                            <div class="project-card">
+                                <div class="project-card__title">Huddle Landing Page</div>
+                                <div class="project-card__credit">Frontend Mentor</div>
+                            </div>
+                        </a>
+                    </li>  
                 </ul>
-            </nav>
-
-        </div>
-
-        <div class="row-reverse">
-
-            <p class="mission">Thank you for visiting my website. I'll be using this site as a portfolio of my work. Please explore the <a href="./the_fox_den.html#mock_sites" class="link">mock sites</a> and <a href="./the_fox_den.html#java_fun" class="link">java scripts</a> I've coded. Although I do try and make these sites visually appealing, I am not a designer by trade and focus more on coding. That being said, all of these pages have responsive design in mind, so feel free to try them on many devices.</p>
-
-            <a href="./the_fox_den.html" class="btn">Enter Site</a>
-
-        </div>
-        
+            </section>
+            <section id="contact" class="section">
+                <div class="section__coming-soon">Coming Soon</div>
+            </section>
+        </main>
     </div>
 </body>
 </html>

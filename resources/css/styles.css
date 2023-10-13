@@ -194,10 +194,6 @@ body {
     text-decoration: none;
 }
 
-.project-list__link:active {
-    background-color: var(--project-card-background-color);
-}
-
 .project-card {
     border: 1px solid white;
     padding: 1em;
@@ -255,6 +251,30 @@ body {
 
     .navbar__link {
         width: max-content;
+    }
+
+}
+
+@media (hover: none) {
+    
+    .navbar__link {
+        margin: 0;
+        padding: 1em;
+    }
+
+    .project-list__link {
+        /*stop blue highlight on mobile*/
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .project-list__link:focus {
+        outline: none;
     }
 
 }

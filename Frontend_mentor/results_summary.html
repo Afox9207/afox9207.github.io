@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./results_summary_resources/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./resources/results_summary/images/favicon-32x32.png">
   
   <title>Frontend Mentor | Results summary component</title>
 
@@ -12,66 +12,56 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="./results_summary_resources/results_summary.css">
+  <link rel="stylesheet" href="./resources/results_summary/css/results_summary.css">
 </head>
 <body>
 
-  <div class="vertical_center">
-    
-    <div class="row">
-    
-      <div class="background_color">
-        <div class="results_section">
-          <div class="container">
-            <h2 class="results">Your Result</h2>
-    
-            <div class="circle">
-              <div class="score">76</div>
-              <div class="score_total">of 100</div>
+  <div class="body-layout">
+    <main>
+      <div class="main-layout">
+        <div class="result-summary">
+          <section class="result">
+            <div class="container container--smaller">
+              <h1 class="result__title">Your Result</h1>
+              <p class="result__score"><span class="result__score-span">76</span> of 100</p>
+              <p class="result__rating">Great</p>
+              <p class="result__percentile">You scored higher than 65% of the people who have taken these tests.</p>
             </div>
-            <div class="rating">Great</div>
-            <p class="percentile">You scored higher than 65% of the people who have taken these tests.</p>
-          </div>
+          </section>
+    
+          <section class="summary">
+            <div class="container">
+              <h2 class="summary__title">Summary</h2>
+              <div class="summary-box summary-box--reaction">
+                <img src="./resources/results_summary/images/icon-reaction.svg" alt="reaction">
+                <p>Reaction</p>
+                <p class="summary-box__score"><span class="summary-box__score-span">80</span> / 100</p>
+              </div>
+              <div class="summary-box summary-box--memory">
+                <img src="./resources/results_summary/images/icon-memory.svg" alt="memory">
+                <p>Memory</p>
+                <p class="summary-box__score"><span class="summary-box__score-span">92</span> / 100</p>
+              </div>
+              <div class="summary-box summary-box--verbal">
+                <img src="./resources/results_summary/images/icon-verbal.svg" alt="verbal">
+                <p>Verbal</p>
+                <p class="summary-box__score"><span class="summary-box__score-span">61</span> / 100</p>
+              </div>
+              <div class="summary-box summary-box--visual">
+                <img src="./resources/results_summary/images/icon-visual.svg" alt="visual">
+                <p>Visual</p>
+                <p class="summary-box__score"><span class="summary-box__score-span">72</span> / 100</p>
+              </div>
+              <button class="btn" type="button">Continue</button>
+            </div>
+          </section>
         </div>
       </div>
+    </main>
     
-      <div class="summary_section">
-        <div class="container">
-          <h2 class="summary">Summary</h2>
-    
-          <div class="area_results red">
-            <img src="./results_summary_resources/images/icon-reaction.svg" alt="lightning bolt">
-            <div>Reaction</div>
-            <div class="area_score">80 <span class="area_score_total">/ 100</span></div>
-          </div>
-    
-          <div class="area_results yellow">
-            <img src="./results_summary_resources/images/icon-memory.svg" alt="brain">
-            <div>Memory</div>
-            <div class="area_score">92 <span class="area_score_total">/ 100</span></div>
-          </div>
-    
-          <div class="area_results green">
-            <img src="./results_summary_resources/images/icon-verbal.svg" alt="speech bubble">
-            <div>Verbal</div>
-            <div class="area_score">61 <span class="area_score_total">/ 100</span></div>
-          </div>
-    
-          <div class="area_results blue">
-            <img src="./results_summary_resources/images/icon-visual.svg" alt="eye">
-            <div>Visual</div>
-            <div class="area_score">72 <span class="area_score_total">/ 100</span></div>
-          </div>
-          <button class="btn-continue" type="button">Continue</button>
-        </div>
-      </div>
-    </div>
-    
-    <div class="attribution">
-      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-      Coded by <a href="https://afox9207.github.io/">Adam Fox</a>.
-    </div>
+    <footer class="footer">
+      <p>Challenge by <a class="footer__link" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by <a class="footer__link" href="https://afox9207.github.io/">Adam Fox</a>.</p>
+    </footer>
   </div>
-
 </body>
 </html>

@@ -167,26 +167,7 @@ body {
     gap: 1em;
     width: 90%;
     margin: 0 auto;
-}
-
-@media (min-width: 700px) {
-
-    .project-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-}
-
-@media (min-width: 1050px) {
-
-    .project-list {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-}
-
-.project-list__item {
-    max-width: 350px;
+    grid-template-columns: repeat(auto-fit, 350px);
 }
 
 .project-list__link {

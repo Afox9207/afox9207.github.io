@@ -1,16 +1,14 @@
-/* font-family: 'Fraunces', serif; 700
-font-family: 'Montserrat', sans-serif; 500/700*/
+/* || reset */
 
-/* || Reset */
 * {
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
-    font-weight: 500;
+
+    font: inherit;
 }
 
-h1,h2,h3,h4,h5,h6 {
-    font-size: 1.4rem;
+:root {
+    font-size: 62.5%;
 }
 
 img {
@@ -18,113 +16,88 @@ img {
     display: block;
 }
 
+/* || variables */
+
 :root {
-    font-size: 62.5%;
+    --clr-neutral-1: hsl(0, 0%, 100%);
+    --clr-neutral-2: hsl(228, 12%, 48%);
+    --clr-neutral-3: hsl(212, 21%, 14%);
+
+    --clr-primary-1: hsl(30, 38%, 92%);
+    --clr-primary-2: hsl(158, 36%, 37%);
+    --clr-primary-2-dark: hsl(158, 36%, 15%);
+
+    --ff-main: 'Montserrat', sans-serif;
+    --ff-headings: 'Fraunces', serif;
+
+    --fs-1: 1.4rem;
+    --fs-2: calc(2 * var(--fs-1));
+
+    --fw-1: 500;
+    --fw-2: 700;
 }
+
+/* || default */
 
 body {
-    font-size: 1.4rem;
-    font-family: 'Montserrat', sans-serif;
-    background-color: var(--background);
-}
-/* || Variables */
-:root {
-    --background: hsl(30, 38%, 92%);
-    --primary: hsl(158, 36%, 37%);
-    --heading: hsl(212, 21%, 14%);
-    --text: hsl(228, 12%, 48%);
-    --white: hsl(0, 0%, 100%);
-}
-/* || Block */
-.body-layout {
     display: grid;
     grid-template-rows: 1fr auto;
+    
     min-height: 100vh;
     min-height: 100dvh;
+
+    background-color: var(--clr-primary-1);
+
+    font-size: var(--fs-1);
+    font-weight: var(--fw-1);
+    font-family: var(--ff-main);
 }
 
-.main-layout {
-    display: grid;
-    place-content: center;
-    height: 100%;
-}
+/* || block */
 
-.card {
-    background-color: var(--white);
-    color: var(--text);
-    max-width: 686px;
-    border-radius: .5em;
-    overflow: hidden;
-}
-
-.card-container {
-    width: 90%;
-    margin: 0 auto;
-    padding: 2em 0;
+.product {
+    padding: 1em;
+    
+    background-color: var(--clr-neutral-1);
 }
 
 .btn {
-    padding: 1em;
-    background-color: var(--primary);
+    display: flex;
+    gap: .5em;
+    align-items: center;
+    
+    transition: background-color 100ms;
+
     border: 0;
+    padding: 1em;
     border-radius: .5em;
-    color: var(--white);
-    width: 100%;
+
+    background-color: var(--clr-primary-2);
+    
+    color: var(--clr-neutral-1);
 }
 
 .footer {
-    font-size: 1.1rem;
-    text-align: center;
     padding: 1em 0;
-}
-/* || Element */
 
-.card__subtitle {
-    text-transform: uppercase;
-    letter-spacing: .5em;
-    margin-bottom: 1em;
+    font-size: 1.1rem;
+    text-align: center; 
 }
 
-.card__title {
-    color: var(--heading);
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 4.2rem;
-    margin: .5em 0;
-}
-
-.card__description {
-    margin: 1em 0;
-}
-
-.card__price {
-    display: flex;
-    align-items: center;
-    margin: 1em 0;
-    gap: 1em;
-}
-
-.card__sale-price {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    color: var(--primary);
-    font-size: 4.2rem;
-}
-
-.card__original-price {
-    text-decoration: line-through;
-}
+/* || element */
 
 .footer__link {
-    color: hsl(228, 45%, 44%);
+    color: hsl(228, 45%, 44%); 
 }
-/* || Modifier */
-/* || Media */
-@media (min-width: 800px) {
-    
-    .card {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        max-width: 800px;
+
+/* || media queries */
+
+@media (hover: hover) {
+
+    .btn:hover {
+        background-color: var(--clr-primary-2-dark);
+
+        cursor: pointer;
     }
+
 }

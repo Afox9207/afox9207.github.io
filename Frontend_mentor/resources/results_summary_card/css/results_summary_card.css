@@ -1,0 +1,233 @@
+/* || reset */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+
+    font: inherit;
+}
+
+:root {
+    font-size: 62.5%;
+}
+
+/* || variables */
+
+:root {
+    --clr-neutral-1: hsl(0, 0%, 100%);
+    --clr-neutral-2: hsl(221, 100%, 96%);
+    --clr-neutral-hsl-3: 241, 100%, 89%;
+    --clr-neutral-3: hsl(var(--clr-neutral-hsl-3));
+    --clr-neutral-4-hsl: 224, 30%, 27%;
+    --clr-neutral-4: hsl(var(--clr-neutral-4-hsl));
+    
+    --clr-gradient-background-from: hsl(252, 100%, 67%);
+    --clr-gradient-background-to: hsl(241, 81%, 54%);
+    --clr-gradient-background: linear-gradient(var(--clr-gradient-background-from), var(--clr-gradient-background-to));
+    --clr-gradient-circle-from: hsla(256, 72%, 46%, 1);
+    --clr-gradient-circle-to: hsla(241, 72%, 46%, 0);
+    --clr-gradient-circle: linear-gradient(var(--clr-gradient-circle-from), var(--clr-gradient-circle-to));
+
+    --clr-primary-hsl-1: 0, 100%, 67%; 
+    --clr-primary-hsl-2: 39, 100%, 56%;
+    --clr-primary-hsl-3: 166, 100%, 37%;
+    --clr-primary-hsl-4: 234, 85%, 45%;
+    --clr-primary-1: hsl(var(--clr-primary-hsl-1));
+    --clr-primary-2: hsl(var(--clr-primary-hsl-2));
+    --clr-primary-3: hsl(var(--clr-primary-hsl-3));
+    --clr-primary-4: hsl(var(--clr-primary-hsl-4));
+
+    --fw-1: 500;
+    --fw-2: 700;
+    --fw-3: 800;
+    
+    --fs-1: 1.8rem;
+    --fs-2: calc(1.25 * var(--fs-1));
+    --fs-3: calc(2 * var(--fs-1));
+    --fs-4: calc(4 * var(--fs-1));
+}
+
+/* || default */
+
+body {
+    display: grid;
+    grid-template-rows: 1fr auto;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+    
+    background-color: var(--clr-neutral-2);
+    
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: var(--fs-1);
+    font-weight: var(--fw-1);
+}
+
+/* || utilities */
+
+.section-title {
+    font-size: var(--fs-2);
+    font-weight: var(--fw-2);
+}
+
+.grid-flow {
+    display: grid;
+    align-content: start;
+    gap: 1em
+}
+
+.grid-flow[data-spacing="large"] {
+    gap: 1.5em;
+}
+
+.btn {
+    border: 0;
+    border-radius: 2em;
+    padding: 1em;
+    
+    background-color: var(--clr-neutral-4);
+
+    color: var(--clr-neutral-1);
+}
+
+/* || block */
+
+.results-summary {
+    --padding: 2em;
+    --radius: 2em;
+
+    background-color: var(--clr-neutral-1);
+}
+
+.results {
+    padding: var(--padding) calc(2 * var(--padding));
+    border-radius: 0 0 var(--radius) var(--radius);
+
+    background: var(--clr-gradient-background);
+
+    text-align: center;
+    color: hsl(var(--clr-neutral-hsl-3), .75);
+}
+
+.summary {
+    padding: var(--padding);
+
+    color: var(--clr-neutral-4);
+}
+
+.summary-box {
+    --opacity: .1;
+
+    display: flex;
+    gap: .5em;
+
+    border-radius: .5em;
+    padding: 1em;
+}
+
+.footer {
+    padding: 1em 0; 
+    
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* || element */
+
+.results__score {
+    display: grid;
+    place-content: center;
+    margin: 0 auto;
+    
+    border-radius: 50%;
+    aspect-ratio: 1 /1 ;
+    width: 18rem;
+
+    background: var(--clr-gradient-circle);
+
+    color: hsl(var(--clr-neutral-hsl-3), .5);
+}
+
+.results__score-span {
+    font-size: var(--fs-4);
+    font-weight: var(--fw-3);
+    color: var(--clr-neutral-2);
+}
+
+.results__rating {
+    font-size: var(--fs-3);
+    font-weight: var(--fw-2);
+    color: var(--clr-neutral-2);
+}
+
+.summary-box__score {
+    margin-left: auto;
+
+    color: hsl(var(--clr-neutral-4-hsl), .5)
+}
+
+.summary-box__score-span {
+    font-weight: var(--fw-2);
+    color: var(--clr-neutral-4);
+}
+
+.footer__link {
+    color: hsl(228, 45%, 44%); 
+}
+
+/* || modifier */
+
+.summary-box--reaction {
+    background-color: hsl(var(--clr-primary-hsl-1), var(--opacity));
+
+    color: var(--clr-primary-1);
+}
+
+.summary-box--memory {
+    background-color: hsl(var(--clr-primary-hsl-2), var(--opacity));
+
+    color: var(--clr-primary-2);
+}
+
+.summary-box--verbal {
+    background-color: hsl(var(--clr-primary-hsl-3), var(--opacity));
+
+    color: var(--clr-primary-3);
+}
+
+.summary-box--visual {
+    background-color: hsl(var(--clr-primary-hsl-4), var(--opacity));
+
+    color: var(--clr-primary-4);
+}
+
+/* || media queries */
+
+@media (hover: hover) {
+    
+    .btn:hover {
+        background: var(--clr-gradient-background);
+
+        cursor: pointer;
+    }
+
+}
+
+@media (min-width: 725px) {
+
+    main {
+        display: grid;
+        place-content: center;
+    }
+
+    .results-summary {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        
+        overflow: hidden;
+
+        border-radius: var(--radius);
+        max-width: 80rem;
+    }
+
+}

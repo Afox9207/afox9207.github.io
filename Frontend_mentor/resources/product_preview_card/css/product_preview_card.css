@@ -31,7 +31,7 @@ img {
     --ff-headings: 'Fraunces', serif;
 
     --fs-1: 1.4rem;
-    --fs-2: calc(2 * var(--fs-1));
+    --fs-2: calc(3 * var(--fs-1));
 
     --fw-1: 500;
     --fw-2: 700;
@@ -53,18 +53,60 @@ body {
     font-family: var(--ff-main);
 }
 
+/* || utilities */
+
+.main-layout {
+    display: grid;
+    place-content: center;
+
+    margin: 1em;
+}
+
+.grid-flow {
+    display: grid;
+    align-content: start;
+    gap: 2em;
+}
+
+.sr-only {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+}
+
 /* || block */
 
 .product {
-    padding: 1em;
+    overflow: hidden;
+
+    border-radius: 1em;
+    max-width: 425px;
+}
+
+.product-info {
+    padding: 2em;
     
     background-color: var(--clr-neutral-1);
+
+    color: var(--clr-neutral-2);
+}
+
+.product-price {
+    display: flex;
+    gap: 1em;
+    align-items: center;
 }
 
 .btn {
     display: flex;
     gap: .5em;
     align-items: center;
+    justify-content: center;
     
     transition: background-color 100ms;
 
@@ -75,6 +117,7 @@ body {
     background-color: var(--clr-primary-2);
     
     color: var(--clr-neutral-1);
+    font-weight: var(--fw-2);
 }
 
 .footer {
@@ -85,6 +128,28 @@ body {
 }
 
 /* || element */
+
+.product__category {
+    text-transform: uppercase;
+    letter-spacing: .5em;
+}
+
+.product__title {
+    font-family: var(--ff-headings);
+    color: var(--clr-neutral-3);
+    font-size: var(--fs-2);
+    line-height: 1;
+}
+
+.product__description {
+    line-height: 1.75;
+}
+
+.product-price__sale {
+    font-family: var(--ff-headings);
+    font-size: var(--fs-2);
+    color: var(--clr-primary-2);
+}
 
 .footer__link {
     color: hsl(228, 45%, 44%); 
@@ -98,6 +163,17 @@ body {
         background-color: var(--clr-primary-2-dark);
 
         cursor: pointer;
+    }
+
+}
+
+@media (min-width: 700px) {
+
+    .product {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        max-width: 700px;
     }
 
 }

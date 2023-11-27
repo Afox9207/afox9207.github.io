@@ -4,58 +4,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./interactive_rating_resources/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./resources/interactive_rating/images/favicon-32x32.png">
   
   <title>Frontend Mentor | Interactive rating component</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap" rel="stylesheet">  
 
-  <link rel="stylesheet" href="./interactive_rating_resources/interactive_rating.css">
+  <link rel="stylesheet" href="./resources/interactive_rating/css/interactive_rating.css">
 
-  <script src="./interactive_rating_resources/interactive_rating.js" defer></script>
-
+  <script src="./resources/interactive_rating/js/interactive_rating.js" defer></script>
 </head>
 <body>
 
-  <div class="vertical-center">
+  <main class="main-layout">
     <!-- Rating state start -->
-    <div id="rating-state" class="rating">
-      <div class="rating__container">
-        <div class="rating__circle rating__circle--no-hover">
-          <img class="rating__img-star" src="./interactive_rating_resources/images/icon-star.svg" alt="star">
-        </div>
-        <h2 class="rating__title">How did we do?</h2>
-        <p class="rating__text">Please let us know how we did with your support request. All feedback is appreciated to help us improve our offering!</p>
-        <div class="rating__row">
-          <div id="one" class="rating__circle">1</div>
-          <div id="two" class="rating__circle">2</div>
-          <div id="three" class="rating__circle">3</div>
-          <div id="four" class="rating__circle">4</div>
-          <div id="five" class="rating__circle">5</div>
-        </div>
-        <button id="submit-btn" class="rating__btn" type="button">Submit</button>
+    <div class="section rating grid-flow" id="rating">
+      <div class="circle">
+        <img class="star-img" src="./resources/interactive_rating/images/icon-star.svg" alt="star">
       </div>
+      <h1 class="section__title">How did we do?</h1>
+      <p>
+        Please let us know how we did with your support request. All feedback is appreciated
+        to help us improve our offering!
+      </p>
+      <div class="btn-row" id="btn-row">
+        <button class="btn-row__btn circle" data-score="1">1</button>
+        <button class="btn-row__btn circle" data-score="2">2</button> 
+        <button class="btn-row__btn circle" data-score="3">3</button> 
+        <button class="btn-row__btn circle" data-score="4">4</button> 
+        <button class="btn-row__btn circle" data-score="5">5</button>
+      </div>
+      <button class="btn" id="submit-btn">Submit</button>
     </div>
     <!-- Rating state end -->
-    
     <!-- Thank you state start -->
-    <div id="thank-you-state" class="rating rating--center-text">
-      <div class="rating__container">
-        <img class="rating__img-thanks" src="./interactive_rating_resources/images/illustration-thank-you.svg" alt="smart phone">
-        <div class="rating__results">You selected <span id="rating-area"></span> out of 5</div>
-        <h2 class="rating__title">Thank you!</h2>
-        <p class="rating__text">We appreciate you taking the time to give a rating. If you ever need more support, don’t hesitate to get in touch!</p>
-      </div>
+    <div class="section thank-you grid-flow" id="thank-you">
+      <img class="thank-you__img" src="./resources/interactive_rating/images/illustration-thank-you.svg" alt="cellphone">
+      <p class="thank-you__rating">You selected <span id="score-area"></span> out of 5</p>
+      <p class="section__title">Thank you!</p>
+      <p>
+        We appreciate you taking the time to give a rating. If you ever need more support,
+        don’t hesitate to get in touch!
+      </p>
     </div>
     <!-- Thank you state end -->
-    
-    <footer class="footer">
+  </main>
+  
+  <footer class="footer">
+    <p>
       Challenge by <a class="footer__link" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
       Coded by <a class="footer__link" href="https://afox9207.github.io/">Adam Fox</a>.
-    </footer>
-  </div>
-
+    </p>
+  </footer>
 </body>
 </html>

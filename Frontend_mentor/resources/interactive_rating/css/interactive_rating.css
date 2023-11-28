@@ -90,6 +90,7 @@ body {
 .section {
     place-content: center;
 
+    margin-inline: 1em;
     padding: 2em;
     border-radius: 1em;
 

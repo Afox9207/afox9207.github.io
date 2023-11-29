@@ -39,9 +39,8 @@ img {
 
 body {
     background-image: url(../images/pattern-background-mobile.svg);
-    background-size: cover;
-    background-position: ;
     background-color: var(--clr-primary-1);
+    background-repeat: repeat-x;
 
     font-family: 'Red Hat Display', sans-serif;
     font-size: var(--fs-1);
@@ -60,6 +59,8 @@ body {
 .main-layout {
     display: grid;
     place-content: center;
+
+    margin: 1em;
 }
 
 /* || utilities */
@@ -114,7 +115,7 @@ body {
 /* || elements */
 
 .order-summary__container {
-    padding: 1em;
+    padding: 2em;
 }
 
 .order-summary__title {
@@ -141,6 +142,11 @@ body {
     color: var(--clr-primary-2);
 }
 
+.btn--change:focus {
+    text-decoration: none;
+    color: hsl(var(--clr-primary-2-hsl), .7);
+}
+
 .btn--proceed {
     box-shadow: 0 10px 10px hsla(var(--clr-primary-2-hsl), .25);
     
@@ -149,8 +155,16 @@ body {
     color: var(--clr-neutral-1);
 }
 
+.btn--proceed:focus {
+    background-color: hsl(var(--clr-primary-2-hsl), .7);
+}
+
 .btn--cancel {
     color: var(--clr-neutral-3);
+}
+
+.btn--cancel:focus {
+    color: var(--clr-neutral-4);
 }
 
 /* || media queries */
@@ -168,6 +182,14 @@ body {
 
     .btn--cancel:hover {
         color: var(--clr-neutral-4);
+    }
+
+}
+
+@media (min-width: 375px) {
+    
+    body {
+        background-image: url(../images/pattern-background-desktop.svg);
     }
 
 }

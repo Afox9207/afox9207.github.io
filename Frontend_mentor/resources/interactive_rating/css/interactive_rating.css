@@ -53,12 +53,22 @@ body {
 .main-layout {
     display: grid;
     place-content: center;
+
+    margin: 1em;
 }
 
 .grid-flow {
     display: grid;
     align-content: start;
-    gap: 1em;
+    gap: .75em;
+}
+
+.grid-flow[data-spacing="lg"] {
+    gap: 1.5em;
+}
+
+.grid-flow[data-spacing="xl"] {
+    gap: 2em;
 }
 
 .circle {
@@ -66,7 +76,7 @@ body {
 
     border-radius: 50%;
     aspect-ratio: 1 / 1;
-    width: 2.5em;
+    width: 3em;
 
     background-color: var(--clr-circle);
 }
@@ -78,11 +88,17 @@ body {
     border-radius: 2em;
     padding: 1em;
     
+    cursor: pointer;
     background-color: var(--clr-primary-1);
 
     text-transform: uppercase;
     color: var(--clr-neutral-1);
     font-weight: var(--fw-2);
+}
+
+.btn:focus {
+    background-color: var(--clr-neutral-1);
+    color: var(--clr-primary-1);
 }
 
 /* || block */
@@ -92,10 +108,10 @@ body {
 
     margin-inline: 1em;
     padding: 2em;
-    border-radius: 1em;
+    border-radius: 2em;
 
-    max-width: 350px;
-    height: 360px;
+    max-width: 375px;
+    height: 400px;
 
     background-color: var(--clr-neutral-4);
 }
@@ -131,6 +147,10 @@ body {
     color: var(--clr-neutral-1);
 }
 
+.section__text {
+    line-height: 1.5;
+}
+
 .btn-row__btn {
     transition: background-color 100ms, color 100ms;
     
@@ -139,6 +159,12 @@ body {
     cursor: pointer;
 
     color: var(--clr-neutral-2);
+}
+
+.btn-row__btn:focus {
+    background-color: var(--clr-primary-1);
+
+    color: var(--clr-neutral-1);
 }
 
 .thank-you__img {
@@ -185,8 +211,7 @@ body {
 
     .btn:hover {
         background-color: var(--clr-neutral-1);
-        cursor: pointer;
-
+        
         color: var(--clr-primary-1);
     }
 

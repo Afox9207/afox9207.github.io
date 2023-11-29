@@ -86,8 +86,13 @@ body {
     padding: 1em;
     
     background-color: var(--clr-neutral-4);
+    cursor: pointer;
 
     color: var(--clr-neutral-1);
+}
+
+.btn:focus {
+    background: var(--clr-gradient-background);
 }
 
 /* || block */
@@ -127,7 +132,7 @@ body {
 
 .footer {
     padding: 1em 0; 
-    
+
     font-size: 1.1rem;
     text-align: center;
 }
@@ -207,8 +212,6 @@ body {
     
     .btn:hover {
         background: var(--clr-gradient-background);
-
-        cursor: pointer;
     }
 
 }
@@ -226,6 +229,7 @@ body {
         
         overflow: hidden;
 
+        margin: 1em;
         border-radius: var(--radius);
         max-width: 80rem;
     }

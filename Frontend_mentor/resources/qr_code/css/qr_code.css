@@ -54,6 +54,8 @@ img {
 .main-layout {
     display: grid;
     place-content: center;
+
+    margin: 1em;
 }
 
 body {
@@ -71,7 +73,7 @@ body {
     margin-inline: 1em;
     max-width: 350px;
     padding: 1em;
-    border-radius: 1em;
+    border-radius: 1.5em;
     
     background-color: var(--clr-1);
 
@@ -90,11 +92,14 @@ body {
     border-radius: 1em;
 }
 
+.qr-code__container {
+    padding: 0 1.5em;
+}
+
 .qr-code__title {
     font-size: var(--fs-2);
     color: var(--clr-4);
     font-weight: var(--fw-2);
-    text-wrap: balance;
 }
 
 .footer__link {

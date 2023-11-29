@@ -31,7 +31,7 @@ img {
     --ff-headings: 'Fraunces', serif;
 
     --fs-1: 1.4rem;
-    --fs-2: calc(3 * var(--fs-1));
+    --fs-2: calc(2.5 * var(--fs-1));
 
     --fw-1: 500;
     --fw-2: 700;
@@ -65,7 +65,7 @@ body {
 .grid-flow {
     display: grid;
     align-content: start;
-    gap: 2em;
+    gap: 1em;
 }
 
 .sr-only {
@@ -114,10 +114,15 @@ body {
     padding: 1em;
     border-radius: .5em;
 
+    cursor: pointer;
     background-color: var(--clr-primary-2);
     
     color: var(--clr-neutral-1);
     font-weight: var(--fw-2);
+}
+
+.btn:focus {
+    background-color: var(--clr-primary-2-dark);
 }
 
 .footer {
@@ -131,7 +136,7 @@ body {
 
 .product__category {
     text-transform: uppercase;
-    letter-spacing: .5em;
+    letter-spacing: .35em;
 }
 
 .product__title {
@@ -161,19 +166,21 @@ body {
 
     .btn:hover {
         background-color: var(--clr-primary-2-dark);
-
-        cursor: pointer;
     }
 
 }
 
-@media (min-width: 700px) {
+@media (min-width: 625px) {
+
+    .grid-flow {
+        gap: 1.5em;
+    }
 
     .product {
         display: grid;
         grid-template-columns: 1fr 1fr;
 
-        max-width: 700px;
+        max-width: 600px;
     }
 
 }

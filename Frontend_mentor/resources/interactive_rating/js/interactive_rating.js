@@ -1,5 +1,4 @@
-const btnContainer = document.getElementById("btn-row");
-const btns = btnContainer.getElementsByClassName("btn-row__btn");
+const btns = document.getElementsByClassName("btn-row__btn");
 const activeBtns = document.getElementsByClassName("btn-row__btn--active");
 const submitBtn = document.getElementById("submit-btn");
 
@@ -39,5 +38,3 @@ function submitScore() {
         thankYouScreen.style.display = "grid";
     }
 };
-
-

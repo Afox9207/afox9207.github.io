@@ -142,7 +142,7 @@ body {
     color: var(--clr-primary-2);
 }
 
-.btn--change:focus {
+.btn--change:focus-visible {
     text-decoration: none;
     color: hsl(var(--clr-primary-2-hsl), .7);
 }
@@ -155,7 +155,7 @@ body {
     color: var(--clr-neutral-1);
 }
 
-.btn--proceed:focus {
+.btn--proceed:focus-visible {
     background-color: hsl(var(--clr-primary-2-hsl), .7);
 }
 
@@ -163,7 +163,7 @@ body {
     color: var(--clr-neutral-3);
 }
 
-.btn--cancel:focus {
+.btn--cancel:focus-visible {
     color: var(--clr-neutral-4);
 }
 

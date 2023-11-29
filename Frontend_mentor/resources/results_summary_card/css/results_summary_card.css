@@ -91,7 +91,7 @@ body {
     color: var(--clr-neutral-1);
 }
 
-.btn:focus {
+.btn:focus-visible {
     background: var(--clr-gradient-background);
 }
 

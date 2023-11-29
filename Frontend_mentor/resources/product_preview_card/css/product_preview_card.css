@@ -121,7 +121,7 @@ body {
     font-weight: var(--fw-2);
 }
 
-.btn:focus {
+.btn:focus-visible {
     background-color: var(--clr-primary-2-dark);
 }
 

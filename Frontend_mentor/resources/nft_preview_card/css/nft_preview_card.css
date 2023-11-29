@@ -137,7 +137,7 @@ body {
     background-color: hsla(var(--clr-primary-2-hsl), .5);
 }
 
-.nft-card__img-filter:focus {
+.nft-card__img-filter:focus-visible {
     opacity: 1;
 }
 
@@ -150,7 +150,7 @@ body {
     text-decoration: none;
 }
 
-.nft-card__title:focus {
+.nft-card__title:focus-visible {
     color: var(--clr-primary-2);
 }
 
@@ -176,7 +176,7 @@ body {
     font-weight: var(--fw-2);
 }
 
-.nft-card__creator-name:focus {
+.nft-card__creator-name:focus-visible {
     color: var(--clr-primary-2)
 }
 

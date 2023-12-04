@@ -89,6 +89,7 @@ body {
 .stats-preview-card {
     overflow: hidden;
 
+    max-width: 654px; /* width of mobile image */
     border-radius: .5em;
 
     background-color: var(--clr-primary-2);
@@ -98,6 +99,8 @@ body {
 
 .stats-preview-card__container {
     padding: 2em;
+    max-width: 500px;
+    margin-inline: auto;
 }
 
 .stats-preview-card__title {
@@ -116,6 +119,7 @@ body {
 
 .stats-preview-card__stat {
     font-family: var(--ff-2);
+    color: var(--clr-neutral-3);
     text-transform: uppercase;
 }
 
@@ -137,4 +141,33 @@ body {
 
 .footer__link {
     color: hsl(228, 45%, 44%); 
+}
+
+@media (min-width: 900px) {
+
+    .stats-preview-card {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "info hero";
+
+        max-width: 1175px; /* do not change */
+
+        text-align: left;
+    }
+
+    .hero {
+        grid-area: hero;
+    }
+
+    .stats-preview-card__container {
+        grid-area: info;
+
+        padding: 4em;    
+    }
+
+    .flex-group {
+        display: flex;
+        justify-content: space-between;
+    }
+
 }

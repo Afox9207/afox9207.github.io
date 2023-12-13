@@ -45,3 +45,28 @@ for (let i = 0; i < accordionBtns.length; i++) {
         }
     });
 }
+
+const accordionImgContainer = document.getElementsByClassName("accordion-img__container")[0];
+const accordionImg = document.getElementsByClassName("accordion-img")[0];
+
+let accordionImgHeight = window.getComputedStyle(accordionImg).height;
+// remove px from string
+accordionImgHeight = accordionImgHeight.slice(0, accordionImgHeight.length - 2);
+// turn string into number
+accordionImgHeight = Number(accordionImgHeight);
+// take %40 of height
+let accordionImgHeightInside = accordionImgHeight * 0.4;
+// add px back to number
+accordionImgContainer.style.height = accordionImgHeightInside + "px";
+
+// main layout padding
+const mainLayout = document.getElementsByClassName("main-layout")[0];
+let accordionImgHeightOutside = accordionImgHeight * 0.6;
+mainLayout.style.paddingTop = accordionImgHeightOutside  + "px";
+
+
+
+
+
+
+

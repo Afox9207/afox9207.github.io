@@ -18,6 +18,9 @@ for (let i = 0; i < accordionBtns.length; i++) {
     accordionBtns[i].addEventListener("mouseenter", function() {
         const accordionQuestion = this.getElementsByClassName("accordion-list__question")[0];
         accordionQuestion.style.color = "var(--clr-primary-1)";
+
+        const orangeBox = document.getElementsByClassName("accordion-img__box")[0];
+        orangeBox.style.translate = "-75% -25%"
     });
     // mouse leave event
     accordionBtns[i].addEventListener("mouseleave", function() {
@@ -28,11 +31,17 @@ for (let i = 0; i < accordionBtns.length; i++) {
         } else {
             accordionQuestion.style.color = "var(--clr-neutral-3";
         }
+
+        const orangeBox = document.getElementsByClassName("accordion-img__box")[0];
+        orangeBox.style.translate = "-50% -25%"
     });
     // focus in event
     accordionBtns[i].addEventListener("focusin", function() {
         const accordionQuestion = this.getElementsByClassName("accordion-list__question")[0];
         accordionQuestion.style.color = "var(--clr-primary-1)";
+
+        const orangeBox = document.getElementsByClassName("accordion-img__box")[0];
+        orangeBox.style.translate = "-75% -25%"
     });
     // focus out event
     accordionBtns[i].addEventListener("focusout", function() {
@@ -43,6 +52,9 @@ for (let i = 0; i < accordionBtns.length; i++) {
         } else {
             accordionQuestion.style.color = "var(--clr-neutral-3";
         }
+
+        const orangeBox = document.getElementsByClassName("accordion-img__box")[0];
+        orangeBox.style.translate = "-50% -25%"
     });
 }
 
@@ -57,14 +69,16 @@ accordionImgHeight = Number(accordionImgHeight);
 // take %40 of height
 let accordionImgHeightInside = accordionImgHeight * 0.4;
 // add px back to number
-accordionImgContainer.style.height = accordionImgHeightInside + "px";
+if (window.innerWidth < 600) {
+    accordionImgContainer.style.height = accordionImgHeightInside + "px";
+}
 
 // main layout padding
-const mainLayout = document.getElementsByClassName("main-layout")[0];
-let accordionImgHeightOutside = accordionImgHeight * 0.6;
-mainLayout.style.paddingTop = accordionImgHeightOutside  + "px";
-
-
+if (window.innerWidth < 600) {
+    const mainLayout = document.getElementsByClassName("main-layout")[0];
+    let accordionImgHeightOutside = accordionImgHeight * 0.6;
+    mainLayout.style.paddingTop = accordionImgHeightOutside  + "px";
+}
 
 
 

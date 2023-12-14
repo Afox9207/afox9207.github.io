@@ -19,7 +19,7 @@ img {
     --ff-1: 'Kumbh Sans', sans-serif;
 
     --fs-1: 1.2rem;
-    --fs-2: calc(var(--fs-1) * 2);
+    --fs-2: calc(var(--fs-1) * 2.5);
 
     --fw-1: 400;
     --fw-2: 700;
@@ -85,6 +85,10 @@ body {
     filter: drop-shadow(0px 30px 1px #f0f0fc)
 }
 
+.accordion-img__box {
+    display: none;
+}
+
 .accordion {
     position: relative;
     
@@ -94,12 +98,12 @@ body {
 }
 
 .accordion__container {
-    max-width: 350px;
-    padding: 1em 1em 3em;
+    max-width: 300px;
+    padding: 1em 1em 4em;
 }
 
 .accordion__title {
-    margin-block: 1em;
+    margin: 1em 0 .5em;
 
     font-size: var(--fs-2);
     font-weight: var(--fw-2);
@@ -165,3 +169,52 @@ body {
     margin-block: 1em;
 }
 
+/* || media queries */
+
+@media (min-width: 600px) {
+
+    .accordion {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        
+        max-width: 700px;
+        width: 100vw;
+    }
+
+    .accordion-img__container {
+        display: grid;
+        align-content: center;
+
+        overflow: hidden;
+    }
+
+    .accordion-img {
+        position: static;
+
+        translate: none;
+        translate: -20% 0;
+
+        width: auto;
+        height: 20em;
+        
+        filter: drop-shadow(0px 60px 1px #f0f0fc)
+    }
+
+    .accordion-img__box {
+        position: absolute;
+        left: 0;
+        top: 50%;
+
+        display: block;
+        translate: -50% -25%;
+
+        transition: translate 250ms;
+
+        width: 10em;
+    }
+
+    .accordion__title {
+        text-align: left;
+    }
+
+}

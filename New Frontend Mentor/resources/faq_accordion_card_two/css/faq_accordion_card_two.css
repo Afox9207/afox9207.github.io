@@ -1,0 +1,70 @@
+/* || reset */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font: inherit
+}
+
+/* || custom properties */
+
+:root {
+    font-size: 62.5%;
+
+    --ff-1: 'Work Sans', sans-serif;
+
+    --fw-1: 400;
+    --fw-2: 600;
+    --fw-3: 700;
+
+    --fs-1: 1.6rem;
+    --fs-2: calc(var(--fs-1) * 3);
+
+    --clr-1: hsl(0, 0%, 100%);
+    --clr-2: hsl(275, 100%, 97%);
+    --clr-3: hsl(292, 16%, 49%);
+    --clr-4: hsl(292, 42%, 14%);
+}
+
+/* || body & layouts */
+
+body {
+    background-image: url(../images/background-pattern-mobile.svg);
+    background-repeat: repeat-x;
+    background-color: var(--clr-3);
+    
+    font-size: var(--fs-1);
+}
+
+.body-layout {
+    display: grid;
+    grid-template-rows: 1fr auto;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.main-layout {
+    display: grid;
+    place-content: center;
+}
+
+/* || bem */
+
+.accordion {
+    max-width: 350px;
+    padding: 1em;
+    border-radius: .5em;
+
+    background-color: var(--clr-1);
+}
+
+.footer {
+    font-size: 1.1rem;
+    text-align: center; 
+    padding-block: 1em;
+}
+
+.footer__link {
+    color: hsl(228, 45%, 44%); 
+}

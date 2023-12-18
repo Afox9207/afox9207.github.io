@@ -24,6 +24,7 @@
     --clr-2: hsl(275, 100%, 97%);
     --clr-3: hsl(292, 16%, 49%);
     --clr-4: hsl(292, 42%, 14%);
+    --clr-5: #a542d4;
 }
 
 /* || body & layout */
@@ -105,6 +106,7 @@ body {
     padding: 0;
     
     background: transparent;
+    cursor: pointer;
 
     text-align: left;
     color: inherit;
@@ -122,8 +124,23 @@ body {
     text-wrap: balance;
 }
 
+.accordion__question--hover {
+    color: var(--clr-5);
+}
+
 .accordion__answer {
+    transition: max-height 250ms, margin-block 250ms;
+
     max-height: 0;
+    margin-block: 0;
+}
+
+.accordion__answer--active {
+    /* max height set by js */
+    --max-height: ;
+    
+    max-height: var(--max-height);
+    margin-block: 1em;
 }
 
 .footer {

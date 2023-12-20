@@ -26,11 +26,21 @@
 
     --clr-primary-1: hsl(333, 80%, 67%);
     --clr-primary-2: hsl(300, 43%, 22%);
+
+    --max-width: 375px;
 }
 
 /* || body & layout */
 
-body {
+.body-layout {
+    display: grid;
+    grid-template-rows: 1fr auto;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+    max-width: 1000px;
+    margin-inline: auto;
+    
     background-image: url(../images/bg-pattern-top-mobile.svg), url(../images/bg-pattern-bottom-mobile.svg);
     background-repeat: no-repeat;
     background-position: top left, bottom right;
@@ -44,7 +54,7 @@ body {
     line-height: 1.25;
 }
 
-main {
+.main-layout {
     margin: 2em 1em;
 }
 
@@ -64,8 +74,12 @@ main {
 
 /* || bem */
 
+.hero-ratings {
+    margin-bottom: 2em;
+}
+
 .hero {
-    max-width: 375px;
+    max-width: var(--max-width);
     margin-inline: auto;
 }
 
@@ -79,9 +93,9 @@ main {
 }
 
 .rating-box {
-    margin: 1em auto;
+    margin: .5em auto;
     padding: 1em;
-    max-width: 375px;
+    max-width: var(--max-width);
     border-radius: .25em;
 
     background-color: var(--clr-neutral-2);
@@ -91,9 +105,9 @@ main {
 }
 
 .testimony-box {
-    max-width: 375px;
+    max-width: var(--max-width);
     margin: 1em auto;
-    padding: 1em;
+    padding: 1.5em;
     border-radius: .5em;
 
     background-color: var(--clr-primary-2);
@@ -136,8 +150,52 @@ main {
 
 }
 
-@media (min-width: 800px) {
+@media (min-width: 850px) {
 
+    .flex-start {
+        align-self: flex-start;
+    }
 
+    .flex-center {
+        align-self: center;
+    }
+
+    .flex-end {
+        align-self: flex-end;
+    }
+
+    .hero-ratings {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .hero {
+        margin-inline: 0;
+
+        text-align: left;
+    }
+
+    .ratings {
+        display: flex;
+        flex-direction: column;
+
+        width: calc(var(--max-width) + 3em);
+        max-width: 100%;
+    }
+
+    .rating-box {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+
+        margin-inline: 0;
+    }
+
+    .testimonies {
+        display: flex;
+        gap: 1em;
+
+        height: calc(250px + 3em);
+    }
 
 }

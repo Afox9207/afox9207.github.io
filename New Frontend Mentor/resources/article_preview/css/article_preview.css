@@ -1,0 +1,149 @@
+/* || reset */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* || custom properties */
+
+:root {
+    font-size: 62.5%;
+
+    --ff-1: 'Manrope', sans-serif;
+
+    --fs-1: 1.3rem;
+    --fs-2: calc(var(--fs-1) * 1.25);
+
+    --fw-1: 500;
+    --fw-2: 700;
+
+    --clr-1: white;
+    --clr-2: hsl(210, 46%, 95%);
+    --clr-3: hsl(212, 23%, 69%);
+    --clr-4: hsl(214, 17%, 51%);
+    --clr-5: hsl(217, 19%, 35%);
+}
+
+/* || body & layouts */
+
+.body-layout {
+    display: grid;
+    grid-template-rows: 1fr auto;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    background-color: var(--clr-2);
+
+    font-family: var(--ff-1);
+}
+
+.main-layout {
+    display: grid;
+    place-content: center;
+}
+
+/* || utilities */
+
+.grid-flow {
+    display: grid;
+    gap: 1em;
+}
+
+.bold {
+    font-weight: var(--fw-2);
+    color: var(--clr-5);
+}
+
+/* || bem */
+
+.article-preview {
+    overflow: hidden;
+
+    max-width: 375px;
+    border-radius: 1em;
+
+    background-color: var(--clr-1);
+    
+    font-size: var(--fs-1);
+    color: var(--clr-4);
+    font-weight: var(--fw-1);
+    line-height: 1.5;
+}
+
+.article-preview__container {
+    padding: 2em;
+}
+
+.article-preview__title {
+    font-size: var(--fs-2);
+    font-weight: var(--fw-2);
+    color: var(--clr-5);
+}
+
+.article-preview-footer {
+    display: flex;
+}
+
+.social {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    
+    margin: 1em;
+}
+
+.social--inactive {
+    display: flex;
+}
+
+.social__share-icon {
+    margin: 1em;
+    margin-left: auto;
+    padding: 1em;
+    border: 0;
+    border-radius: 50%;
+
+    cursor: pointer;
+    background-color: var(--clr-2);
+}
+
+/* social section not active */
+
+.social__avatar {
+    height: 3em;
+    border-radius: 50%;
+}
+
+/* social section active */
+
+.social--active {
+    display: none;
+    flex: 1;
+    
+    text-transform: uppercase;
+    letter-spacing: .25em;
+}
+
+.social__share-icon--inverse {
+    background-color: var(--clr-4);
+}
+
+.footer {
+    font-size: 1.1rem;
+    text-align: center; 
+    padding-block: 1em;
+}
+
+.footer__link {
+    color: hsl(228, 45%, 44%); 
+}
+
+/* || media queries */

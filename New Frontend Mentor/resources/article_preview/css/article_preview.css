@@ -1,0 +1,161 @@
+/* || reset */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* || custom properties */
+
+:root {
+    font-size: 62.5%;
+
+    --ff-1: 'Manrope', sans-serif;
+
+    --fs-1: 1.3rem;
+    --fs-2: calc(var(--fs-1) * 1.25);
+
+    --fw-1: 500;
+    --fw-2: 700;
+
+    --clr-1: hsl(0, 0%, 100%);
+    --clr-2: hsl(210, 46%, 95%);
+    --clr-3: hsl(212, 23%, 69%);
+    --clr-4: hsl(214, 17%, 51%);
+    --clr-5: hsl(217, 19%, 35%);
+}
+
+/* || body & layout */
+
+.body-layout {
+    display: grid;
+    grid-template-rows: 1fr auto;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    background-color: var(--clr-2);
+}
+
+.main-layout {
+    display: grid;
+    place-content: center;
+}
+
+/* || utilities */
+
+.bold {
+    font-weight: var(--fw-2);
+    color: var(--clr-5);
+}
+
+.lg-txt {
+    font-size: var(--fs-2);
+}
+
+.grid-flow {
+    display: grid;
+    align-content: start;
+    gap: 1em;
+}
+
+.flex-group {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+/* || bem */
+
+.card {
+    overflow: hidden;
+
+    margin: 2em;
+    border-radius: .5em;
+
+    background-color: var(--clr-1);
+
+    font-family: var(--ff-1);
+    font-size: var(--fs-1);
+    font-weight: var(--fw-1);
+    color: var(--clr-4);
+}
+
+.card__content {
+    padding: 2em;
+}
+
+.card__bottom {
+    padding: 1em 2em;
+}
+
+.card__credit {
+    /* display: none; */
+}
+
+.card__avatar {
+    border-radius: 50%;
+    width: 3em;
+}
+
+.card__share {
+    display: none;
+
+    color: var(--clr-3);
+    text-transform: uppercase;
+    letter-spacing: .5em;
+}
+
+.card__share-btn {
+    display: grid;
+    place-content: center;
+
+    aspect-ratio: 1 / 1;
+    
+    border: none;
+    border-radius: 50%;
+    margin-left: auto;
+    width: 3em;
+
+    background-color: var(--clr-2);
+    cursor: pointer;
+}
+
+.footer {
+    font-size: 1.1rem;
+    text-align: center; 
+    padding-block: 1em;
+}
+
+.footer__link {
+    color: hsl(228, 45%, 44%); 
+}
+
+@media (min-width: 600px) {
+
+    .card {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+
+        max-width: 750px;
+    }
+
+    .card__img-container {
+        overflow: hidden;
+
+        aspect-ratio: 1 / 1;
+    }
+
+    .card__img {
+        max-width: none;
+        height: 100%;
+    }
+
+}

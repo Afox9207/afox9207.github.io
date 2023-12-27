@@ -75,8 +75,6 @@ img {
 /* || bem */
 
 .card {
-    overflow: hidden;
-
     margin: 2em;
     border-radius: .5em;
 
@@ -88,12 +86,21 @@ img {
     color: var(--clr-4);
 }
 
+.card__img-container {
+    overflow: hidden;
+
+    border-radius: .5em .5em 0 0;
+}
+
 .card__content {
     padding: 2em;
 }
 
 .card__bottom {
+    position: relative;
+
     padding: 1em 2em;
+    border-radius: 0 0 .5em .5em;
 }
 
 .card__credit {
@@ -111,6 +118,21 @@ img {
     color: var(--clr-3);
     text-transform: uppercase;
     letter-spacing: .5em;
+}
+
+.card__share--active {
+    display: flex;
+
+    position: absolute;
+    right: 2em;
+    bottom: 5em;
+
+    translate: 50%;
+
+    padding: 1em 2em;
+    border-radius: .5em;
+
+    background-color: var(--clr-5);
 }
 
 .card__share-btn {
@@ -138,19 +160,34 @@ img {
     color: hsl(228, 45%, 44%); 
 }
 
-@media (min-width: 600px) {
+@keyframes shake {
+    0% {rotate: 0deg; scale: 1;}
+    25% {rotate: -5deg; scale: 1.1;}
+    50% {rotate: 0deg; scale: 1;}
+    75% {rotate: 5deg; scale: 1.1;}
+}
+
+@media (hover: hover) {
+
+    .card__share-icon:hover {
+        animation: shake 1000ms linear infinite;
+    }
+
+}
+
+@media (min-width: 800px) {
 
     .card {
         display: grid;
         grid-template-columns: 1fr 2fr;
 
-        max-width: 750px;
+        max-width: 700px;
     }
 
     .card__img-container {
-        overflow: hidden;
-
         aspect-ratio: 1 / 1;
+
+        border-radius: .5em 0 0 .5em
     }
 
     .card__img {

@@ -1,65 +1,78 @@
-const shareBtn = document.getElementsByClassName("article-preview-footer__btn")[0];
-const shareBtnImg = document.getElementsByClassName("article-preview-footer__btn-img")[0];
+const shareBtn = document.getElementsByClassName("card__share-btn")[0];
+const shareBtnImg = document.getElementsByClassName("card__share-btn-img")[0];
 
-const footer = document.getElementsByClassName("article-preview-footer")[0];
-const footerInactive = document.getElementsByClassName("flex-group--inactive")[0];
-const footerActive = document.getElementsByClassName("flex-group--active")[0];
+const cardBottom = document.getElementsByClassName("card__bottom")[0];
+const cardCredit = document.getElementsByClassName("card__credit")[0];
+const cardShare = document.getElementsByClassName("card__share")[0];
 
-let isShareBtnActive = false;
-let isShareBtnFocused = false;
+let isBtnFocused = false;
+let isBtnActive = false;
 
-// functions
+// callback functions
 
-function changeFooter() {
-    if (!isShareBtnActive) {
-        // change elements
-        footerInactive.style.display = "none";
-        footerActive.style.display = "flex";
-        // change background color
-        footer.style.backgroundColor = "var(--clr-5)";
-        // make true
-        isShareBtnActive = true;
+function changeBtnStyle() {
+    if (!isBtnActive && !isBtnFocused) {
+        shareBtn.style.backgroundColor = "var(--clr-2)";
+        shareBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share.svg");
+    } else if (!isBtnActive && isBtnFocused) {
+        shareBtn.style.backgroundColor = "var(--clr-4)";
+        shareBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share-inverse.svg");
+    } else if (isBtnActive && !isBtnFocused) {
+        shareBtn.style.backgroundColor = "var(--clr-4)";
+        shareBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share-inverse.svg");
     } else {
-        // change elements
-        footerInactive.style.display = "flex";
-        footerActive.style.display = "none";
-        // change background color
-        footer.style.backgroundColor = "var(--clr-1)";
-        // make false
-        isShareBtnActive = false;
-    }
-}
-function changeShareBtn() {
-    if (!isShareBtnActive && !isShareBtnFocused) {
-    // if btn is not active and not focused
-    shareBtn.style.backgroundColor = "var(--clr-2)";
-    shareBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share.svg");
-    } else if (!isShareBtnActive && isShareBtnFocused) {
-    // if btn is not active and is focused
-    shareBtn.style.backgroundColor = "var(--clr-4)";
-    shareBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share-inverse.svg");
-    } else if (isShareBtnActive && !isShareBtnFocused) {
-    // if btn is active and not focused
-    shareBtn.style.backgroundColor = "var(--clr-4)";
-    shareBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share-inverse.svg");
-    } else {
-    shareBtn.style.backgroundColor = "var(--clr-2)";
-    shareBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share.svg");
+        shareBtn.style.backgroundColor = "var(--clr-2)";
+        shareBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share.svg");
     }
 }
 
+function changeCardBottom() {
+    if (!isBtnActive) {
+        cardBottom.style.backgroundColor = "var(--clr-5)";
 
-shareBtn.addEventListener("click", function() {
-    changeFooter();
-    changeShareBtn()
-});
+        cardCredit.style.display = "none";
+        cardShare.style.display = "flex";
+
+        isBtnActive = true;
+    } else {
+        cardBottom.style.backgroundColor = "var(--clr-1)";
+
+        cardCredit.style.display = "flex";
+        cardShare.style.display = "none";
+
+        isBtnActive = false;
+    }
+}
+
+function popOutShareSection() {
+    if (!isBtnActive) {
+        cardShare.classList += " card__share--active";
+        isBtnActive = true;
+    } else {
+        cardShare.classList.remove("card__share--active");
+        isBtnActive = false;
+    }
+    
+}
+
+// event listeners
 
 shareBtn.addEventListener("mouseenter", function() {
-    isShareBtnFocused = true;
-    changeShareBtn();
+    isBtnFocused = true;
+    changeBtnStyle();
 });
 
 shareBtn.addEventListener("mouseleave", function() {
-    isShareBtnFocused = false;
-    changeShareBtn();
+    isBtnFocused = false;
+    changeBtnStyle();
+});
+
+shareBtn.addEventListener("click", function() {
+    if (window.innerWidth < 800) {
+        changeCardBottom();
+        changeBtnStyle();
+    } else {
+        popOutShareSection();
+        changeBtnStyle();
+    }
 });

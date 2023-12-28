@@ -1,78 +1,80 @@
-const shareBtn = document.getElementsByClassName("card__share-btn")[0];
-const shareBtnImg = document.getElementsByClassName("card__share-btn-img")[0];
+const cardBtn = document.getElementsByClassName("card__btn")[0];
+const cardBtnImg = document.getElementsByClassName("card__btn-img")[0];
 
 const cardBottom = document.getElementsByClassName("card__bottom")[0];
 const cardCredit = document.getElementsByClassName("card__credit")[0];
 const cardShare = document.getElementsByClassName("card__share")[0];
 
-let isBtnFocused = false;
+let isBtnFocused;
 let isBtnActive = false;
 
-// callback functions
+// functions
 
 function changeBtnStyle() {
     if (!isBtnActive && !isBtnFocused) {
-        shareBtn.style.backgroundColor = "var(--clr-2)";
-        shareBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share.svg");
+        cardBtn.style.backgroundColor = "var(--clr-2)";
+        cardBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share.svg");
     } else if (!isBtnActive && isBtnFocused) {
-        shareBtn.style.backgroundColor = "var(--clr-4)";
-        shareBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share-inverse.svg");
+        cardBtn.style.backgroundColor = "var(--clr-4)";
+        cardBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share-inverse.svg");
     } else if (isBtnActive && !isBtnFocused) {
-        shareBtn.style.backgroundColor = "var(--clr-4)";
-        shareBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share-inverse.svg");
+        cardBtn.style.backgroundColor = "var(--clr-4)";
+        cardBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share-inverse.svg");
     } else {
-        shareBtn.style.backgroundColor = "var(--clr-2)";
-        shareBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share.svg");
+        cardBtn.style.backgroundColor = "var(--clr-2)";
+        cardBtnImg.setAttribute("src", "./resources/article_preview/images/icon-share.svg");
     }
 }
 
 function changeCardBottom() {
-    if (!isBtnActive) {
+    if (isBtnActive && window.innerWidth < 900) {
+        // change background color
         cardBottom.style.backgroundColor = "var(--clr-5)";
-
+        // switch displays
         cardCredit.style.display = "none";
         cardShare.style.display = "flex";
-
-        isBtnActive = true;
     } else {
         cardBottom.style.backgroundColor = "var(--clr-1)";
 
         cardCredit.style.display = "flex";
         cardShare.style.display = "none";
-
-        isBtnActive = false;
     }
 }
 
-function popOutShareSection() {
-    if (!isBtnActive) {
+function addActiveClass() {
+    if (isBtnActive) {
         cardShare.classList += " card__share--active";
-        isBtnActive = true;
     } else {
         cardShare.classList.remove("card__share--active");
-        isBtnActive = false;
     }
-    
 }
 
 // event listeners
 
-shareBtn.addEventListener("mouseenter", function() {
+cardBtn.addEventListener("mouseenter", function() {
     isBtnFocused = true;
     changeBtnStyle();
 });
 
-shareBtn.addEventListener("mouseleave", function() {
+cardBtn.addEventListener("mouseleave", function() {
     isBtnFocused = false;
     changeBtnStyle();
 });
 
-shareBtn.addEventListener("click", function() {
-    if (window.innerWidth < 800) {
-        changeCardBottom();
-        changeBtnStyle();
+cardBtn.addEventListener("click", function() {
+    
+    if (!isBtnActive) {
+        isBtnActive = true;
     } else {
-        popOutShareSection();
-        changeBtnStyle();
+        isBtnActive = false;
+    }
+    
+    changeBtnStyle();
+    
+    if (window.innerWidth < 900) {
+        changeCardBottom();
+    } else {
+        addActiveClass();
     }
 });
+

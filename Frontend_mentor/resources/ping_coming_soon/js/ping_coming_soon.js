@@ -5,14 +5,13 @@ const btn = document.querySelector(".btn");
 btn.addEventListener("click", function() {
     if (!emailInput.value || !emailInput.value.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
         emailInput.style.outline = "2px solid var(--clr-secondary-2)";
-
-        errorMessage.innerHTML = "Please provide a valid email address";
+        
+        errorMessage.style.display = "block";
     }
 });
 
 emailInput.addEventListener("keyup", function() {
     emailInput.style.outline = "1px solid var(--clr-secondary-1)";
     
-    errorMessage.innerHTML = "";
-
+    errorMessage.style.display = "none";
 });

@@ -126,9 +126,9 @@ p {
 }
 
 .form__error-message {
-    display: block;
+    display: none;
 
-    margin-top: .5em;
+    margin-block: 1em;
     padding-left: 2em;
 
     font-size: var(--fs-sm);
@@ -141,6 +141,7 @@ p {
     transition: opacity 100ms linear;
 
     width: 100%;
+    margin-block: 1em;
     padding: 1em;
     border: 0;
     border-radius: 2em;
@@ -232,6 +233,10 @@ p {
         grid-template-columns: 2fr 1fr;
         gap: 1em;
         align-items: start;
+    }
+
+    .btn {
+        margin-block: 0;
     }
 
 }

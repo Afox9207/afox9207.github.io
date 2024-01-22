@@ -1,24 +1,24 @@
-const signUpScreen = document.getElementById("sign-up-form");
-const confirmationScreen = document.getElementById("confirmation-message");
+const signUpScreen = document.getElementById("sign-up-screen");
+const confirmationScreen = document.getElementById("confirmation-screen");
 
-const emailInput = document.getElementById("email");
-const errorMessage = document.querySelector(".newsletter__error-message");
+const errorMessage = document.getElementById("error-message");
+const emailInput = document.getElementById("email-input")
+
+const userEmail = document.getElementById("user-email");
 
 const subscribeBtn = document.getElementById("subscribe-btn");
 const dismissBtn = document.getElementById("dismiss-btn");
 
-const userEmail = document.querySelector(".newsletter__user-email");
-
 subscribeBtn.addEventListener("click", function() {
     if (!emailInput.value.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
-        errorMessage.innerHTML = "Valid email required";
+        emailInput.classList.add("email__input--error");
 
-        emailInput.classList.add("newsletter__email-input--error");
+        errorMessage.innerText = "Valid email required";
     } else {
-        signUpScreen.style.display = "none";
-        confirmationScreen.style.display = "block";
+        userEmail.innerText = emailInput.value;
 
-        userEmail.innerHTML = emailInput.value;
+        signUpScreen.style.display = "none";
+        confirmationScreen.style.display = "grid";
     }
 });
 
@@ -28,7 +28,7 @@ dismissBtn.addEventListener("click", function() {
 });
 
 emailInput.addEventListener("keyup", function() {
-    emailInput.classList.remove("newsletter__email-input--error");
+    emailInput.classList.remove("email__input--error");
 
-    errorMessage.innerHTML = "";
+        errorMessage.innerText = "";
 });

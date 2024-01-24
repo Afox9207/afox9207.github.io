@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./resources/age_calculator_app/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Age calculator app</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,400;1,800&display=swap" rel="stylesheet">  
+
+  <link rel="stylesheet" href="./resources/age_calculator_app/css/age_calculator_app.css">
+
+  <script src="./resources/age_calculator_app/js/age_calculator_app.js" defer></script>
+</head>
+<body class="body-layout">
+
+  <main class="main-layout">
+    <div class="age-calculator">
+      <form class="age-calculator__form" action="#">
+        <div class="flex-group">
+          <div>
+            <label class="age-calculator__label" for="day">Day</label>
+            <input class="age-calculator__input" type="number" id="day" name="day" placeholder="DD" min="01" max="31" minlength="2" maxlength="2"></input>
+            <span class="age-calculator__error-message" id="error-message-day"></span>
+          </div>
+          <div>
+            <label class="age-calculator__label" for="month">Month</label>
+            <input class="age-calculator__input" type="number" id="month" name="month" placeholder="MM" min="01" max="12" minlength="2" maxlength="2"></input>
+            <span class="age-calculator__error-message" id="error-message-month"></span>
+          </div>
+          <div>
+            <label class="age-calculator__label" for="year">Year</label>
+            <input class="age-calculator__input" type="number" id="year" name="year" placeholder="YYYY" min="0" minlength="4" maxlength="4"></input>
+            <span class="age-calculator__error-message" id="error-message-year"></span>
+          </div>
+        </div>
+        <button class="age-calculator__btn" id="btn" type="button"></button>
+      </form>
+      <p class="age-calculator__result"><span class="purple" id="result-years">--</span> years</p>
+      <p class="age-calculator__result"><span class="purple" id="result-months">--</span> months</p>
+      <p class="age-calculator__result"><span class="purple" id="result-days">--</span> days</p>
+    </div>
+  </main>
+  
+  <footer class="footer">
+    <p>
+      Challenge by <a class="footer__link" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a class="footer__link" href="https://afox9207.github.io/">Adam Fox</a>.
+    </p>
+  </footer>
+</body>
+</html>

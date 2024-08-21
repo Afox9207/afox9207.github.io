@@ -1,0 +1,163 @@
+/* || reset */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+ul, ol {
+    list-style-position: inside;
+}
+
+b {
+    font-weight: var(--fw-3);
+}
+
+/* || custom properties */
+
+:root {
+    font-size: 62.5%;
+
+    --fs-1: 1.6rem;
+    --fs-2: calc(var(--fs-1) * 1.25);
+    --fs-3: calc(var(--fs-1) * 1.5);
+    --fs-4: calc(var(--fs-1) * 2);
+
+    --ff-1: 'Outfit', sans-serif;
+    --ff-2: 'Young Serif', serif;
+
+    --fw-1: 400;
+    --fw-2: 600;
+    --fw-3: 700;
+
+    --clr-neutral-1: hsl(0, 0%, 100%);
+    --clr-neutral-2: hsl(330, 100%, 98%);
+    --clr-neutral-3: hsl(30, 54%, 90%);
+    --clr-neutral-4: hsl(30, 18%, 87%);
+    --clr-neutral-5: hsl(30, 10%, 34%);
+    --clr-neutral-6: hsl(24, 5%, 18%);
+
+    --clr-primary-2-hsl: 332, 51%, 32%;
+
+    --clr-primary-1: hsl(14, 45%, 36%);
+    --clr-primary-2: hsl(var(--clr-primary-2-hsl));
+}
+
+/* || body & layout */
+
+.body {
+    display: grid;
+    grid-template-rows: 1fr auto;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    font-family: var(--ff-1);
+}
+
+/* || bem */
+
+.recipe {
+    background-color: var(--clr-neutral-1);
+
+    font-family: var(--ff-1);
+    font-size: var(--fs-1);
+    font-weight: var(--fw-1);
+    color: var(--clr-neutral-5);
+}
+
+.recipe__container {
+    padding: 1em;
+}
+
+.recipe__name {
+    font-family: var(--ff-2);
+    font-size: var(--fs-4);
+    color: var(--clr-neutral-6);
+}
+
+.recipe__prep {
+    padding: 1em;
+    border-radius: .5em;
+
+    background-color: hsla(var(--clr-primary-2-hsl), .1);
+}
+
+.recipe__prep-header {
+    font-size: var(--fs-2);
+    font-weight: var(--fw-2);
+    color: var(--clr-primary-2);
+}
+
+.recipe__list li {
+    margin-block: .5em;
+}
+
+.recipe__list li::marker {
+    color: var(--clr-primary-1);
+    font-weight: var(--fw-3);
+}
+
+.recipe__list--prep-time li::marker {
+    color: var(--clr-primary-2);
+}
+
+.recipe__section-header {
+    font-family: var(--ff-2);
+    font-size: var(--fs-3);
+    color: var(--clr-primary-1);
+}
+
+.recipe__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.recipe__table th {
+    border-bottom: 1px solid;
+
+    text-align: left;
+}
+
+.recipe__table td {
+    border-bottom: 1px solid;
+
+    color: var(--clr-primary-1);
+}
+
+.footer {
+    padding-block: 1em;
+    
+    background-color: var(--clr-neutral-1);
+
+    font-size: 1.1rem;
+    text-align: center; 
+}
+
+.footer__link {
+    color: hsl(228, 45%, 44%); 
+}
+
+/* || media queries */
+
+@media (min-width: 800px) {
+
+    .body {
+        background-color: var(--clr-primary-1);
+    }
+
+    .center {
+        display: grid;
+        place-content: center;
+    }
+
+}

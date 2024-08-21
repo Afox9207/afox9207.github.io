@@ -1,0 +1,74 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+/* utilities */
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* areas*/
+
+#gameArea {
+    background-color: black;
+}
+
+#optionsMenu {
+    display: none;
+    grid-template-rows: auto 1fr auto;
+    
+    min-height: calc(100% - 64px);
+}
+
+#controls {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: none;
+    justify-content: space-around;
+    
+    width: 100%;
+}
+
+/* buttons */
+
+.controlButton {
+    background: none;
+    border: 1px solid white;
+    cursor: pointer;
+    color: white;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+}
+
+.menuItem {
+    border: none;
+    
+    background: none;
+    cursor: pointer;
+}
+
+.menuItem:hover {
+    opacity: .75;
+}
+
+
+

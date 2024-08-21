@@ -1,0 +1,78 @@
+/* || custom properties */
+
+:root {
+    font-size: 62.5%;
+
+    --fs-paragraph: 1.6rem;
+    --fs-title: calc(var(--fs-paragraph) * 3);
+
+    --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+/* body & layout */
+
+body {
+    font-family: var(--system-ui);
+    font-size: var(--fs-paragraph);
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+}
+
+/* || header */
+
+.header {
+    display: grid;
+    place-content: center;
+
+    min-height: 80vh;
+}
+
+.header__logo {
+    position: relative;
+
+    width: 425px;
+    height: 425px;
+    background-image: url(../images/fox_avatar.jpg);
+    border-radius: 50%;
+    
+}
+
+.header__logo-text {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    text-align: right;
+    text-shadow: 0 0 1px white;
+}
+
+.header__title {
+    font-size: var(--fs-title);
+}
+
+/* || nav */
+
+.nav {
+    outline: 1px solid black;
+
+    width: min-content;
+    padding: .5em;
+}
+
+/* || main content */
+
+.main-content {
+    padding: .5em;
+}
+
+/* || ad space */
+
+.ad-space {
+    outline: 1px solid black;
+
+    width: 200px;
+    padding: .5em;
+}

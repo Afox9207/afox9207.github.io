@@ -24,12 +24,12 @@
             <div class="flex-col">
                 <div>
                     <label for="starCycleSlider">New Star Cycle (fps)</label>
-                    <input id="starCycleSlider" type="range" min="10" max="60" step="10" value="30">
+                    <input id="starCycleSlider" type="range" min="1" max="5" step="1">
                     <span id="starCycleValue"></span>
                 </div>
                 <div>
                     <label for="numOfStarsSlider">New Stars Per Cycle</label>
-                    <input id="numOfStarsSlider" type="range" min="1" max="10" step="1" value="10">
+                    <input id="numOfStarsSlider" type="range" min="1" max="10" step="1">
                     <span id="numOfStarsValue"></span>
                 </div>
                 <div>
@@ -37,29 +37,36 @@
                     <label for="whiteStars">White</label>
                     <input class="colorOfStarsRadio" type="radio" id="whiteStars" name="colorOfStars" value="white">
                     <label for="vibrantStars">Vibrant</label>
-                    <input class="colorOfStarsRadio" type="radio" id="vibrantStars" name="colorOfStars" value="vibrant" checked>
+                    <input class="colorOfStarsRadio" type="radio" id="vibrantStars" name="colorOfStars" value="vibrant">
                     <label for="colorfulStars">Colorful</label>
                     <input class="colorOfStarsRadio" type="radio" id="colorfulStars" name="colorOfStars" value="colorful"> 
                 </div>
                 <div>
                     <label for="numOfRocketParticlesSlider">Number Of Rocket Particles</label>
-                    <input id="numOfRocketParticlesSlider" type="range" min="1" max="10" step="1" value="5">
+                    <input id="numOfRocketParticlesSlider" type="range" min="1" max="10" step="1">
                     <span id="numOfRocketParticlesValue"></span>
                 </div>
                 <div>
                     <label for="asteroidCycleSlider">New Asteroid Cycle (fps)</label>
-                    <input id="asteroidCycleSlider" type="range" min="10" max="60" step="10" value="10">
+                    <input id="asteroidCycleSlider" type="range" min="1" max="5" step="1">
                     <span id="asteroidCycleValue"></span>
                 </div>
                 <div>
                     <label for="numOfAsteroidsSlider">New Asteroids Per Cycle</label>
-                    <input id="numOfAsteroidsSlider" type="range" min="1" max="10" step="1" value="1">
+                    <input id="numOfAsteroidsSlider" type="range" min="1" max="5" step="1">
                     <span id="numOfAsteroidsValue"></span>
                 </div>
                 <div>
                     <label for="chanceOfAsteroidSlider">Chance Of Asteroid</label>
-                    <input id="chanceOfAsteroidSlider" type="range" min="1" max="100" step="1" value="1">
+                    <input id="chanceOfAsteroidSlider" type="range" min="25" max="100" step="25">
                     <span id="chanceOfAsteroidValue"></span>
+                </div>
+                <div>
+                    <p>FPS</p>
+                    <label for="hideFps">Hide</label>
+                    <input class="fpsCounterRadio" type="radio" id="hideFps" name="fpsRadio" value="hide">
+                    <label for="showFps">Show</label>
+                    <input class="fpsCounterRadio" type="radio" id="showFps" name="fpsRadio" value="show">
                 </div>
             </div>
             <div></div> <!-- spacer -->

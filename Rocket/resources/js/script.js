@@ -9,15 +9,18 @@ let X_RESOLUTION = 720;
 let UNITS;
 
 const colorOfStarsRadioArray = document.getElementsByClassName('colorOfStarsRadio');
+const fpsRadioArray = document.getElementsByClassName('fpsCounterRadio');
 
-const DEFAULT_STAR_CYCLE = 30;
-const DEFAULT_NUM_OF_STARS = 10;
+const DEFAULT_STAR_CYCLE = 1;
+const DEFAULT_NUM_OF_STARS = 5;
 const DEFAULT_COLOR_OF_STARS_OPTION = 1;
 const DEFAULT_COLOR_OF_STARS = colorOfStarsRadioArray[DEFAULT_COLOR_OF_STARS_OPTION].value;
 const DEFAULT_NUM_OF_ROCKET_PARTICLES = 5;
-const DEFAULT_ASTEROID_CYCLE = 10;
+const DEFAULT_ASTEROID_CYCLE = 1;
 const DEFAULT_NUM_OF_ASTEROIDS = 1;
-const DEFAULT_CHANCE_OF_ASTEROID = 1;
+const DEFAULT_CHANCE_OF_ASTEROID = 25;
+const DEFAULT_FPS_COUNTER_OPTION = 0;
+const DEFAULT_FPS_COUNTER = fpsRadioArray[DEFAULT_FPS_COUNTER_OPTION].value;
 let STAR_CYCLE = DEFAULT_STAR_CYCLE;
 let NUM_OF_STARS = DEFAULT_NUM_OF_STARS;
 let COLOR_OF_STARS = DEFAULT_COLOR_OF_STARS;
@@ -25,14 +28,15 @@ let NUM_OF_ROCKET_PARTICLES = DEFAULT_NUM_OF_ROCKET_PARTICLES;
 let ASTEROID_CYCLE = DEFAULT_ASTEROID_CYCLE;
 let NUM_OF_ASTEROIDS = DEFAULT_NUM_OF_ASTEROIDS;
 let CHANCE_OF_ASTEROID = DEFAULT_CHANCE_OF_ASTEROID;
+let FPS_COUNTER = DEFAULT_FPS_COUNTER;
 
 let LAST_TIME = 0;
 let TIME_TO_NEXT_STAR = 0;
-let STAR_INTERVAL = FRAME_RATE * STAR_CYCLE;
+let STAR_INTERVAL = 1000 / STAR_CYCLE;
 let TIME_TO_NEXT_ROCKET_PARTICLE = 0;
 let ROCKET_PARTICLE_INTERVAL = FRAME_RATE;
 let TIME_TO_NEXT_ASTEROIDS = 0;
-let ASTEROID_INTERVAL = FRAME_RATE * ASTEROID_CYCLE;
+let ASTEROID_INTERVAL = 1000 / ASTEROID_CYCLE;
 
 let ROCKET;
 let PLAYER_X;
@@ -43,10 +47,14 @@ let GAME_OVER = true;
 let IS_LEFT_BUTTON_PRESSED = false;
 let IS_RIGHT_BUTTON_PRESSED = false;
 
-
 let stars = [];
 let rocketParticles = [];
 let asteroids = [];
+
+function resetArrays() {
+    rocketParticles = [];
+    asteroids = [];
+}
 
 function setGameArea() {
     if(window.innerWidth >= (9 * window.innerHeight / 16)) {
@@ -79,9 +87,6 @@ const numOfStarsValue = document.getElementById('numOfStarsValue');
 
 const numOfRocketParticlesSlider = document.getElementById('numOfRocketParticlesSlider');
 const numOfRocketParticlesValue = document.getElementById('numOfRocketParticlesValue');
-starCycleValue.innerText = starCycleSlider.value;
-numOfStarsValue.innerText = numOfStarsSlider.value;
-numOfRocketParticlesValue.innerText = numOfRocketParticlesSlider.value;
 
 const asteroidCycleSlider = document.getElementById('asteroidCycleSlider');
 const asteroidCycleValue = document.getElementById('asteroidCycleValue');
@@ -100,12 +105,15 @@ menuItemOptions.addEventListener('click', openOptionsMenu);
 starCycleSlider.addEventListener('input', updateStarCycle);
 numOfStarsSlider.addEventListener('input', updateNumOfStars);
 numOfRocketParticlesSlider.addEventListener('input', updateNumOfRocketParticles);
-for (let i = 0; i < colorOfStarsRadioArray.length; i++) {
+for (let i = 0; i < colorOfStarsRadioArray.length; ++i) {
     colorOfStarsRadioArray[i].addEventListener('input', updateColorOfStars);
 }
 asteroidCycleSlider.addEventListener('input', updateAsteroidCycle);
 numOfAsteroidsSlider.addEventListener('input', updateNumOfAsteroids);
 chanceOfAsteroidSlider.addEventListener('input', updateChanceOfAsteroid);
+for (let i = 0; i < fpsRadioArray.length; ++i) {
+    fpsRadioArray[i].addEventListener('input', updateFpsCounter);
+}
 
 menuItemDefault.addEventListener('click', resetOptions);
 menuItemDone.addEventListener('click', closeOptionsMenu);
@@ -113,6 +121,7 @@ menuItemDone.addEventListener('click', closeOptionsMenu);
 function openOptionsMenu() {
     gameMenu.style.display = 'none';
     optionsMenu.style.display = 'grid';
+    resetOptions();
 }
 function closeOptionsMenu() {
     optionsMenu.style.display = 'none';
@@ -120,7 +129,7 @@ function closeOptionsMenu() {
 }
 function updateStarCycle() {
     starCycleValue.innerText = STAR_CYCLE = starCycleSlider.value;
-    STAR_INTERVAL = FRAME_RATE * STAR_CYCLE;
+    STAR_INTERVAL = 1000 / STAR_CYCLE;
 }
 function updateNumOfStars() {
     numOfStarsValue.innerText = NUM_OF_STARS = numOfStarsSlider.value;
@@ -146,6 +155,14 @@ function updateNumOfAsteroids() {
 function updateChanceOfAsteroid() {
     chanceOfAsteroidValue.innerText = CHANCE_OF_ASTEROID = chanceOfAsteroidSlider.value;
 }
+function updateFpsCounter() {
+    for (let i = 0; i < fpsRadioArray.length; ++i) {
+        if (this.checked) {
+            FPS_COUNTER = this.value;
+            break;
+        }
+    }
+}
 function resetOptions() {
     starCycleSlider.value = starCycleValue.innerText = STAR_CYCLE = DEFAULT_STAR_CYCLE;
     numOfStarsSlider.value = numOfStarsValue.innerText = NUM_OF_STARS = DEFAULT_NUM_OF_STARS;
@@ -155,6 +172,8 @@ function resetOptions() {
     asteroidCycleSlider.value = asteroidCycleValue.innerText = ASTEROID_CYCLE = DEFAULT_ASTEROID_CYCLE;
     numOfAsteroidsSlider.value = numOfAsteroidsValue.innerText = NUM_OF_ASTEROIDS = DEFAULT_NUM_OF_ASTEROIDS;
     chanceOfAsteroidValue.innerText = chanceOfAsteroidSlider.value = CHANCE_OF_ASTEROID = DEFAULT_CHANCE_OF_ASTEROID;
+    fpsRadioArray[DEFAULT_FPS_COUNTER_OPTION].checked = true;
+    FPS_COUNTER = DEFAULT_FPS_COUNTER;
 }
 function startGame() {
     gameMenu.style.display = 'none';
@@ -171,6 +190,18 @@ function startGame() {
         IS_RIGHT_BUTTON_PRESSED = true;
     });
     controlButtonRight.addEventListener('mouseup', function() {
+        IS_RIGHT_BUTTON_PRESSED = false;
+    });
+    controlButtonLeft.addEventListener('touchstart', function() {
+        IS_LEFT_BUTTON_PRESSED = true;
+    });
+    controlButtonLeft.addEventListener('touchend', function() {
+        IS_LEFT_BUTTON_PRESSED = false;
+    });
+    controlButtonRight.addEventListener('touchstart', function() {
+        IS_RIGHT_BUTTON_PRESSED = true;
+    });
+    controlButtonRight.addEventListener('touchend', function() {
         IS_RIGHT_BUTTON_PRESSED = false;
     });
 }
@@ -267,7 +298,7 @@ class Asteroid {
     }
     update() {
         this.y += UNITS;
-        this.x += this.rotation * 0.05;
+        // this.x += this.rotation * 0.05;
         if (this.y > CANVAS_HEIGHT + this.height || this.x < 0 - this.width || this.x > CANVAS_WIDTH) this.markedForDeletion = true;
     }
     draw() {
@@ -296,15 +327,16 @@ function animate(timestamp) {
             for (let i = 0; i < NUM_OF_ROCKET_PARTICLES; ++i) {
                 rocketParticles.push(new RocketParticle());
             }
+            TIME_TO_NEXT_ROCKET_PARTICLE = 0;
         }
         TIME_TO_NEXT_ASTEROIDS += deltaTime;
         if (TIME_TO_NEXT_ASTEROIDS > ASTEROID_INTERVAL) {
             for (let i = 0; i < NUM_OF_ASTEROIDS; ++i) {
-                if (Math.ceil(Math.random() * (100 / CHANCE_OF_ASTEROID)) === 1) {
+                if (Math.random() * (100 / CHANCE_OF_ASTEROID) < 1) {
                     asteroids.push(new Asteroid());
                 }
             }
-            console.log((Math.ceil(Math.random() * (100 / CHANCE_OF_ASTEROID))));
+            TIME_TO_NEXT_ASTEROIDS = 0;
         }
         rocketParticles = rocketParticles.filter(object => !object.markedForDeletion);
         asteroids = asteroids.filter(object => !object.markedForDeletion);
@@ -312,8 +344,24 @@ function animate(timestamp) {
         [...rocketParticles, ...asteroids].forEach(object => object.draw());
         ROCKET.update();
         ROCKET.draw();
+        for (let i = 0; i < asteroids.length; ++i)
+            if(asteroids[i].x < ROCKET.x + ROCKET.width &&
+                asteroids[i].x + asteroids[i].width > ROCKET.x &&
+                asteroids[i].y < ROCKET.y + ROCKET.height &&
+                asteroids[i].y + asteroids[i].height > ROCKET.y) {
+                    GAME_OVER = true;
+                    resetArrays();
+                    gameMenu.style.display = 'flex';
+                    break;
+                } else {
+                    ++i;
+                }
+    }
+    if (FPS_COUNTER === 'show') {
+        ctx.font = '16px ariel';
+        ctx.fillStyle = 'white';
+        ctx.fillText(Math.floor(1000 / deltaTime), CANVAS_WIDTH - 64, 64);
     }
     requestAnimationFrame(animate);
-    console.log(asteroids);
 }
 animate(0);

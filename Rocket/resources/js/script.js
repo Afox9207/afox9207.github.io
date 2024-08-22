@@ -18,7 +18,7 @@ const DEFAULT_COLOR_OF_STARS = colorOfStarsRadioArray[DEFAULT_COLOR_OF_STARS_OPT
 const DEFAULT_NUM_OF_ROCKET_PARTICLES = 5;
 const DEFAULT_ASTEROID_CYCLE = 1;
 const DEFAULT_NUM_OF_ASTEROIDS = 1;
-const DEFAULT_CHANCE_OF_ASTEROID = 25;
+const DEFAULT_CHANCE_OF_ASTEROID = 50;
 const DEFAULT_FPS_COUNTER_OPTION = 0;
 const DEFAULT_FPS_COUNTER = fpsRadioArray[DEFAULT_FPS_COUNTER_OPTION].value;
 let STAR_CYCLE = DEFAULT_STAR_CYCLE;
@@ -219,8 +219,8 @@ class Rocket {
         this.y = CANVAS_HEIGHT - CONTROL_HEIGHT - PLAYER_HEIGHT;
     }
     update() {
-        if (IS_LEFT_BUTTON_PRESSED && this.x > 0) this.x -= UNITS;
-        if (IS_RIGHT_BUTTON_PRESSED && this.x < CANVAS_WIDTH - this.width) this.x += UNITS;
+        if (IS_LEFT_BUTTON_PRESSED && this.x > 0) this.x -= 2 * UNITS;
+        if (IS_RIGHT_BUTTON_PRESSED && this.x < CANVAS_WIDTH - this.width) this.x += 2 * UNITS;
         PLAYER_X = this.x;
     }
     draw() {
@@ -297,8 +297,8 @@ class Asteroid {
         this.markedForDeletion = false;
     }
     update() {
-        this.y += UNITS;
-        // this.x += this.rotation * 0.05;
+        this.y += 2 * UNITS;
+        this.x += this.rotation * 0.05;
         if (this.y > CANVAS_HEIGHT + this.height || this.x < 0 - this.width || this.x > CANVAS_WIDTH) this.markedForDeletion = true;
     }
     draw() {

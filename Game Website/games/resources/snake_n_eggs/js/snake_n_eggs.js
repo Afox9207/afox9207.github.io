@@ -1,342 +1,659 @@
-const canvas = document.querySelector('canvas');
-const ctx = canvas.getContext('2d');
-canvas.width = 640;
-canvas.height = 640;
+class Html {
+    constructor(width, height) {
+        this.createGameArea(width, height);
+        this.resources = [];
+        this.createImage('./resources/logo.jpg', 'gameImageLogo');
+        this.createImage('./resources/snake_n_eggs/images/grass2.jpg', 'gameImageGrass');
+        this.createAudio('./resources/snake_n_eggs/sounds/crunch.6.ogg', 'gameSoundCrunch');
+        this.loadResources(this.resources);
+        this.createCanvas(width, height);
+    }
+    createGameArea(width, height) {
+        const div = document.createElement('div');
+        div.id = 'gameArea';
+        div.style.position = 'relative';
+        div.style.width = `${width}px`;
+        div.style.height = `${height}px`;
+        div.style.fontFamily = 'Arial';
+        const gameCode = document.getElementById('gameCode');
+        document.body.insertBefore(div, gameCode);
+        this.gameArea = document.getElementById('gameArea');
+    }
+    createCanvas(width, height) {
+        const canvas = document.createElement('canvas');
+        canvas.id = 'gameCanvas';
+        canvas.width = width;
+        canvas.height = height;
+        canvas.style.position = 'absolute';
+        this.gameArea.appendChild(canvas);
+    }
+    createText(id, posX, posY, textArray, fontSize, booleanCenterText, booleanTranslateY) {
+        const div = document.createElement('div');
+        div.id = id;
+        div.style.fontSize = fontSize;
+        div.style.position = 'relative';
+        div.style.left = posX;
+        div.style.top = posY;
+        if (booleanTranslateY) {
+            div.style.transform = 'translate(-50%, -50%)';
+        } else {
+            div.style.transform = 'translateX(-50%)';
+        }
+        if (booleanCenterText) {
+            div.style.textAlign = 'center';
+        }
+        this.gameArea.appendChild(div);
+        textArray.forEach(line => {
+            const p = document.createElement('p');
+            p.textContent = line;
+            document.getElementById(id).appendChild(p);
+        });
+    }
+    styleText(element) {
+        const textShadowOffsetX = 2;
+        const textShadowOffsetY = 2;
+        element.style.textShadow =
+        `-1px -1px black, -1px 1px black, 1px -1px black, 1px 1px black, ${textShadowOffsetX}px ${textShadowOffsetY}px black`;
+        element.style.color = 'white';
+    }
+    createImage(src, id) {
+        const img = document.createElement('img');
+        img.id = id;
+        img.style.display = 'none';
+        img.style.position = 'absolute';
+        this.gameArea.appendChild(img);
+        this.resources.push({element: document.getElementById(id), src: src, event: 'load'});
+    }
+    createAudio(src, id) {
+        const audio = document.createElement('audio');
+        audio.id = id;
+        audio.style.display = 'none';
+        this.gameArea.appendChild(audio);
+        this.resources.push({element: document.getElementById(id), src: src, event: 'canplaythrough'});
+    }
+    loadResources(resources) {
+        let index = 0;
+        this.createText('gameTextLoading', '50%', '50%', ['Loading', 'Resources'], '56px', true, true);
+        function increaseIndex() {
+            resources[index].element.removeEventListener(resources[index].event, increaseIndex);
+            ++index;
+            loadNextResource();
+        }
+        function continueGameCode() {
+            resources[index].element.removeEventListener(resources[index].event, continueGameCode);
+            document.getElementById('gameTextLoading').remove();
+            game.lastTime = 0;
+            game.animate(0);
+            game.setState('Logo');
+        }
+        function loadNextResource() {
+            if (index < resources.length - 1) {
+                resources[index].element.addEventListener(resources[index].event, increaseIndex);
+                resources[index].element.src = resources[index].src;
+            } else {
+                resources[index].element.addEventListener(resources[index].event, continueGameCode);
+                resources[index].element.src = resources[index].src;
+            }
+        }
+        loadNextResource();
+    }
+}
 
-// || Input
+class Background {
+    constructor(gameArea) {
+        
+    }
+    setBackground(background) {
+        gameArea.style.background = background;
+    }
+}
 
 class Input {
     constructor() {
+        this.timer = 0;
+        this.timerInterval = 200;
+        this.timerIsActive = false;
         this.keys = [];
         window.addEventListener('keydown', e => {
             if ((   e.key === 'ArrowLeft' ||
                     e.key === 'ArrowUp' ||
                     e.key === 'ArrowRight' ||
                     e.key === 'ArrowDown' ||
-                    e.key === 'Enter' ||
-                    e.key === 's' ||
-                    e.key === 'c') && !this.keys.includes(e.key)) {
+                    e.key === 'Enter')
+                && this.keys.indexOf(e.key) === -1) {
                 this.keys.push(e.key);
             }
         });
         window.addEventListener('keyup', e => {
-            if (    e.key === 'ArrowLeft' ||
-                    e.key === 'ArrowUp' ||
-                    e.key === 'ArrowRight' ||
-                    e.key === 'ArrowDown' ||
-                    e.key === 'Enter' ||
-                    e.key === 's' ||
-                    e.key === 'c') {
+            if (e.key === 'ArrowLeft' ||
+                e.key === 'ArrowUp' ||
+                e.key === 'ArrowRight' ||
+                e.key === 'ArrowDown' ||
+                e.key === 'Enter') {
                 this.keys.splice(this.keys.indexOf(e.key), 1);
             }
         });
     }
-}
-
-// || UI
-
-class UI {
-    constructor(game) {
-        this.game = game;
-        this.font = 'Arial';
-        this.fontSize = 32;
-        this.color = 'hsl(200, 100%, 95%)';
-        this.score = 0;
-        this.scorePosX = this.game.width - 144;
-        this.scorePosY = 40;
-        this.dropShadowOffsetX = -2;
-        this.dropShadowOffsetY = -2;
+    update(deltaTime) {
+        if (this.timerIsActive) {
+            if (this.timer < this.timerInterval) {
+                this.timer += deltaTime;
+            } else {
+                this.timerIsActive = false;
+                this.timer = 0;
+            }
+        }
     }
-    draw() {
-        ctx.save();
-        ctx.font = this.fontSize + 'px ' + this.font;
-        ctx.fillText('Score: ' + this.score, this.scorePosX + this.dropShadowOffsetX, this.scorePosY + this.dropShadowOffsetY);
-        ctx.fillStyle = this.color;
-        ctx.fillText('Score: ' + this.score, this.scorePosX, this.scorePosY);
-        ctx.restore();
+    startTimer() {
+        this.timerIsActive = true;
     }
 }
-
-// || Logo
 
 class Logo {
-    constructor(game) {
-        this.game = game;
+    constructor() {
+        this.fadeInterval = 2000;
+        this.logoInterval = 1000;
         this.fadeInTimer = 0;
         this.logoTimer = 0;
         this.fadeOutTimer = 0;
-        this.fadeInInterval = 2000;
-        this.LogoInterval = 1000;
-        this.fadeOutInterval = 2000;
+        this.logo = document.getElementById('gameImageLogo');
+        this.logo.style.display = 'block';
+        this.setOpacity(0);
+        this.setTransition();
     }
-    update(deltaTime) {
-        if (this.fadeInTimer < this.fadeInInterval) {
-            this.fadeInTimer += deltaTime;
-        } else if (this.logoTimer < this.LogoInterval) {
-            this.logoTimer += deltaTime;
-        } else if (this.fadeOutTimer < this.fadeOutInterval) {
-            this.fadeOutTimer += deltaTime;
-        } else {
-            this.game.setState('Start Screen');
+    setTransition() {
+        this.logo.style.transition = `opacity ${this.fadeInterval}ms linear`;
+    }
+    setOpacity(opacity) {
+        this.logo.style.opacity = opacity;
+    }
+    showLogo(deltaTime) {
+        if (window.getComputedStyle(this.logo).opacity === '0') {
+            this.logoIsReadyToShow = true;
         }
-    }
-    draw(ctx) {
-        ctx.fillRect(0, 0, this.game.width, this.game.height);
-        if (this.fadeInTimer < this.fadeInInterval) {
-            ctx.save();
-            ctx.globalAlpha = 0 + this.fadeInTimer / this.fadeInInterval;
-            this.drawLogo(ctx);
-            ctx.restore();
-        } else if (this.logoTimer < this.LogoInterval) {
-            this.drawLogo(ctx);
-        } else if (this.fadeOutTimer < this.fadeOutInterval) {
-            ctx.save();
-            ctx.globalAlpha = 1 - this.fadeOutTimer / this.fadeOutInterval;
-            this.drawLogo(ctx);
-            ctx.restore();
+        if (this.logoIsReadyToShow) {
+            if (this.fadeInTimer < this.fadeInterval) {
+                this.setOpacity(1);
+                this.fadeInTimer += deltaTime;
+            } else if (this.logoTimer < this.logoInterval) {
+                this.logoTimer += deltaTime;
+            } else if (this.fadeOutTimer < this.fadeInterval) {
+                this.setOpacity(0);
+                this.fadeOutTimer += deltaTime;
+            } else {
+                this.logo.display = 'none';
+                game.setState('Title Screen');
+            }
         }
-    }
-    drawLogo(ctx) {
-        ctx.drawImage(logo, this.game.width / 2 - logo.width / 2,
-        this.game.height / 2 - logo.height / 2);
     }
 }
 
-// || Start Screen
-
-class StartScreen {
-    constructor(game, ctx) {
-        this.game = game;
-        this.backGroundColor = 'hsl(200, 100%, 95%)';
-        this.titleFont = 'Arial';
-        this.titleSize = 96;
-        this.titleFillStyle = ctx.createPattern(grass, 'no-repeat');
-        this.textFont = 'Arial';
-        this.textSize = 64;
-        this.textFillStyle = 'White';
+class TitleScreen {
+    constructor() {
+        this.createTitle();
+        this.createTitleScreenText();
     }
     update(input) {
-        if (input.includes('Enter')) {
-            this.game.setState('Snake Selection');
+        if (!game.input.timerIsActive) {
+            if (input === 'Enter') {
+                this.title.remove();
+                document.getElementById('gameTextTitleScreen').remove();
+                game.input.startTimer();
+                game.setState('Snake Selection');
+            }
         }
     }
-    draw(ctx) {
-        ctx.save();
-        ctx.fillStyle = this.backGroundColor;
-        ctx.fillRect(0, 0, this.game.width, this.game.height);
-        ctx.restore();
-        ctx.save();
-        ctx.font = this.titleSize + 'px ' + this.titleFont;
-        ctx.textAlign = 'center';
-        ctx.baseLine = 'middle';
-        ctx.fillStyle = this.titleFillStyle;
-        ctx.fillText('Snake', this.game.width / 2, this.titleSize);
-        ctx.fillText(`'N'`, this.game.width / 2, this.titleSize * 2);
-        ctx.fillText('Eggs', this.game.width / 2, this.titleSize * 3);
-        ctx.strokeText('Snake', this.game.width / 2, this.titleSize);
-        ctx.strokeText(`'N'`, this.game.width / 2, this.titleSize * 2);
-        ctx.strokeText('Eggs', this.game.width / 2, this.titleSize * 3);
-        ctx.restore();
-        ctx.save();
-        ctx.font = this.textSize + 'px ' + this.textFont;
-        ctx.textAlign = 'center';
-        ctx.baseLine = 'middle';
-        ctx.fillStyle = this.textFillStyle;
-        ctx.fillText('Press Enter', this.game.width / 2, (this.game.height + this.titleSize * 3) / 2);
-        ctx.fillText('to Start', this.game.width / 2, (this.game.height + this.titleSize * 3) / 2 + this.textSize);
-        ctx.strokeText('Press Enter', this.game.width / 2, (this.game.height + this.titleSize * 3) / 2);
-        ctx.strokeText('to Start', this.game.width / 2, (this.game.height + this.titleSize * 3) / 2 + this.textSize);
-        ctx.restore();
+    createTitle() {
+        game.html.createText('gameTextTitle', '50%', '48px', ['Snake', `'N'`, 'Eggs'], '64px', true, false);
+        this.title = document.getElementById('gameTextTitle');
+        this.title.style.fontWeight = '700';
+        game.html.styleText(this.title);
+    }
+    createTitleScreenText() {
+        game.html.createText('gameTextTitleScreen', '50%', '110px', ['Press Enter', 'to Start'],
+        '32px', true, false);
     }
 }
-
-// || Snake Selection
 
 class SnakeSelection {
-    constructor(game) {
-        this.game = game;
-        this.textSize = 40;
-        this.textFont = 'Arial';
-        this.color = 'hsl(200, 100%, 95%)';
-        this.dropShadowOffsetX = -2;
-        this.dropShadowOffsetY = -2;
+    constructor() {
+        this.createTitle();
+        this.createOptions();
     }
     update(input) {
-        if (input.includes('s')) {
-            this.game.snake.snakeType = this.game.snake.snakeTypes[0];
-            this.game.setState('Game');
-        } else if (input.includes('c')) {
-            this.game.snake.snakeType = this.game.snake.snakeTypes[1];
-            this.game.setState('Game');
+        if (!game.input.timerIsActive) {
+            switch (input) {
+                case 'ArrowUp':
+                    if (this.index > 0) {
+                        --this.index;
+                    } else {
+                        this.index = this.snakes.length - 1;
+                    }
+                    this.updateSelection();
+                    break;
+                case 'ArrowDown':
+                    if (this.index < this.snakes.length - 1) {
+                        ++this.index;
+                    } else {
+                        this.index = 0;
+                    }
+                    this.updateSelection();
+                    break;
+                case 'Enter':
+                    this.setSnakeStyle();
+                    document.getElementById('gameTextSnakeSelectionTitle').remove();
+                    document.getElementById('gameTextSnakeSelection').remove();
+                    game.input.startTimer();
+                    game.setState('Game');
+                    break;
+            }
         }
     }
-    draw(ctx) {
-        ctx.save();
-        ctx.font = this.textSize + 'px ' + this.textFont;
-        ctx.textAlign = 'center'
-        ctx.fillText('Press S for Scarlet Kingsnake', this.game.width / 2 + this.dropShadowOffsetX, this.game.height / 2 + this.dropShadowOffsetY);
-        ctx.fillText('Press C for Coral Snake', this.game.width / 2 + this.dropShadowOffsetX, this.game.height / 2 + this.textSize * 1.5 + this.dropShadowOffsetY);
-        ctx.fillStyle = this.color;
-        ctx.fillText('Press S for Scarlet Kingsnake', this.game.width / 2, this.game.height / 2);
-        ctx.fillText('Press C for Coral Snake', this.game.width / 2, this.game.height / 2 + this.textSize * 1.5);
-        ctx.restore();
+    updateSelection() {
+        this.snakes.forEach(option => {
+            option.style.color = 'gray';
+        });
+        this.snakes[this.index].style.color = 'black';
+        game.input.startTimer();
+    }
+    setSnakeStyle() {
+        switch (this.index) {
+            case 0:
+                this.style = 'Classic';
+                break;
+            case 1:
+                this.style = 'King Snake';
+                break;
+            case 2:
+                this.style = 'Coral Snake';
+                break;
+            case 3:
+                this.style = 'Rock Star';
+                break;
+        }
+    }
+    createTitle() {
+        game.html.createText('gameTextSnakeSelectionTitle', '50%', '40px', ['Choose Your Snake'], '56px', true, false);
+        game.html.styleText(document.getElementById('gameTextSnakeSelectionTitle'));
+    }
+    createOptions() {
+        game.html.createText('gameTextSnakeSelection', '50%', '102px', ['Classic', 'King Snake', 'Coral Snake', 'Rock Star'],
+        '32px', true, false);
+        this.snakes = document.querySelectorAll('#gameTextSnakeSelection p');
+        this.index = 0;
+        this.updateSelection();
     }
 }
-
-// || Background
-
-class Background {
-    constructor() {
-
-    }
-    draw(ctx) {
-        ctx.drawImage(grass, 0, 0);
-    }
-}
-
-// || Snake
 
 class Snake {
-    constructor(game) {
-        this.game = game;
-        this.segments = [new Segment(320, 320)];
-        this.lastSegment = this.segments[0];
-        this.snakeTypes = ['Scarlet Kingsnake', 'Coral Snake'];
-        this.scarletKingsnakeColors = ['red', 'black', 'yellow', 'black'];
+    constructor(snakeStyle, width, height) {
+        this.style = snakeStyle;
+        this.kingSnakeColors = ['red', 'black', 'yellow', 'black'];
         this.coralSnakeColors = ['yellow', 'black', 'yellow', 'red'];
-        this.moveTimer = 0;
-        this.moveInterval = 250;
-        this.EatingSound = snakeEatingSound;
+        this.width = width;
+        this.height = height;
+        document.getElementById('gameImageGrass').style.display = 'block';
+        this.blockSize = 20;
+        this.createGrid();
+        this.segments = [new Segment(240, 240)];
+        this.timer = 0;
+        this.timerInterval = 250;
+        this.crunch = document.getElementById('gameSoundCrunch');
+        this.createScoreArea();
     }
-    update(input, deltaTime) {
-        // set direction
-        if (input.includes('ArrowLeft') && this.segments[0].direction !== 'right') {
-            this.segments[0].direction = 'left';
-        } else if (input.includes('ArrowUp') && this.segments[0].direction !== 'down') {
-            this.segments[0].direction = 'up';
-        } else if (input.includes('ArrowRight') && this.segments[0].direction !== 'left') {
-            this.segments[0].direction = 'right';
-        } else if (input.includes('ArrowDown') && this.segments[0].direction !== 'up') {
-            this.segments[0].direction = 'down';
-        }
-        // start timer
-        if (this.moveTimer > this.moveInterval) {
-            this.moveTimer = 0;
-            this.moveSegments();
-            this.updateDirections();
-            this.checkForCollisions();
+    update(deltaTime, input) {
+        this.bufferInput(input);
+        if (this.timer < this.timerInterval) {
+            this.timer += deltaTime;
         } else {
-            this.moveTimer += deltaTime;
+            this.timer = 0;
+            this.updateDirection()
+            this.updateCoordinates();
+            this.passDirectionToNextSegment();
+            this.checkIfFoodIsEaten();
+            this.checkForWallCollision();
+            this.checkForSnakeCollision();
         }
     }
     draw(ctx) {
-        this.segments.forEach((segment, index) => {
-            ctx.save();
-            if (this.snakeType === 'Scarlet Kingsnake') {
-                switch (index % 4) {
-                    case 0:
-                        ctx.fillStyle = this.scarletKingsnakeColors[0];
-                        break;
-                    case 1:
-                        ctx.fillStyle = this.scarletKingsnakeColors[1];
-                        break;
-                    case 2:
-                        ctx.fillStyle = this.scarletKingsnakeColors[2];
-                        break;
-                    case 3:
-                        ctx.fillStyle = this.scarletKingsnakeColors[3];
-                        break;
-                }
-            } else if (this.snakeType === 'Coral Snake') {
-                if (index === 0) {
-                    ctx.fillStyle === 'black';
-                } else {
-                    switch ((index + 3) % 4) {
-                        case 0:
-                        ctx.fillStyle = this.coralSnakeColors[0];
-                        break;
-                    case 1:
-                        ctx.fillStyle = this.coralSnakeColors[1];
-                        break;
-                    case 2:
-                        ctx.fillStyle = this.coralSnakeColors[2];
-                        break;
-                    case 3:
-                        ctx.fillStyle = this.coralSnakeColors[3];
-                        break;
-                    }
-                }
-            }
-            ctx.fillRect(segment.coordinates[0], segment.coordinates[1], this.game.blockSize, this.game.blockSize);
-            ctx.restore();
-        });
+        this.drawSnake(ctx);
+        if (this.style !== 'Classic') {
+            this.drawSnakeOutline(ctx);
+        }
     }
-    updateDirections() {
+    createGrid() {
+        this.grid = [];
+        for (let c = 0; c < this.width / this.blockSize; ++c) {
+            for (let r = 0; r < this.height / this.blockSize; ++r) {
+                this.grid.push([c * this.blockSize, r * this.blockSize]);
+            }
+        }
+    }
+    createScoreArea() {
+        this.score = 0;
+        const div = document.createElement('div');
+        div.id = 'gameScoreArea';
+        div.style.position = 'absolute';
+        div.style.top = '16px'
+        div.style.right = '16px';
+        game.html.gameArea.appendChild(div);
+        this.scoreArea = document.getElementById('gameScoreArea');
+        game.html.styleText(this.scoreArea);
+        this.createScoreText('gameTextScore' ,'Score: ');
+        this.createScoreText('gameTextScoreSpan' ,'0');
+        this.scoreText = document.getElementById('gameTextScoreSpan');
+    }
+    createScoreText(id, textString) {
+        const span = document.createElement('span');
+        span.id = id;
+        span.style.fontSize = '24px';
+        span.textContent = textString;
+        this.scoreArea.appendChild(span);
+    }
+    bufferInput(input) {
+        if (input && input !== 'Enter') {
+            this.bufferedInput = input;
+        }
+    }
+    updateDirection() {
+        if (this.bufferedInput === 'ArrowLeft' && this.segments[0].direction !== 'ArrowRight') {
+            this.segments[0].direction = 'ArrowLeft';
+        } else if (this.bufferedInput === 'ArrowUp' && this.segments[0].direction !== 'ArrowDown') {
+            this.segments[0].direction = 'ArrowUp';
+        } else if (this.bufferedInput === 'ArrowRight' && this.segments[0].direction !== 'ArrowLeft') {
+            this.segments[0].direction = 'ArrowRight';
+        } else if (this.bufferedInput === 'ArrowDown' && this.segments[0].direction !== 'ArrowUp') {
+            this.segments[0].direction = 'ArrowDown';
+        }
+    }
+    passDirectionToNextSegment() {
         for (let s = this.segments.length - 1; s > 0; --s) {
             this.segments[s].direction = this.segments[s - 1].direction;
         }
     }
-    moveSegments() {
+    updateCoordinates() {
         this.segments.forEach(segment => {
             switch (segment.direction) {
-                case 'left':
-                    segment.coordinates[0] -= this.game.blockSize;
+                case 'ArrowLeft':
+                    segment.coordinates[0] -= this.blockSize;
                     break;
-                case 'up':
-                    segment.coordinates[1] -= this.game.blockSize;
+                case 'ArrowUp':
+                    segment.coordinates[1] -= this.blockSize;
                     break;
-                case 'right':
-                    segment.coordinates[0] += this.game.blockSize;
+                case 'ArrowRight':
+                    segment.coordinates[0] += this.blockSize;
                     break;
-                case 'down':
-                    segment.coordinates[1] += this.game.blockSize;
+                case 'ArrowDown':
+                    segment.coordinates[1] += this.blockSize;
                     break;
             }
         });
     }
-    checkForCollisions() {
-        // food is eaten
-        if (this.segments[0].coordinates[0] === this.game.food.x &&
-            this.segments[0].coordinates[1] === this.game.food.y) {
-            this.EatingSound.play();
-            this.game.food.foodIsEaten = true;
-            this.game.ui.score++;
-            // check last segment direction and position and add new segment
-            switch (this.lastSegment.direction) {
-                case 'left':
-                    this.segments.push(new Segment(this.lastSegment.coordinates[0] + this.game.blockSize,
-                    this.lastSegment.coordinates[1], 'left'));
+    checkIfFoodIsEaten() {
+        if (this.segments[0].coordinates[0] === game.food.x &&
+            this.segments[0].coordinates[1] === game.food.y) {
+            switch (this.segments[this.segments.length - 1].direction) {
+                case 'ArrowLeft':
+                    this.segments.push(new Segment(this.segments[this.segments.length - 1].coordinates[0] + this.blockSize,
+                    this.segments[this.segments.length - 1].coordinates[1],
+                    this.segments[this.segments.length - 1].direction));
                     break;
-                case 'up':
-                    this.segments.push(new Segment(this.lastSegment.coordinates[0],
-                    this.lastSegment.coordinates[1] + this.game.blockSize, 'up'));
+                case 'ArrowUp':
+                    this.segments.push(new Segment(this.segments[this.segments.length - 1].coordinates[0],
+                    this.segments[this.segments.length - 1].coordinates[1] + this.blockSize,
+                    this.segments[this.segments.length - 1].direction));
                     break;
-                case 'right':
-                    this.segments.push(new Segment(this.lastSegment.coordinates[0] - this.game.blockSize,
-                    this.lastSegment.coordinates[1], 'right'));
+                case 'ArrowRight':
+                    this.segments.push(new Segment(this.segments[this.segments.length - 1].coordinates[0] - this.blockSize,
+                    this.segments[this.segments.length - 1].coordinates[1],
+                    this.segments[this.segments.length - 1].direction));
                     break;
-                case 'down':
-                    this.segments.push(new Segment(this.lastSegment.coordinates[0],
-                    this.lastSegment.coordinates[1] - this.game.blockSize, 'down'));
+                case 'ArrowDown':
+                    this.segments.push(new Segment(this.segments[this.segments.length - 1].coordinates[0],
+                    this.segments[this.segments.length - 1].coordinates[1] - this.blockSize,
+                    this.segments[this.segments.length - 1].direction));
                     break;
-            }
-            this.lastSegment = this.segments[this.segments.length - 1];
+                }
+            this.crunch.play();
+            ++this.score;
+            this.scoreText.textContent = this.score;
+            game.food.foodIsEaten = true;
         }
-        // wall is hit
+    }
+    checkForWallCollision() {
         if (this.segments[0].coordinates[0] < 0 ||
-            this.segments[0].coordinates[0] + this.game.blockSize > this.game.width ||
+            this.segments[0].coordinates[0] > this.width - this.blockSize ||
             this.segments[0].coordinates[1] < 0 ||
-            this.segments[0].coordinates[1] + this.game.blockSize > this.game.height) {
-            this.game.setState('Game Over');
+            this.segments[0].coordinates[1] > this.height - this.blockSize) {
+            this.endGame();
         }
-        // snake hits itself
-        for (let s = 1; s < this.segments.length; ++s) {
-            if (this.segments[0].coordinates[0] === this.segments[s].coordinates[0] &&
-                this.segments[0].coordinates[1] === this.segments[s].coordinates[1]) {
-                this.game.setState('Game Over');
-                break;
+    }
+    checkForSnakeCollision() {
+        for (let s = 1; s < this.segments.length - 1; ++s) {
+            if (this.segments[s].coordinates[0] === this.segments[0].coordinates[0] &&
+                this.segments[s].coordinates[1] === this.segments[0].coordinates[1]) {
+                this.endGame();
             }
         }
+    }
+    drawSnake(ctx) {
+        this.segments.forEach((segment, index) => {
+            ctx.save();
+            if (this.style === 'Classic') {
+                ctx.fillStyle = 'black';
+            } else if (this.style === 'King Snake') {
+                switch (index % 4) {
+                    case 3:
+                        ctx.fillStyle = this.kingSnakeColors[3];
+                        break;
+                    case 2:
+                        ctx.fillStyle = this.kingSnakeColors[2];
+                        break;
+                    case 1:
+                        ctx.fillStyle = this.kingSnakeColors[1];
+                        break;
+                    case 0:
+                        ctx.fillStyle = this.kingSnakeColors[0];
+                        break;
+                }
+            } else if (this.style === 'Coral Snake') {
+                switch (index % 4) {
+                    case 3:
+                        ctx.fillStyle = this.coralSnakeColors[2];
+                        break;
+                    case 2:
+                        ctx.fillStyle = this.coralSnakeColors[1];
+                        break;
+                    case 1:
+                        ctx.fillStyle = this.coralSnakeColors[0];
+                        break;
+                    case 0:
+                        ctx.fillStyle = this.coralSnakeColors[3];
+                        if (index === 0) {
+                            ctx.fillStyle = 'black';
+                        }
+                        break;
+                }
+            } else if (this.style === 'Rock Star') {
+                ctx.fillStyle = 'white';
+            }
+            ctx.fillRect(segment.coordinates[0], segment.coordinates[1], this.blockSize, this.blockSize);
+            ctx.restore();
+        });
+    }
+    drawSnakeOutline(ctx) {
+        for (let s = 0; s < this.segments.length; ++s) {
+            // Call Back Functions
+            const drawLeftSide = () => {
+                ctx.beginPath();
+                ctx.moveTo(this.segments[s].coordinates[0], this.segments[s].coordinates[1] + this.blockSize);
+                ctx.lineTo(this.segments[s].coordinates[0], this.segments[s].coordinates[1]);
+                ctx.stroke();
+            }
+            const drawTopSide = () => {
+                ctx.beginPath();
+                ctx.moveTo(this.segments[s].coordinates[0], this.segments[s].coordinates[1]);
+                ctx.lineTo(this.segments[s].coordinates[0] + this.blockSize, this.segments[s].coordinates[1]);
+                ctx.stroke();
+            }
+            const drawRightSide = () => {
+                ctx.beginPath();
+                ctx.moveTo(this.segments[s].coordinates[0] + this.blockSize, this.segments[s].coordinates[1]);
+                ctx.lineTo(this.segments[s].coordinates[0] + this.blockSize, this.segments[s].coordinates[1] + this.blockSize);
+                ctx.stroke();
+            }
+            const drawBottomSide = () => {
+                ctx.beginPath();
+                ctx.moveTo(this.segments[s].coordinates[0] + this.blockSize, this.segments[s].coordinates[1] + this.blockSize);
+                ctx.lineTo(this.segments[s].coordinates[0], this.segments[s].coordinates[1] + this.blockSize);
+                ctx.stroke();
+            }
+            // Loop Logic
+            if (this.segments.length === 1) {
+                // Single Segment
+                ctx.strokeRect(this.segments[0].coordinates[0], this.segments[0].coordinates[1], this.blockSize, this.blockSize);
+            } else if (this.segments.length > 1) {
+                // First Segment
+                if (s === 0) {
+                    switch (this.segments[s + 1].direction) {
+                        case 'ArrowLeft':
+                            drawLeftSide();
+                            drawTopSide();
+                            drawBottomSide();
+                            break;
+                        case 'ArrowUp':
+                            drawLeftSide();
+                            drawTopSide();
+                            drawRightSide();
+                            break;
+                        case 'ArrowRight':
+                            drawTopSide();
+                            drawRightSide();
+                            drawBottomSide();
+                            break;
+                        case 'ArrowDown':
+                            drawLeftSide();
+                            drawRightSide();
+                            drawBottomSide();
+                            break;
+                    } 
+                } else if (s < this.segments.length - 1) {
+                    // Middle Segments
+                    // Current Segment Direction, Then Next Segment Direction
+                    switch (this.segments[s].direction) {
+                        case 'ArrowLeft':
+                            switch (this.segments[s + 1].direction) {
+                                case 'ArrowLeft':
+                                    drawTopSide();
+                                    drawBottomSide();
+                                    break;
+                                case 'ArrowUp':
+                                    drawTopSide();
+                                    drawRightSide();
+                                    break;
+                                case 'ArrowRight':
+                                    drawTopSide();
+                                    drawBottomSide();
+                                    break;
+                                case 'ArrowDown':
+                                    drawRightSide();
+                                    drawBottomSide();
+                                    break;
+                            }
+                            break;
+                        case 'ArrowUp':
+                            switch (this.segments[s + 1].direction) {
+                                case 'ArrowLeft':
+                                    drawLeftSide();
+                                    drawBottomSide();
+                                    break;
+                                case 'ArrowUp':
+                                    drawLeftSide();
+                                    drawRightSide();
+                                    break;
+                                case 'ArrowRight':
+                                    drawRightSide();
+                                    drawBottomSide();
+                                    break;
+                                case 'ArrowDown':
+                                    drawLeftSide();
+                                    drawRightSide();
+                                    break;
+                            }
+                            break;
+                        case 'ArrowRight':
+                            switch (this.segments[s + 1].direction) {
+                                case 'ArrowLeft':
+                                    drawTopSide();
+                                    drawBottomSide();
+                                    break;
+                                case 'ArrowUp':
+                                    drawLeftSide();
+                                    drawTopSide();
+                                    break;
+                                case 'ArrowRight':
+                                    drawTopSide();
+                                    drawBottomSide();
+                                    break;
+                                case 'ArrowDown':
+                                    drawLeftSide();
+                                    drawBottomSide();
+                                    break;
+                            }
+                            break;
+                        case 'ArrowDown':
+                            switch (this.segments[s + 1].direction) {
+                                case 'ArrowLeft':
+                                    drawLeftSide();
+                                    drawTopSide();
+                                    break;
+                                case 'ArrowUp':
+                                    drawLeftSide();
+                                    drawRightSide();
+                                    break;
+                                case 'ArrowRight':
+                                    drawTopSide();
+                                    drawRightSide();
+                                    break;
+                                case 'ArrowDown':
+                                    drawLeftSide();
+                                    drawRightSide();
+                                    break;
+                            }
+                            break;
+                        }
+                } else {
+                    // Last Segment
+                    switch (this.segments[s].direction) {
+                        case 'ArrowLeft':
+                            drawTopSide();
+                            drawRightSide();
+                            drawBottomSide();
+                            break;
+                        case 'ArrowUp':
+                            drawLeftSide();
+                            drawRightSide();
+                            drawBottomSide();
+                            break;
+                        case 'ArrowRight':
+                            drawLeftSide();
+                            drawTopSide();
+                            drawBottomSide();
+                            break;
+                        case 'ArrowDown':
+                            drawLeftSide();
+                            drawTopSide();
+                            drawRightSide();
+                            break;
+                    }
+                }
+            }
+        }
+    }
+    endGame() {
+        document.getElementById('gameScoreArea').remove();
+        document.getElementById('gameImageGrass').style.display = 'none';
+        game.setState('Game Over');
     }
 }
 
@@ -347,165 +664,133 @@ class Segment {
     }
 }
 
-// || Food
-
 class Food {
-    constructor(game) {
-        this.game = game;
+    constructor() {
         this.foodIsEaten = true;
     }
     update() {
         if (this.foodIsEaten) {
+            this.foodIsEaten = false;
+            this.createSpawnAreas();
             this.spawnFood();
         }
     }
     draw(ctx) {
         ctx.save();
         ctx.fillStyle = 'hsl(200, 100%, 95%)';
-        ctx.fillRect(this.x, this.y, this.game.blockSize, this.game.blockSize);
+        ctx.beginPath();
+        ctx.arc(this.x + game.snake.blockSize / 2, this.y + game.snake.blockSize / 2, game.snake.blockSize / 2, 0, 2 * Math.PI);
+        ctx.fill();
         ctx.restore();
+        ctx.stroke();
+    }
+    createSpawnAreas() {
+        this.spawnAreas = game.snake.grid;
+        game.snake.segments.forEach(segment => {
+            this.spawnAreas.splice(this.spawnAreas.indexOf([segment.coordinates[0], segment.coordinates[1], 1]));
+        });
     }
     spawnFood() {
-        this.foodIsEaten = false;
-        // find out possible spawn locations
-        this.spawnLocations = this.game.grid;
-        for (let b = 0; b < this.game.grid.length; ++b) {
-            for (let s = 0; s < this.game.snake.segments.length; ++s) {
-                if (this.spawnLocations[b][0] === this.game.snake.segments[s].coordinates[0] &&
-                    this.spawnLocations[b][1] === this.game.snake.segments[s].coordinates[1]) {
-                    this.spawnLocations.splice(this.spawnLocations[b], 1);
-                }
-            }
-        }
-        // find random spawn
-        this.foodLocation = Math.floor(Math.random() * this.spawnLocations.length);
-        this.x = this.spawnLocations[this.foodLocation][0];
-        this.y = this.spawnLocations[this.foodLocation][1];
+        this.spawnLocation = Math.floor(Math.random() * this.spawnAreas.length);
+        this.x = this.spawnAreas[this.spawnLocation][0];
+        this.y = this.spawnAreas[this.spawnLocation][1];
     }
 }
 
-// || Game Over
-
 class GameOver {
-    constructor(game) {
-        this.game = game;
-        this.font = 'Arial';
-        this.fontSize = 48;
-        this.color = 'hsl(200, 100%, 95%)';
-        this.dropShadowOffsetX = -2;
-        this.dropShadowOffsetY = -2;
+    constructor(score) {
+        this.score = score;
+        game.html.createText('gameTextGameOver', '50%', '96px', ['Game Over', `Final Score: ${this.score}`],
+        '56px', true, false);
+        game.html.styleText(document.getElementById('gameTextGameOver'));
+        game.html.createText('gameTextTryAgain', '50%', '176px', ['Press Enter', 'to Play Again'], '32px',
+        true, false);
     }
     update(input) {
-        if (input.includes('Enter')) {
-            this.game.snake.segments = [new Segment(320, 320)];
-            this.game.snake.lastSegment = this.game.snake.segments[0];
-            this.game.ui.score = 0;
-            this.game.setState('Snake Selection');
+        if (input === 'Enter') {
+            game.input.startTimer();
+            document.getElementById('gameTextGameOver').remove();
+            document.getElementById('gameTextTryAgain').remove();
+            game.setState('Title Screen');
+        }
+    }
+}
+
+class Game {
+    constructor(width, height) {
+        this.width = width;
+        this.height = height;
+        this.html = new Html(width, height);
+        this.background = new Background(this.html.gameArea);
+        this.ctx = document.getElementById('gameCanvas').getContext('2d');
+        this.input = new Input();
+    }
+    update(deltaTime) {
+        this.input.update(deltaTime);
+        switch (this.state) {
+            case 'Logo':
+                this.logo.showLogo(deltaTime);
+                break;
+            case 'Title Screen':
+                this.titleScreen.update(this.input.keys[0]);
+                break;
+            case 'Snake Selection':
+                this.snakeSelection.update(this.input.keys[0]);
+                break;
+            case 'Game':
+                this.snake.update(deltaTime, this.input.keys[0]);
+                if (this.food) {
+                    this.food.update();
+                }
+                break;
+            case 'Game Over':
+                this.gameOver.update(this.input.keys[0]);
+                break;
         }
     }
     draw(ctx) {
-        ctx.save();
-        ctx.font = this.fontSize + 'px ' + this.font;
-        ctx.textAlign = 'center';
-        ctx.baseLine = 'middle';
-        ctx.fillText('Game Over', this.game.width / 2 + this.dropShadowOffsetX, this.game.height / 2 - this.fontSize * 1.5 + this.dropShadowOffsetY);
-        ctx.fillText('Your Final Score is ' + this.game.ui.score, this.game.width / 2 + this.dropShadowOffsetX, this.game.height / 2 + this.dropShadowOffsetY);
-        ctx.fillText('Press Enter to Try Again', this.game.width / 2 + this.dropShadowOffsetX, this.game.height / 2 + this.fontSize * 1.5 + this.dropShadowOffsetY);
-        ctx.fillStyle = this.color;
-        ctx.fillText('Game Over', this.game.width / 2, this.game.height / 2 - this.fontSize * 1.5);
-        ctx.fillText('Your Final Score is ' + this.game.ui.score, this.game.width / 2, this.game.height / 2);
-        ctx.fillText('Press Enter to Try Again', this.game.width / 2, this.game.height / 2 + this.fontSize * 1.5);
-        ctx.restore();
-    }
-}
-
-// || Game Object
-
-class Game {
-    constructor(width, height, ctx) {
-        this.width = width;
-        this.height = height;
-        this.grid = [];
-        this.blockSize = 20;
-        this.states = ['Logo', 'Start Screen', 'Snake Selection', 'Game', 'Game Over'];
-        this.currentState = this.states[0];
-        this.input = new Input();
-        this.ui = new UI(this);
-        this.logo = new Logo(this);
-        this.startScreen = new StartScreen(this, ctx);
-        this.snakeSelection = new SnakeSelection(this);
-        this.background = new Background();
-        this.snake = new Snake(this);
-        this.food = new Food(this);
-        this.gameOver = new GameOver(this);
-    }
-    update(deltaTime) {
-        switch (this.currentState) {
-            case 'Logo':
-                this.logo.update(deltaTime);
-                break;
-            case 'Start Screen':
-                this.startScreen.update(this.input.keys);
-                break;
-            case 'Snake Selection':
-                this.snakeSelection.update(this.input.keys);
-                break;
+        ctx.clearRect(0, 0, this.width, this.height);
+        switch (this.state) {
             case 'Game':
-                if (this.grid.length === 0) {
-                    this.fillGrid();
-                }
-                this.snake.update(this.input.keys, deltaTime);
-                this.food.update();
-                break;
-            case 'Game Over':
-                this.gameOver.update(this.input.keys);
-        }
-    }
-    draw(ctx, deltaTime) {
-        switch (this.currentState) {
-            case 'Logo':
-                this.logo.draw(ctx, deltaTime);
-                break;
-            case 'Start Screen':
-                this.startScreen.draw(ctx);
-                break;
-            case 'Snake Selection':
-                this.background.draw(ctx);
-                this.snakeSelection.draw(ctx);
-                break;
-            case 'Game':
-                this.background.draw(ctx);
                 this.snake.draw(ctx);
                 this.food.draw(ctx);
-                this.ui.draw();
                 break;
-            case 'Game Over':
-                this.background.draw(ctx);
-                this.gameOver.draw(ctx);
         }
     }
-    fillGrid() {
-        for (let r = 0; r < this.height / this.blockSize; ++r) {
-            for (let c = 0; c < this.width / this.blockSize; ++c) {
-                this.grid.push([c * this.blockSize, r * this.blockSize]);
-            }
-        }
+    animate(timestamp) {
+        const deltaTime = timestamp - game.lastTime;
+        game.lastTime = timestamp;
+        game.update(deltaTime);
+        game.draw(game.ctx);
+        requestAnimationFrame(game.animate); 
     }
     setState(state) {
-        this.currentState = this.states[this.states.indexOf(state)];
+        switch (state) {
+            case 'Logo':
+                this.background.setBackground('black');
+                this.logo = new Logo();
+                break;
+            case 'Title Screen':
+                delete this.logo;
+                this.background.setBackground('hsl(200, 100%, 95%)');
+                this.titleScreen = new TitleScreen();
+                break;
+            case 'Snake Selection':
+                delete this.titleScreen;
+                this.snakeSelection = new SnakeSelection();
+                break;
+            case 'Game':
+                this.snake = new Snake(this.snakeSelection.style, this.width, this.height);
+                delete this.snakeSelection;
+                this.food = new Food();
+                break;
+            case 'Game Over':
+                this.gameOver = new GameOver(this.snake.score);
+                delete this.snake;
+                delete this.food;
+                break;
+            }
+            this.state = state;
     }
 }
-const game = new Game(canvas.width, canvas.height, ctx);
-
-// || Animation Loop
-
-let lastTime = 0;
-function animate(timestamp) {
-    const deltaTime = timestamp - lastTime;
-    lastTime = timestamp;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    game.update(deltaTime);
-    game.draw(ctx, deltaTime);
-    requestAnimationFrame(animate);
-}
-animate(0);
+const game = new Game(480, 480);

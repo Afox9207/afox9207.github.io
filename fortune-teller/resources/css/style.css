@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100dvh;
+}
+
+.gameContainer {
+    position: relative;
+    margin-inline: auto;
+    max-width: 100%;
+    max-height: 100dvh;
+    border: 1px solid black;
+}
+
+.gameCanvas {
+    display: block;
+    max-width: 100%;
+    max-height: 100dvh;
+    margin-inline: auto;
+}
+

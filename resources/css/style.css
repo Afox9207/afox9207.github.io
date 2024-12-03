@@ -17,15 +17,15 @@
     --font-size-xl: calc(var(--font-size-lg) * var(--font-scale));
 }
 
-/* header */
-
-/* footer */
-
 body {
     display: grid;
     min-height: 100vh;
     min-height: 100dvh;
     grid-template-rows: auto 1fr auto;
+}
+
+main {
+    display: grid;
 }
 
 .container {
@@ -44,4 +44,9 @@ body {
 .games-list {
     list-style: none;
     font-size: var(--font-size-sm);
+}
+
+#game {
+    place-self: center;
+    width: 100%;
 }

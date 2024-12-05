@@ -7,7 +7,7 @@ const randomFloatingPoint = new RandomFloatingPointGenerator();
 
 const gameContainer = {
     element: document.getElementById('game'),
-    defaultBrightness: 0.6,
+    defaultBrightness: 0.5,
     newBrightness: 1,
     style: function() {
         this.element.style.position = 'relative';
@@ -50,6 +50,7 @@ const title = {
         this.element.style.color = 'white';
         this.element.style.textAlign = 'center';
         this.element.style.fontWeight = '600';
+        this.element.style.textShadow = '4px 4px black';
     }
 };
 
@@ -60,7 +61,6 @@ const orb = {
     colorOne: 'hsl(240 100 100 / 0.5)',
     colorTwo: 'hsl(240 100 75 / 0.5)',
     transitionTime: 1000,
-    brightness: 1.1,
     defaultBorderBlur: 4,
     newBorderBlur: 16,
     defaultBrightness: 1,
@@ -124,25 +124,31 @@ const orb = {
 class SmokeCloud {
     constructor() {
         this.size = 8;
-        this.x = (orb.radius / 2 - this.size / 2) + randomFloatingPoint.generate(-24, 24);
-        this.y = (orb.radius / 2 - this.size / 2) + randomFloatingPoint.generate(-24, 24);
+        // 124 is hard coded number for center of orb offset by half size of cloud
+        this.x = 124 + randomFloatingPoint.generate(-24, 24);
+        this.y = 124 + randomFloatingPoint.generate(-24, 24);
         this.xVelocity = randomFloatingPoint.generate(-0.05, 0.05);
         this.yVelocity = randomFloatingPoint.generate(-0.05, 0.05);
         this.lifeTime = 0;
         this.frame = 0;
-        this.frameInterval = 1000 / 24;
+        // 25 fps
+        this.frameInterval = 25;
         this.frameTimer = 0;
     }
 }
 
 const canvas = {
     smokeClouds: [],
+    newSmokeCloudTimer: 0,
+    newSmokeCloudInterval: 1000 / 60,
+    newCloudsPerCycle: 10,
     frameSize: 64,
     growRate: 0.1,
     maxSize: 64,
     minSize: 8,
     maxLifeSpan: 2500,
     maxFrame: 14,
+    minFrameRate: 1000 / 30,
     create: function() {
         const canvas = document.createElement('canvas');
         canvas.width = orb.radius;
@@ -169,9 +175,20 @@ const canvas = {
     getSmokeSizeOffset: function() {
         this.smokeSizeOffset = this.growRate / 2;
     },
-    createSmokeClouds: function() {
-        for (let i = 0; i < 3; ++i) {
-            this.smokeClouds.push(new SmokeCloud());
+    createSmokeClouds: function(deltaTime) {
+        if (this.newSmokeCloudTimer === 0) {
+            this.newSmokeCloudTimer += deltaTime;
+            for (let i = 0; i < this.newCloudsPerCycle; ++i) {
+                this.smokeClouds.push(new SmokeCloud());
+            }
+        } else if (this.newSmokeCloudTimer < this.newSmokeCloudInterval) {
+            this.newSmokeCloudTimer += deltaTime;
+        } else {
+            this.newSmokeCloudTimer = 0;
+        }
+        // if frame rate drops too low
+        if (deltaTime > this.minFrameRate) {
+            --this.newCloudsPerCycle;
         }
     },
     removeSmokeClouds: function(cloud, index) {
@@ -217,6 +234,7 @@ const canvas = {
     },
     drawSmokeClouds: function(ctx) {
         const arrayLength = this.smokeClouds.length - 1;
+        // draw newest clouds first
         for (let i = arrayLength; i > 0; --i) {
             ctx.drawImage(this.smokeImage, this.smokeClouds[i].frame * this.frameSize, 0, this.frameSize, this.frameSize,
             this.smokeClouds[i].x, this.smokeClouds[i].y, this.smokeClouds[i].size, this.smokeClouds[i].size);
@@ -241,33 +259,46 @@ const askButton = {
     },
     style: function() {
         this.element = document.getElementById('gameAskButton');
-        this.element.style.position = 'relative';
-        this.element.style.zIndex = '1';
-        this.element.style.display = 'block';
-        this.element.style.marginTop = this.marginTop + 'px';
-        this.element.style.marginInline = 'auto';
-        gameContainer.element.style.paddingBottom = this.marginBottom + 'px';
-        this.element.style.padding = `${this.verticalPadding}px ${this.horizontalPadding}px`;
-        this.element.style.border = '1px solid white';
-        this.element.style.borderRadius = '4px';
-        this.element.style.backgroundColor = 'hsl(0 100 100 / 0.1)';
-        this.element.style.cursor = 'pointer';
-        this.element.style.color = 'white';
-        this.element.style.fontSize = '16px';
-        this.element.style.transition = `box-shadow ${this.transitionTime}ms linear,
-                                        scale ${this.transitionTime}ms linear`;
-    },
-    addHoverStyles: function() {
+        
         const style = document.createElement('style');
         style.textContent = 
-        `#gameAskButton:hover {
+        `#gameAskButton {
+            position: relative;
+            z-index: 1;
+            display: block;
+            margin-top: ${this.marginTop}px;
+            margin-inline: auto;
+            padding: ${this.verticalPadding}px ${this.horizontalPadding}px;
+            border: 1px solid white;
+            border-radius: 4px;
+            background-color: hsl(0 0 0 / 0);
+            cursor: pointer;
+            color: white;
+            font-size: 16px;
+            transition: box-shadow ${this.transitionTime}ms linear,
+                        scale ${this.transitionTime}ms linear,
+        }
+        #gameAskButton:active {
             box-shadow: -1px -1px ${this.hoverGlow}px white,
                         -1px 1px ${this.hoverGlow}px white,
                         1px -1px ${this.hoverGlow}px white,
                         1px 1px ${this.hoverGlow}px white;
             scale: 1.05;
+            background-color: hsl(0 0 0 / 1);
+        }
+        @media (hover: hover) {
+            #gameAskButton:hover {
+                box-shadow: -1px -1px ${this.hoverGlow}px white,
+                            -1px 1px ${this.hoverGlow}px white,
+                            1px -1px ${this.hoverGlow}px white,
+                            1px 1px ${this.hoverGlow}px white;
+                scale: 1.05;
+                background-color: hsl(0 0 0 / 1);
+            }
         }`;
         document.head.appendChild(style);
+
+        gameContainer.element.style.paddingBottom = this.marginBottom + 'px';
     },
     addEventListener: function() {
         this.element.addEventListener('click', () => {
@@ -333,10 +364,10 @@ const animator = {
                 orb.lightUp();
                 animator.animationTimer += deltaTime;
             } else if (animator.animationTimer < animator.animationInterval) {
-                canvas.createSmokeClouds();
-                canvas.updateSmokeClouds(deltaTime);
-                canvas.drawSmokeClouds(canvas.ctx);
-                animator.animationTimer += deltaTime;
+                    canvas.createSmokeClouds(deltaTime);
+                    canvas.updateSmokeClouds(deltaTime);
+                    canvas.drawSmokeClouds(canvas.ctx);
+                    animator.animationTimer += deltaTime;
             } else {
                 if (!answer.isGenerated) {
                     answer.generate();
@@ -386,7 +417,6 @@ canvas.getSmokeSizeOffset();
 
 askButton.create();
 askButton.style();
-askButton.addHoverStyles();
 askButton.addEventListener();
 
 animator.animate(0);

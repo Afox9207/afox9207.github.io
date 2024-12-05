@@ -139,9 +139,11 @@ class SmokeCloud {
 
 const canvas = {
     smokeClouds: [],
+    minSmokeClouds: 100,
     newSmokeCloudTimer: 0,
     newSmokeCloudInterval: 1000 / 60,
     newCloudsPerCycle: 10,
+    minNewCloudsPerCycle: 3,
     frameSize: 64,
     growRate: 0.1,
     maxSize: 64,
@@ -175,6 +177,20 @@ const canvas = {
     getSmokeSizeOffset: function() {
         this.smokeSizeOffset = this.growRate / 2;
     },
+    limitSmokeClouds: function(deltaTime) {
+        if (deltaTime > this.minFrameRate) {
+            // first limit amount of new clouds
+            if (this.newCloudsPerCycle > this.minNewCloudsPerCycle) {
+                --this.newCloudsPerCycle;
+            } else {
+            // if still need frames, limit size of array
+                this.maxSmokeClouds = this.smokeClouds.length;
+                if (this.maxSmokeClouds > this.minSmokeClouds) {
+                    --this.maxSmokeClouds;
+                }
+            }
+        }
+    },
     createSmokeClouds: function(deltaTime) {
         if (this.newSmokeCloudTimer === 0) {
             this.newSmokeCloudTimer += deltaTime;
@@ -186,15 +202,17 @@ const canvas = {
         } else {
             this.newSmokeCloudTimer = 0;
         }
-        // if frame rate drops too low
-        if (deltaTime > this.minFrameRate) {
-            --this.newCloudsPerCycle;
-        }
     },
     removeSmokeClouds: function(cloud, index) {
         if (cloud.size < 8) {
             this.smokeClouds.splice(index, 1);
         }
+        if (this.maxSmokeClouds) {
+            if (this.smokeClouds.length > this.maxSmokeClouds) {
+                this.smokeClouds.splice(this.maxSmokeClouds, this.smokeClouds.length);
+            }
+        }
+        
     },
     changeSmokeCloudSize: function(cloud, deltaTime) {
         if (cloud.lifeTime < this.maxLifeSpan) {
@@ -364,6 +382,7 @@ const animator = {
                 orb.lightUp();
                 animator.animationTimer += deltaTime;
             } else if (animator.animationTimer < animator.animationInterval) {
+                    canvas.limitSmokeClouds(deltaTime);
                     canvas.createSmokeClouds(deltaTime);
                     canvas.updateSmokeClouds(deltaTime);
                     canvas.drawSmokeClouds(canvas.ctx);

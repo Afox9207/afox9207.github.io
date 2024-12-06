@@ -140,7 +140,6 @@ const canvas = {
     newSmokeCloudTimer: 0,
     newSmokeCloudInterval: 1000 / 60,
     newCloudsPerCycle: 10,
-    minNewCloudsPerCycle: 1,
     frameSize: 64,
     growRate: 0.1,
     maxSize: 64,
@@ -148,6 +147,7 @@ const canvas = {
     maxLifeSpan: 2500,
     maxFrame: 14,
     minFrameRate: 1000 / 30,
+    fpsCheckerTimer: 0,
     create: function() {
         const canvas = document.createElement('canvas');
         canvas.width = orb.radius;
@@ -174,10 +174,34 @@ const canvas = {
         this.smokeSizeOffset = this.growRate / 2;
     },
     limitSmokeClouds: function(deltaTime) {
-        if (deltaTime > this.minFrameRate) {
-            if (this.newCloudsPerCycle > this.minNewCloudsPerCycle) {
-                --this.newCloudsPerCycle;
-            } 
+        if (this.fpsCheckerTimer === 0) {
+            this.fpsCheckerTimer += deltaTime;
+            if (deltaTime > this.minFrameRate) {
+                const arrayLength = this.smokeClouds.length;
+                if (arrayLength < 160) {
+                    this.newCloudsPerCycle = 1;
+                } else if (arrayLength < 230) {
+                    this.newCloudsPerCycle = 2;
+                } else if (arrayLength < 315) {
+                    this.newCloudsPerCycle = 3;
+                } else if (arrayLength < 390) {
+                    this.newCloudsPerCycle = 4;
+                } else if (arrayLength < 460) {
+                    this.newCloudsPerCycle = 5;
+                } else if (arrayLength < 535) {
+                    this.newCloudsPerCycle = 6;
+                } else if (arrayLength < 620) {
+                    this.newCloudsPerCycle = 7;
+                } else if (arrayLength < 685) {
+                    this.newCloudsPerCycle = 8;
+                } else if (arrayLength < 750) {
+                    this.newCloudsPerCycle = 9;
+                }
+            }
+        } else if (this.fpsCheckerTimer < this.maxLifeSpan) {
+            this.fpsCheckerTimer += deltaTime;
+        } else {
+            this.fpsCheckerTimer = 0;
         }
     },
     createSmokeClouds: function(deltaTime) {
@@ -303,7 +327,7 @@ const askButton = {
     },
     addEventListener: function() {
         this.element.addEventListener('click', () => {
-            if (!this.timerIsActive) {
+            if (!this.isActive) {
                 this.isActive = true;
                 answer.isGenerated = false;
                 answer.fadeOut();
@@ -365,6 +389,12 @@ const log = {
         const p = document.createElement('p');
         p.textContent = 'fps:';
         this.fpsElement = p;
+        this.div.appendChild(p);
+    },
+    createMaxNumOfClouds: function() {
+        const p = document.createElement('p');
+        p.textContent = 'Max # of clouds:';
+        this.maxNumOfCloudsElement = p;
         this.div.appendChild(p);
     },
     createNumOfNewCloudsPerCycle: function() {
@@ -459,6 +489,7 @@ askButton.addEventListener();
 
 log.createDiv();
 log.createFps();
+log.createMaxNumOfClouds();
 log.createNumOfNewCloudsPerCycle();
 log.createNumOfClouds();
 

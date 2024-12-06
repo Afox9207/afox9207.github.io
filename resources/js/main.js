@@ -57,23 +57,27 @@ const footer = {
     }
 };
 
-const games = [
-    {title: 'Fortune Teller', link: '/games/fortune-teller.html'}
-];
+const games = {
+    list: [
+        {title: `Madame Fox's Fortune Telling`, link: '/games/fortune-teller.html'}
+    ],
+    createList: function() {
+        const gamesList = document.getElementById('games-list');
+        this.list.forEach(item => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = item.link;
+            a.textContent = item.title;
+            a.classList.add('games-list__link');
+            gamesList.appendChild(li);
+            li.appendChild(a);
+        });
+    }
+}
 
 head.addFavicon();
 head.addStyleSheet();
 header.createHeader();
 footer.createFooter();
 
-if (document.getElementById('games-list')) {
-    const gamesList = document.getElementById('games-list');
-    games.forEach(item => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.textContent = item.title;
-        a.href = item.link;
-        gamesList.appendChild(li);
-        gamesList.lastElementChild.appendChild(a);
-    });
-}
+if (document.getElementById('games-list')) games.createList();

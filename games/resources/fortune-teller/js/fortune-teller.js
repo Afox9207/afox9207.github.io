@@ -36,12 +36,11 @@ const title = {
     marginBottom: 32,
     create: function() {
         const h1 = document.createElement('h1');
-        h1.id = 'gameTitle';
         h1.textContent = `Madame Fox's Fortune Telling`;
+        this.element = h1;
         gameContainer.element.appendChild(h1);
     },
     style: function() {
-        this.element = document.getElementById('gameTitle');
         this.element.style.position = 'relative';
         this.element.style.zIndex = '1';
         gameContainer.element.style.paddingTop = this.marginTop + 'px';
@@ -67,11 +66,10 @@ const orb = {
     newBrightness: 1.1,
     create: function() {
         const div = document.createElement('div');
-        div.id = 'gameOrb';
+        this.element = div;
         gameContainer.element.appendChild(div);
     },
     style: function() {
-        this.element = document.getElementById('gameOrb');
         this.element.style.position = 'relative';
         this.element.style.zIndex = '1';
         this.element.style.overflow = 'hidden';
@@ -139,11 +137,10 @@ class SmokeCloud {
 
 const canvas = {
     smokeClouds: [],
-    minSmokeClouds: 100,
     newSmokeCloudTimer: 0,
     newSmokeCloudInterval: 1000 / 60,
     newCloudsPerCycle: 10,
-    minNewCloudsPerCycle: 3,
+    minNewCloudsPerCycle: 1,
     frameSize: 64,
     growRate: 0.1,
     maxSize: 64,
@@ -155,11 +152,10 @@ const canvas = {
         const canvas = document.createElement('canvas');
         canvas.width = orb.radius;
         canvas.height = orb.radius;
-        canvas.id = 'orbCanvas';
+        this.element = canvas;
         orb.element.appendChild(canvas);
     },
     style: function() {
-        this.element = document.getElementById('orbCanvas');
         this.element.style.position = 'relative';
         this.element.style.display = 'block';
     },
@@ -179,16 +175,9 @@ const canvas = {
     },
     limitSmokeClouds: function(deltaTime) {
         if (deltaTime > this.minFrameRate) {
-            // first limit amount of new clouds
             if (this.newCloudsPerCycle > this.minNewCloudsPerCycle) {
                 --this.newCloudsPerCycle;
-            } else {
-            // if still need frames, limit size of array
-                this.maxSmokeClouds = this.smokeClouds.length;
-                if (this.maxSmokeClouds > this.minSmokeClouds) {
-                    --this.maxSmokeClouds;
-                }
-            }
+            } 
         }
     },
     createSmokeClouds: function(deltaTime) {
@@ -207,12 +196,6 @@ const canvas = {
         if (cloud.size < 8) {
             this.smokeClouds.splice(index, 1);
         }
-        if (this.maxSmokeClouds) {
-            if (this.smokeClouds.length > this.maxSmokeClouds) {
-                this.smokeClouds.splice(this.maxSmokeClouds, this.smokeClouds.length);
-            }
-        }
-        
     },
     changeSmokeCloudSize: function(cloud, deltaTime) {
         if (cloud.lifeTime < this.maxLifeSpan) {
@@ -273,10 +256,10 @@ const askButton = {
         const button = document.createElement('button');
         button.id = 'gameAskButton';
         button.textContent = 'ASK';
+        this.element = button
         gameContainer.element.appendChild(button);
     },
     style: function() {
-        this.element = document.getElementById('gameAskButton');
         
         const style = document.createElement('style');
         style.textContent = 
@@ -339,9 +322,8 @@ const answer = {
     transitionTime: 2000,
     create: function() {
         const p = document.createElement('p');
-        p.id = 'gameAnswer';
+        this.element = p;
         orb.element.appendChild(p);
-        this.element = document.getElementById('gameAnswer');
     },
     style: function() {
         this.element.style.position = 'absolute';
@@ -366,6 +348,42 @@ const answer = {
     fadeOut: function() {
         this.element.style.opacity = '0';
         this.element.style.scale = '1';
+    }
+};
+
+const log = {
+    createDiv: function() {
+        const div = document.createElement('div');
+        div.style.fontSize = '16px';
+        div.style.paddingInline = '16px';
+        div.style.width = 'max-content';
+        div.style.textAlign = 'right';
+        document.querySelector('main').appendChild(div);
+        this.div = div;
+    },
+    createFps: function() {
+        const p = document.createElement('p');
+        p.textContent = 'fps:';
+        this.fpsElement = p;
+        this.div.appendChild(p);
+    },
+    createNumOfNewCloudsPerCycle: function() {
+        const p = document.createElement('p');
+        p.textContent = '# of new clouds per cycle:';
+        this.numOfNewCloudsElement = p;
+        this.div.appendChild(p);
+    },
+    createNumOfClouds: function() {
+        const p = document.createElement('p');
+        p.textContent = '# of clouds:';
+        this.numOfCloudsElement = p;
+        this.div.appendChild(p);
+    },
+    calculate: function(deltaTime) {
+        this.fps = 1000 / deltaTime;
+        this.fpsElement.textContent = `fps: ${this.fps}`;
+        this.numOfNewCloudsElement.textContent = `# of new clouds per cycle: ${canvas.newCloudsPerCycle}`;
+        this.numOfCloudsElement.textContent = `# of clouds: ${canvas.smokeClouds.length}`;
     }
 };
 
@@ -403,6 +421,7 @@ const animator = {
             }
         }
         requestAnimationFrame(animator.animate);
+        log.calculate(deltaTime);
     }
 };
 
@@ -437,5 +456,10 @@ canvas.getSmokeSizeOffset();
 askButton.create();
 askButton.style();
 askButton.addEventListener();
+
+log.createDiv();
+log.createFps();
+log.createNumOfNewCloudsPerCycle();
+log.createNumOfClouds();
 
 animator.animate(0);

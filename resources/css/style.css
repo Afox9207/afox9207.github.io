@@ -6,6 +6,7 @@
 }
 
 :root {
+    /* fonts */
     font-family: Arial, Helvetica, sans-serif;
     font-size: 62.5%;
     --font-size-base: 1.6rem;
@@ -15,6 +16,8 @@
     --font-size-md: calc(var(--font-size-sm) * var(--font-scale));
     --font-size-lg: calc(var(--font-size-md) * var(--font-scale));
     --font-size-xl: calc(var(--font-size-lg) * var(--font-scale));
+    /* colors */
+    
 }
 
 body {
@@ -44,12 +47,16 @@ a {
 .page-title {
     margin-block: 1em;
     font-size: var(--font-size-xl);
-    font-weight: 900;
+    font-weight: 700;
 }
 
 .games-list {
     list-style: none;
     font-size: var(--font-size-sm);
+}
+
+.games-list__link {
+    
 }
 
 #game {

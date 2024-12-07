@@ -146,9 +146,8 @@ const canvas = {
     minSize: 8,
     maxLifeSpan: 2500,
     maxFrame: 14,
-    minFrameRate: 1000 / 45,
-    preferredFrameRate: 1000 / 59,
-    hasFpsBeenChecked: false,
+    minFrameRate: 1000 / 30,
+    numOfCloudsHasBeenReduced: false,
     create: function() {
         const canvas = document.createElement('canvas');
         canvas.width = orb.radius;
@@ -175,30 +174,23 @@ const canvas = {
         this.smokeSizeOffset = this.growRate / 2;
     },
     limitSmokeClouds: function(deltaTime) {
-        if (!this.hasFpsBeenChecked) {
+        if (!this.numOfCloudsHasBeenReduced && deltaTime > this.minFrameRate) {
             const arrayLength = this.smokeClouds.length;
-            if (deltaTime > this.minFrameRate) {
-                this.hasFpsBeenChecked = true;
-                if (arrayLength > 232) {
-                    this.newCloudsPerCycle = 3;
-                } else if (arrayLength > 311) {
-                    this.newCloudsPerCycle = 4;
-                } else if (arrayLength > 392) {
-                    this.newCloudsPerCycle = 5;
-                } else if (arrayLength > 459) {
-                    this.newCloudsPerCycle = 6;
-                } else if (arrayLength > 534) {
-                    this.newCloudsPerCycle = 7;
-                } else if (arrayLength > 605) {
-                    this.newCloudsPerCycle = 8;
-                } else {
-                    this.newCloudsPerCycle = 9;
-                }
-                this.maxNumOfClouds = arrayLength;
-            }
-            if (this.maxNumOfClouds < arrayLength && deltaTime < this.preferredFrameRate) {
-                this.newCloudsPerCycle = 10;
-                delete this.maxNumOfClouds;
+            this.numOfCloudsHasBeenReduced = true;
+            if (arrayLength < 232) {
+                this.newCloudsPerCycle = 3;
+            } else if (arrayLength < 311) {
+                this.newCloudsPerCycle = 4;
+            } else if (arrayLength < 392) {
+                this.newCloudsPerCycle = 5;
+            } else if (arrayLength < 459) {
+                this.newCloudsPerCycle = 6;
+            } else if (arrayLength < 534) {
+                this.newCloudsPerCycle = 7;
+            } else if (arrayLength < 605) {
+                this.newCloudsPerCycle = 8;
+            } else {
+                this.newCloudsPerCycle = 9;
             }
         }
     },
@@ -220,16 +212,6 @@ const canvas = {
         }
     },
     changeSmokeCloudSize: function(cloud, deltaTime) {
-        // if limit is set
-        if (this.maxNumOfClouds) {
-            const arrayLength = this.smokeClouds.length
-            const difference = arrayLength - this.maxNumOfClouds;
-            if (arrayLength > this.maxNumOfClouds) {
-                for (let i = 0; i < difference; ++i) {
-                    this.smokeClouds[i].lifeTime = this.maxLifeSpan;
-                }
-            }
-        }
         if (cloud.lifeTime < this.maxLifeSpan) {
             cloud.lifeTime += deltaTime;
             if (cloud.size < this.maxSize) {
@@ -383,54 +365,6 @@ const answer = {
     }
 };
 
-const log = {
-    maxNumOfClouds: 0,
-    createDiv: function() {
-        const div = document.createElement('div');
-        div.style.fontSize = '16px';
-        div.style.paddingInline = '16px';
-        div.style.width = 'max-content';
-        div.style.textAlign = 'right';
-        document.querySelector('main').appendChild(div);
-        this.div = div;
-    },
-    createFps: function() {
-        const p = document.createElement('p');
-        p.textContent = 'fps:';
-        this.fpsElement = p;
-        this.div.appendChild(p);
-    },
-    createMaxNumOfClouds: function() {
-        const p = document.createElement('p');
-        p.textContent = 'Max # of clouds:';
-        this.maxNumOfCloudsElement = p;
-        this.div.appendChild(p);
-    },
-    createNumOfNewCloudsPerCycle: function() {
-        const p = document.createElement('p');
-        p.textContent = '# of new clouds per cycle:';
-        this.numOfNewCloudsElement = p;
-        this.div.appendChild(p);
-    },
-    createNumOfClouds: function() {
-        const p = document.createElement('p');
-        p.textContent = '# of clouds:';
-        this.numOfCloudsElement = p;
-        this.div.appendChild(p);
-    },
-    calculate: function(deltaTime) {
-        const numOfClouds = canvas.smokeClouds.length;
-        this.fps = 1000 / deltaTime;
-        this.fpsElement.textContent = `fps: ${this.fps}`;
-        this.numOfNewCloudsElement.textContent = `# of new clouds per cycle: ${canvas.newCloudsPerCycle}`;
-        this.numOfCloudsElement.textContent = `# of clouds: ${numOfClouds}`;
-        this.maxNumOfCloudsElement.textContent = `Max # of clouds: ${this.maxNumOfClouds}`;
-        if (this.maxNumOfClouds < numOfClouds) {
-            this.maxNumOfClouds = numOfClouds;
-        }
-    }
-};
-
 const animator = {
     lastTime: 0,
     animationInterval: 7000,
@@ -461,12 +395,11 @@ const animator = {
                     canvas.drawSmokeClouds(canvas.ctx);
                 } else {
                     askButton.isActive = false;
-                    canvas.hasFpsBeenChecked = false;
+                    canvas.numOfCloudsHasBeenReduced = false;
                 }
             }
         }
         requestAnimationFrame(animator.animate);
-        log.calculate(deltaTime);
     }
 };
 
@@ -501,11 +434,5 @@ canvas.getSmokeSizeOffset();
 askButton.create();
 askButton.style();
 askButton.addEventListener();
-
-log.createDiv();
-log.createFps();
-log.createMaxNumOfClouds();
-log.createNumOfNewCloudsPerCycle();
-log.createNumOfClouds();
 
 animator.animate(0);

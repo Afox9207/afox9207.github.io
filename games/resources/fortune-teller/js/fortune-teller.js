@@ -146,8 +146,8 @@ const canvas = {
     minSize: 8,
     maxLifeSpan: 2500,
     maxFrame: 14,
-    minFrameRate: 1000 / 50,
-    preferredFrameRate: 1000 / 55,
+    minFrameRate: 1000 / 30,
+    preferredFrameRate: 1000 / 58,
     fpsCheckerTimer: 0,
     create: function() {
         const canvas = document.createElement('canvas');

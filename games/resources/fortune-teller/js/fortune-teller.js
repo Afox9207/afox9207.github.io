@@ -174,23 +174,23 @@ const canvas = {
         this.smokeSizeOffset = this.growRate / 2;
     },
     limitSmokeClouds: function(deltaTime) {
-        if (!this.numOfCloudsHasBeenReduced && deltaTime > this.minFrameRate) {
+        if (!this.numOfCloudsHasBeenReduced && deltaTime > this.minFrameRate && this.newCloudsPerCycle !== 3) {
             const arrayLength = this.smokeClouds.length;
             this.numOfCloudsHasBeenReduced = true;
-            if (arrayLength < 232) {
-                this.newCloudsPerCycle = 3;
-            } else if (arrayLength < 311) {
-                this.newCloudsPerCycle = 4;
-            } else if (arrayLength < 392) {
-                this.newCloudsPerCycle = 5;
-            } else if (arrayLength < 459) {
-                this.newCloudsPerCycle = 6;
-            } else if (arrayLength < 534) {
-                this.newCloudsPerCycle = 7;
-            } else if (arrayLength < 605) {
-                this.newCloudsPerCycle = 8;
-            } else {
+            if (arrayLength > 678) {
                 this.newCloudsPerCycle = 9;
+            } else if (arrayLength > 605) {
+                this.newCloudsPerCycle = 8;
+            } else if (arrayLength > 534) {
+                this.newCloudsPerCycle = 7;
+            } else if (arrayLength > 459) {
+                this.newCloudsPerCycle = 6;
+            } else if (arrayLength > 392) {
+                this.newCloudsPerCycle = 5;
+            } else if (arrayLength > 311) {
+                this.newCloudsPerCycle = 4;
+            } else {
+                this.newCloudsPerCycle = 3;
             }
         }
     },

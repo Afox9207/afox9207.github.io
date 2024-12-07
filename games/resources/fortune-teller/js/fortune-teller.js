@@ -146,9 +146,9 @@ const canvas = {
     minSize: 8,
     maxLifeSpan: 2500,
     maxFrame: 14,
-    minFrameRate: 1000 / 30,
-    preferredFrameRate: 1000 / 58,
-    fpsCheckerTimer: 0,
+    minFrameRate: 1000 / 45,
+    preferredFrameRate: 1000 / 59,
+    hasFpsBeenChecked: false,
     create: function() {
         const canvas = document.createElement('canvas');
         canvas.width = orb.radius;
@@ -175,38 +175,31 @@ const canvas = {
         this.smokeSizeOffset = this.growRate / 2;
     },
     limitSmokeClouds: function(deltaTime) {
-        if (this.fpsCheckerTimer === 0) {
-            this.fpsCheckerTimer += deltaTime;
+        if (!this.hasFpsBeenChecked) {
+            const arrayLength = this.smokeClouds.length;
             if (deltaTime > this.minFrameRate) {
-                const arrayLength = this.smokeClouds.length;
-                // limit new clouds
-                if (arrayLength < 232) {
+                this.hasFpsBeenChecked = true;
+                if (arrayLength > 232) {
                     this.newCloudsPerCycle = 3;
-                } else if (arrayLength < 311) {
+                } else if (arrayLength > 311) {
                     this.newCloudsPerCycle = 4;
-                } else if (arrayLength < 392) {
+                } else if (arrayLength > 392) {
                     this.newCloudsPerCycle = 5;
-                } else if (arrayLength < 459) {
+                } else if (arrayLength > 459) {
                     this.newCloudsPerCycle = 6;
-                } else if (arrayLength < 534) {
+                } else if (arrayLength > 534) {
                     this.newCloudsPerCycle = 7;
-                } else if (arrayLength < 605) {
+                } else if (arrayLength > 605) {
                     this.newCloudsPerCycle = 8;
-                } else if (arrayLength < 678) {
-                    this.newCloudsPerCycle = 9;
                 } else {
-                    this.newCloudsPerCycle = 10;
+                    this.newCloudsPerCycle = 9;
                 }
-                // set max array size
                 this.maxNumOfClouds = arrayLength;
-            } else if (deltaTime < this.preferredFrameRate) {
+            }
+            if (this.maxNumOfClouds < arrayLength && deltaTime < this.preferredFrameRate) {
                 this.newCloudsPerCycle = 10;
                 delete this.maxNumOfClouds;
             }
-        } else if (this.fpsCheckerTimer < this.maxLifeSpan) {
-            this.fpsCheckerTimer += deltaTime;
-        } else {
-            this.fpsCheckerTimer = 0;
         }
     },
     createSmokeClouds: function(deltaTime) {
@@ -468,6 +461,7 @@ const animator = {
                     canvas.drawSmokeClouds(canvas.ctx);
                 } else {
                     askButton.isActive = false;
+                    canvas.hasFpsBeenChecked = false;
                 }
             }
         }

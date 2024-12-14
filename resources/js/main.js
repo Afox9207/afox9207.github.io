@@ -59,7 +59,8 @@ const footer = {
 
 const games = {
     list: [
-        {title: `Madame Fox's Fortune Telling`, link: '/games/fortune-teller.html'}
+        {title: `Madame Fox's Fortune Telling`, link: '/games/fortune-teller.html'},
+        {title: 'Let Me Guess Your Card', link: '/games/card-trick.html'}
     ],
     createList: function() {
         const gamesList = document.getElementById('games-list');

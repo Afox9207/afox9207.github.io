@@ -20,6 +20,7 @@ export class Card {
     constructor(suit, value) {
         this.suit = suit;
         this.value = value;
+        this.isCardFlipped = true;
     }
 }
 
@@ -51,8 +52,22 @@ export class CardDeck {
             [this.deck[currentIndex], this.deck[randomCard]] = [this.deck[randomCard], this.deck[currentIndex]];
         }
     }
-    createHtmlElements(card, suit) {
+    draw(arrayToPushTo, numberOfCards = 1) {
+        for (let i = 0; i < numberOfCards; ++i) {
+            arrayToPushTo.push(this.deck[i]);
+        }
+    }
+    create3dSpace(card) {
+        const div = document.createElement('div');
+        card.space = div;
+    }
+    createBody(card) {
         const body = document.createElement('div');
+        card.space.appendChild(body);
+        card.body = body;
+    }
+    createFront(card, suit) {
+        const front = document.createElement('div');
         const topValue = document.createElement('span');
         const bottomValue = document.createElement('span');
         const topSuit = document.createElement('span');
@@ -65,32 +80,73 @@ export class CardDeck {
             } else {
                 element.innerHTML = suit;
             }
-            body.appendChild(element);
-            card.body = body;
+            front.appendChild(element);
         });
+        card.body.appendChild(front);
+        card.front = front;
     }
-    styleHtmlElements(card, color, width) {
-        const elements = card.body.querySelectorAll('span');
-        card.body.style.display = 'grid';
+    createBack(card) {
+        const back = document.createElement('div');
+        card.body.appendChild(back);
+        card.back = back;
+    }
+    createCard(card, suit) {
+        this.create3dSpace(card);
+        this.createBody(card);
+        this.createFront(card, suit);
+        this.createBack(card);
+    }
+    style3dSpace(card, width, perspective) {
+        card.space.style.aspectRatio = '5 / 7';
+        card.space.style.width = width + 'px';
+        card.space.style.fontSize = (width / 6) + 'px';
+        card.space.style.perspective = perspective + 'px';
+    }
+    styleBody(card, color, flipSpeed) {
         card.body.style.outline = '1px solid black';
         card.body.style.borderRadius = '4px';
-        card.body.style.padding = '8px';
-        card.body.style.aspectRatio = '5 / 7';
-        card.body.style.width = width + 'px';
+        card.body.style.width = '100%';
+        card.body.style.height = '100%';
         card.body.style.backgroundColor = 'white';
-        card.body.style.fontSize = (width / 6) + 'px';
         card.body.style.color = color;
+        card.body.style.position = 'relative';
+        card.body.style.transformStyle = 'preserve-3d';
+        card.body.style.transition = `transform ${flipSpeed}ms linear`;
+    }
+    styleFront(card) {
+        const elements = card.front.querySelectorAll('span');
+        card.front.style.display = 'grid';
+        card.front.style.position = 'absolute';
+        card.front.style.padding = '8px';
+        card.front.style.width = '100%';
+        card.front.style.height = '100%';
+        card.front.style.backfaceVisibility = 'hidden';
         elements.forEach((element, index) => {
             if (index === 2) {
-                element.style.justifySelf = 'center'
-                element.style.fontSize = '200%';
+                element.style.justifySelf = 'center';
+                element.style.fontSize = '200%';;
             } else if (index > 2) {
-                element.style.justifySelf = 'end'
-                element.style.scale = '-1 -1'
+                element.style.justifySelf = 'end';
+                element.style.scale = '-1 -1';
             }
         });
     }
-    createCards(width) {
+    styleBack(card) {
+        card.back.style.position = 'absolute';
+        card.back.style.width = '100%';
+        card.back.style.height = '100%';
+        card.back.style.background = 'url(../resources/images/card-back.jpg)';
+        card.back.style.backgroundSize = 'cover';
+        card.back.style.backfaceVisibility = 'hidden';
+        card.back.style.transform = 'rotateY(180deg)';
+    }
+    styleCard(card, color, width, flipSpeed, perspective) {
+        this.style3dSpace(card, width, perspective);
+        this.styleBody(card, color, flipSpeed);
+        this.styleFront(card);
+        this.styleBack(card);
+    }
+    createCards(width, flipSpeed = 100, perspective = 300) {
         this.deck.forEach(card => {
             let suit;
             let color;
@@ -112,8 +168,17 @@ export class CardDeck {
                     color = 'black';
                     break;
             }
-            this.createHtmlElements(card, suit);
-            this.styleHtmlElements(card, color, width);
+            this.createCard(card, suit);
+            this.styleCard(card, color, width, flipSpeed, perspective);
         });
+    }
+    flipCard(card) {
+        if (card.isCardFlipped) {
+            card.body.style.transform = 'rotateY(180deg)';
+            card.isCardFlipped = false;
+        } else {
+            card.body.style.transform = 'rotateY(0deg)';
+            card.isCardFlipped = true;
+        }
     }
 }

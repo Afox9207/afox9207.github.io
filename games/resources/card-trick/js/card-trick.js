@@ -34,7 +34,8 @@ const text = {
         'Pick any card and remember it. Which column is it in?',
         'Now which column is it in',
         'One last time, which column is it in',
-        `Now to spell out the Magic Words 'Hocus Pocus'`
+        `Now to spell out the Magic Words 'Hocus Pocus'`,
+        'Try Again?'
     ],
     create: function() {
         const p = document.createElement('p');
@@ -88,7 +89,6 @@ class CardColumn {
 const cardColumns = {
     marginTop: 16,
     marginBottom: 16,
-    paddingBottom: 8,
     gap: 16,
     columns: [],
     create: function() {
@@ -109,8 +109,7 @@ const cardColumns = {
         this.flex.style.gap = this.gap + 'px';
         this.columns.forEach(item => {
             item.column.style.width = cardWidth + 'px';
-            item.column.style.height = cardStacks.stackOffSet * 6 + cardWidth * (7 / 5) + this.paddingBottom + 'px';
-            item.column.style.paddingBottom = this.paddingBottom + 'px';
+            item.column.style.height = cardStacks.stackOffSet * 6 + cardWidth * (7 / 5) + 'px';
             item.column.style.zIndex = '7';
             item.column.style.cursor = 'pointer';
         });
@@ -125,28 +124,23 @@ const cardStacks = {
     stackOne: [],
     stackTwo: [],
     stackThree: [],
-    drawCards: function() {
-        for (let i = 0; i < 21; ++i) {
-            this.drawPile.push(deck.deck[i]);
-        }
-    },
     appendCardsToContainer: function() {
         for (let i = 20; i >= 0; --i) {
-            gameContainer.element.appendChild(this.drawPile[i].body);
-            this.drawPile[i].body.style.position = 'absolute';
+            gameContainer.element.appendChild(this.drawPile[i].space);
+            this.drawPile[i].space.style.position = 'absolute';
         }
     },
     setTransitions: function() {
         this.drawPile.forEach(card => {
-            card.body.style.transition = `top ${this.transitionTime}ms linear, left ${this.transitionTime}ms linear`;
+            card.space.style.transition = `top ${this.transitionTime}ms linear, left ${this.transitionTime}ms linear`;
         });
     },
     placeInDrawPile: function(cardStack) {
         const topPos = drawPile.element.offsetTop;
         const leftPos = drawPile.element.offsetLeft + this.cardPadding;
         for (let i = cardStack.length - 1; i >= 0; --i) {
-            cardStack[i].body.style.left = leftPos + 'px';
-            cardStack[i].body.style.top = topPos + 'px';
+            cardStack[i].space.style.left = leftPos + 'px';
+            cardStack[i].space.style.top = topPos + 'px';
         }
         
     },
@@ -169,25 +163,29 @@ const cardStacks = {
         const columnThreeLeftPos = cardColumns.columns[2].column.offsetLeft;
         for (let i = 0; i < 7; ++i) {
             setTimeout(() => {
-                this.stackOne[i].body.style.left = columnOneLeftPos + 'px';
-                this.stackOne[i].body.style.top = topPos + this.stackOffSet * i + 'px';
-                this.stackOne[i].body.style.zIndex = i;
+                this.stackOne[i].space.style.left = columnOneLeftPos + 'px';
+                this.stackOne[i].space.style.top = topPos + this.stackOffSet * i + 'px';
+                this.stackOne[i].space.style.zIndex = i;
+                deck.flipCard(this.stackOne[i]);
                 setTimeout(() => {
-                    this.stackTwo[i].body.style.left = columnTwoLeftPos + 'px';
-                    this.stackTwo[i].body.style.top = topPos + this.stackOffSet * i + 'px';
-                    this.stackTwo[i].body.style.zIndex = i;
+                    this.stackTwo[i].space.style.left = columnTwoLeftPos + 'px';
+                    this.stackTwo[i].space.style.top = topPos + this.stackOffSet * i + 'px';
+                    this.stackTwo[i].space.style.zIndex = i;
+                    deck.flipCard(this.stackTwo[i]);
                 }, this.transitionTime);
                 setTimeout(() => {
-                    this.stackThree[i].body.style.left = columnThreeLeftPos + 'px';
-                    this.stackThree[i].body.style.top = topPos + this.stackOffSet * i + 'px';
-                    this.stackThree[i].body.style.zIndex = i;
+                    this.stackThree[i].space.style.left = columnThreeLeftPos + 'px';
+                    this.stackThree[i].space.style.top = topPos + this.stackOffSet * i + 'px';
+                    this.stackThree[i].space.style.zIndex = i;
+                    deck.flipCard(this.stackThree[i]);
                 }, this.transitionTime * 2);
             }, i * 3 * this.transitionTime);
         }
     },
     slideCardsIntoPile: function(stack) {
         stack.forEach(card => {
-            card.body.style.top = cardColumns.columns[0].column.offsetTop + 'px';
+            card.space.style.top = cardColumns.columns[0].column.offsetTop + 'px';
+            deck.flipCard(card);
         });
     },
     putStacksBackIntoDrawPileArray: function(stackOne, stackTwo, stackThree) {
@@ -242,6 +240,14 @@ const cardStacks = {
                 this.placeInDrawPile(thirdPile);
             }, this.transitionTime);
         }, this.transitionTime * 4);
+    },
+    guessCard: function() {
+        const columnHeight = parseInt(window.getComputedStyle(cardColumns.columns[0].column).height, 10);
+        const middlePos = cardColumns.columns[0].column.offsetTop + columnHeight / 2;
+        const leftPos = cardColumns.columns[1].column.offsetLeft;
+        cardStacks.drawPile[10].space.style.left = leftPos + 'px';
+        cardStacks.drawPile[10].space.style.top = middlePos + 'px';
+        deck.flipCard(cardStacks.drawPile[10]);
     }
 };
 
@@ -293,7 +299,8 @@ const gameLogic = {
         if (!isMouseDown) {
             if (this.continuePresses === 0) {
                 deck.shuffle();
-                cardStacks.drawCards();
+                deck.draw(cardStacks.drawPile, 21);
+                deck.deck.forEach(card => deck.flipCard(card));
                 cardStacks.placeInDrawPile(cardStacks.drawPile);
                 cardStacks.setTransitions();
                 cardStacks.appendCardsToContainer();
@@ -320,6 +327,16 @@ const gameLogic = {
                 ++this.continuePresses;
             } else if (this.continuePresses === 4) {
                 text.write(`Your card is the ${cardStacks.drawPile[10].value} of ${cardStacks.drawPile[10].suit}`);
+                cardStacks.guessCard();
+                ++this.continuePresses;
+            } else if (this.continuePresses === 5) {
+                text.write(text.texts[5]);
+                deck.flipCard(cardStacks.drawPile[10]);
+                this.continuePresses = 0;
+                this.columnPresses = 0;
+                cardStacks.drawPile.forEach(card => {
+                    deck.flipCard(card);
+                });
             }
         }
     },
@@ -343,7 +360,7 @@ const cardWidth = 96;
 
 const deck = new CardDeck();
 deck.build();
-deck.createCards(cardWidth);
+deck.createCards(cardWidth, 150);
 
 gameContainer.style();
 
@@ -360,6 +377,3 @@ cardColumns.create();
 cardColumns.style(cardWidth);
 
 eventListeners.add();
-
-
-

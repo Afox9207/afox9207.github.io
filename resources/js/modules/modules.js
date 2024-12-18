@@ -16,6 +16,13 @@ export class RandomFloatingPointGenerator {
     }
 }
 
+export function shuffleArray(array) {
+    for (let currentIndex = array.length - 1; currentIndex > 0; --currentIndex) {
+        const randomIndex = Math.floor(Math.random() * (currentIndex + 1));
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+}
+
 export class Card {
     constructor(suit, value) {
         this.suit = suit;
@@ -28,33 +35,30 @@ export class CardDeck {
     constructor() {
         this.suits = ['Spades', 'Diamonds', 'Clubs', 'Hearts'];
         this.values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-        this.deck = [];
     }
-    build() {
+    build(deck) {
         for (let suit = 0; suit < 4; ++suit) {
             if (suit < 2) {
                 for (let value = 0; value < 13; ++value) {
-                    this.deck.push(new Card(this.suits[suit], this.values[value]));
+                    deck.push(new Card(this.suits[suit], this.values[value]));
                 }
             } else {
                 for (let value = 12; value >= 0; --value) {
-                    this.deck.push(new Card(this.suits[suit], this.values[value]));
+                    deck.push(new Card(this.suits[suit], this.values[value]));
                 }
             }
         }
+        return deck;
     }
-    addJokers() {
-        this.deck.unshift(new Card('None', 'Joker'), new Card('None', 'Joker'));
+    addJokers(deck) {
+        deck.unshift(new Card('None', 'Joker'), new Card('None', 'Joker'));
     }
-    shuffle() {
-        for (let currentIndex = this.deck.length - 1; currentIndex > 0; --currentIndex) {
-            const randomCard = Math.floor(Math.random() * (currentIndex + 1));
-            [this.deck[currentIndex], this.deck[randomCard]] = [this.deck[randomCard], this.deck[currentIndex]];
-        }
+    shuffle(deck) {
+        shuffleArray(deck);
     }
-    draw(arrayToPushTo, numberOfCards = 1) {
+    draw(deck, arrayToPushTo, numberOfCards = 1) {
         for (let i = 0; i < numberOfCards; ++i) {
-            arrayToPushTo.push(this.deck[i]);
+            arrayToPushTo.push(deck[i]);
         }
     }
     create3dSpace(card) {
@@ -102,7 +106,7 @@ export class CardDeck {
         card.space.style.fontSize = (width / 6) + 'px';
         card.space.style.perspective = perspective + 'px';
     }
-    styleBody(card, color, flipSpeed) {
+    styleBody(card, color, flipTime) {
         card.body.style.outline = '1px solid black';
         card.body.style.borderRadius = '4px';
         card.body.style.width = '100%';
@@ -111,7 +115,7 @@ export class CardDeck {
         card.body.style.color = color;
         card.body.style.position = 'relative';
         card.body.style.transformStyle = 'preserve-3d';
-        card.body.style.transition = `transform ${flipSpeed}ms linear`;
+        card.body.style.transition = `transform ${flipTime}ms linear`;
     }
     styleFront(card) {
         const elements = card.front.querySelectorAll('span');
@@ -140,14 +144,14 @@ export class CardDeck {
         card.back.style.backfaceVisibility = 'hidden';
         card.back.style.transform = 'rotateY(180deg)';
     }
-    styleCard(card, color, width, flipSpeed, perspective) {
+    styleCard(card, color, width, flipTime, perspective) {
         this.style3dSpace(card, width, perspective);
-        this.styleBody(card, color, flipSpeed);
+        this.styleBody(card, color, flipTime);
         this.styleFront(card);
         this.styleBack(card);
     }
-    createCards(width, flipSpeed = 100, perspective = 300) {
-        this.deck.forEach(card => {
+    createCards(deck, width, flipTime = 100, perspective = 300) {
+        deck.forEach(card => {
             let suit;
             let color;
             switch(card.suit) {
@@ -169,7 +173,7 @@ export class CardDeck {
                     break;
             }
             this.createCard(card, suit);
-            this.styleCard(card, color, width, flipSpeed, perspective);
+            this.styleCard(card, color, width, flipTime, perspective);
         });
     }
     flipCard(card) {

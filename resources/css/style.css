@@ -17,7 +17,8 @@
     --font-size-lg: calc(var(--font-size-md) * var(--font-scale));
     --font-size-xl: calc(var(--font-size-lg) * var(--font-scale));
     /* colors */
-    
+    --clr-primary: hsl(44 100% 50%);
+    --clr-neutral-400: hsl(44 10% 90%);
 }
 
 body {
@@ -55,8 +56,16 @@ a {
     font-size: var(--font-size-sm);
 }
 
+.games-list__item {
+    margin-block: 8px;
+    padding: 8px;
+    background-color: var(--clr-neutral-400);
+    border-radius: 4px;
+}
+
 .games-list__link {
-    
+    text-decoration: none;
+    color: var(--clr-primary);
 }
 
 #game {

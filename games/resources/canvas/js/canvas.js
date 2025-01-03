@@ -145,26 +145,28 @@ const circles = {
             this.array.push(new Circle());
         }
     },
+    moveCircle: function(circle, deltaTime) {
+        circle.x += circle.dx * deltaTime;
+        circle.y += circle.dy * deltaTime;
+    },
+    checkIfCircleGoesOffscreen: function(circle) {
+        // left and right
+        if (circle.x + circle.radius < 0) {
+            circle.x = canvas.width + circle.radius;
+        } else if (circle.x - circle.radius > canvas.width) {
+            circle.x = 0 - circle.radius;
+        }
+        // top and bottom
+        if (circle.y + circle.radius < 0) {
+            circle.y = canvas.height + circle.radius;
+        } else if (circle.y - circle.radius > canvas.height) {
+            circle.y = 0 - circle.radius;
+        }
+    },
     update: function(deltaTime) {
         this.array.forEach(circle => {
-            circle.x += circle.dx * deltaTime;
-            circle.y += circle.dy * deltaTime;
-            
-            if (circle.x - circle.radius <= 0) {
-                circle.x = 0 + circle.radius;
-                circle.dx *= -1;
-            } else if (circle.x + circle.radius >= canvas.width) {
-                circle.x = canvas.width - circle.radius;
-                circle.dx *= -1;
-            }
-    
-            if (circle.y - circle.radius <= 0) {
-                circle.y = 0 + circle.radius;
-                circle.dy *= -1;
-            } else if (circle.y + circle.radius >= canvas.height) {
-                circle.y = canvas.height - circle.radius;
-                circle.dy *= -1;
-            }
+            this.moveCircle(circle, deltaTime);
+            this.checkIfCircleGoesOffscreen(circle);
         });
     },
     draw: function(ctx) {
@@ -190,26 +192,28 @@ const rectangles = {
             this.array.push(new Rectangle());
         }
     },
+    moveRectangle: function(rectangle, deltaTime) {
+        rectangle.x += rectangle.dx * deltaTime;
+        rectangle.y += rectangle.dy * deltaTime;
+    },
+    checkIfRectangleGoesOffscreen: function(rectangle) {
+        // left and right
+        if (rectangle.x + rectangle.width < 0) {
+            rectangle.x = canvas.width;
+        } else if (rectangle.x > canvas.width) {
+            rectangle.x = 0 - rectangle.width;
+        }
+        // top and bottom
+        if (rectangle.y + rectangle.height < 0) {
+            rectangle.y = canvas.height;
+        } else if (rectangle.y > canvas.height) {
+            rectangle.y = 0 - rectangle.height;
+        }
+    },
     update: function(deltaTime) {
         this.array.forEach(rectangle => {
-            rectangle.x += rectangle.dx * deltaTime;
-            rectangle.y += rectangle.dy * deltaTime;
-
-            if (rectangle.x <= 0) {
-                rectangle.x = 0;
-                rectangle.dx *= -1;
-            } else if (rectangle.x + rectangle.width >= canvas.width) {
-                rectangle.x = canvas.width - rectangle.width;
-                rectangle.dx *= -1;
-            }
-
-            if (rectangle.y <= 0) {
-                rectangle.y = 0;
-                rectangle.dy *= -1;
-            } else if (rectangle.y + rectangle.height > canvas.height) {
-                rectangle.y = canvas.height - rectangle.height;
-                rectangle.dy *= -1;
-            }
+            this.moveRectangle(rectangle, deltaTime)
+            this.checkIfRectangleGoesOffscreen(rectangle);
         });
     },
     draw: function(ctx) {

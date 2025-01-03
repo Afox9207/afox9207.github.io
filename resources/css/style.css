@@ -18,7 +18,8 @@
     --font-size-xl: calc(var(--font-size-lg) * var(--font-scale));
     /* colors */
     --clr-primary: hsl(44 100% 50%);
-    --clr-neutral-400: hsl(44 10% 90%);
+    --clr-neutral-100: hsl(44 10% 95%);
+    --clr-neutral-400: hsl(44 50% 80%);
 }
 
 body {
@@ -26,6 +27,7 @@ body {
     min-height: 100vh;
     min-height: 100dvh;
     grid-template-rows: auto 1fr auto;
+    background-color: var(--clr-neutral-100);
 }
 
 main {
@@ -56,16 +58,19 @@ a {
     font-size: var(--font-size-sm);
 }
 
-.games-list__item {
+.games-list__link {
+    display: block;
     margin-block: 8px;
     padding: 8px;
-    background-color: var(--clr-neutral-400);
     border-radius: 4px;
+    background-color: var(--clr-neutral-400);
+    text-decoration: none;
+    color: inherit;
 }
 
-.games-list__link {
-    text-decoration: none;
-    color: var(--clr-primary);
+.games-list__link:hover {
+    background-color: var(--clr-primary);
+    color: var(--clr-neutral-100);
 }
 
 #game {

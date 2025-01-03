@@ -1,9 +1,6 @@
 'use strict';
 
-import { RandomIntegerGenerator, RandomFloatingPointGenerator } from "../../../../resources/js/modules/modules.js";
-
-const randomInteger = new RandomIntegerGenerator();
-const randomFloatingPoint = new RandomFloatingPointGenerator();
+import { generateRandomFloatingPoint, generateRandomInteger } from "../../../../resources/js/modules/modules.js";
 
 const gameContainer = {
     element: document.getElementById('game'),
@@ -123,10 +120,10 @@ class SmokeCloud {
     constructor() {
         this.size = 8;
         // 124 is hard coded number for center of orb offset by half size of cloud
-        this.x = 124 + randomFloatingPoint.generate(-24, 24);
-        this.y = 124 + randomFloatingPoint.generate(-24, 24);
-        this.xVelocity = randomFloatingPoint.generate(-0.05, 0.05);
-        this.yVelocity = randomFloatingPoint.generate(-0.05, 0.05);
+        this.x = 124 + generateRandomFloatingPoint(-24, 24);
+        this.y = 124 + generateRandomFloatingPoint(-24, 24);
+        this.xVelocity = generateRandomFloatingPoint(-0.05, 0.05);
+        this.yVelocity = generateRandomFloatingPoint(-0.05, 0.05);
         this.lifeTime = 0;
         this.frame = 0;
         // 25 fps
@@ -353,7 +350,7 @@ const answer = {
         scale ${this.transitionTime}ms linear`;
     },
     generate: function() {
-        this.element.textContent = this.answers[randomInteger.generate(0, 19)];
+        this.element.textContent = this.answers[generateRandomInteger(0, 19)];
     },
     fadeIn: function() {
         this.element.style.opacity = '1';

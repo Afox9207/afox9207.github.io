@@ -70,7 +70,6 @@ const games = {
             const a = document.createElement('a');
             a.href = item.link;
             a.textContent = item.title;
-            li.classList.add('games-list__item');
             a.classList.add('games-list__link');
             gamesList.appendChild(li);
             li.appendChild(a);

@@ -1,91 +1,92 @@
 export class Button {
-    constructor(main) {
-        this.main = main;
-    }
-    addStyles() {
-        const transitionTime = 100;
-        const borderRadius = 4;
-        const boxShadowColor = 'white';
-        const defaultBoxShadowBlur = 0;
-        const newBoxShadowBlur = 3;
+    constructor(main, button) {
+        const padding = '8px 16px';
+        const marginTop = '16px';
+        const boxShadowBlur = '1px';
+        const activeBoxShadowBlur = '4px'; 
 
         const styles = 
         `
-        .button-container {
-            display: flex;
-            justify-content: flex-end;
-            gap: 16px;
+        input,
+        button {
+            -webkit-tap-highlight-color: transparent;
         }
+
         .button {
             display: block;
-            margin-inline: auto;
-            margin-top: 16px;
-            padding: 8px 16px;
-            scale: 1;
-            border: 1px solid ${boxShadowColor};
-            border-radius: ${borderRadius}px;
-            background: rgba(0, 0, 0, 0);
-            color: rgba(255, 255, 255, 1);
+            margin-top: ${marginTop};
+            padding: ${padding};
+            border: 1px solid ${main.styles.borderColor};
+            border-radius: ${main.styles.borderRadius};
             cursor: pointer;
-            transition: background ${transitionTime}ms linear;
-        }
-        .icon-button {
-            padding: 0;
-            border: none;
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            background: transparent;
-            cursor: pointer;
-            transition: scale ${transitionTime}ms linear;
-        }
-        .icon-button:hover {
-            scale: 1.1;
-        }
-        .icon {
-            fill: white;
+            background-color: ${main.styles.backgroundColor};
+            color: ${main.styles.boldTextColor};
+            transition: background-color ${main.styles.buttonTransitionTime}ms linear;
         }
         .button:hover {
-            background: rgba(0, 0, 0, 1);
+            background-color: ${main.styles.activeBackgroundColor};
         }
         .button--active {
             animation-name: pulse;
-            animation-duration: ${this.main.buttonAnimationDuration}ms;
+            animation-timing-function: linear;
+            animation-duration: ${main.styles.buttonAnimationTime}ms;
+        }
+        .button--center {
+            margin-inline: auto;
+        }
+        .icon-button {
+            border: none;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            background-color: transparent;
+            transition: scale ${main.styles.buttonTransitionTime}ms linear;
+        }
+        .icon-button:hover {
+            scale: 1.05;
+        }
+        .icon-button svg {
+            width: 100%;
+            height: 100%;
+            fill: white;
         }
         @keyframes pulse {
             0% {
-                scale: 1;
                 box-shadow:
-                -1px -1px ${defaultBoxShadowBlur}px ${boxShadowColor},
-                -1px 1px ${defaultBoxShadowBlur}px ${boxShadowColor},
-                1px -1px ${defaultBoxShadowBlur}px ${boxShadowColor},
-                1px 1px ${defaultBoxShadowBlur}px ${boxShadowColor};
+                -1px -1px ${boxShadowBlur},
+                -1px 1px ${boxShadowBlur},
+                1px -1px ${boxShadowBlur},
+                1px 1px ${boxShadowBlur};
+                scale: 1;
             }
             50% {
-                scale: 1.05;
                 box-shadow:
-                -1px -1px ${newBoxShadowBlur}px ${boxShadowColor},
-                -1px 1px ${newBoxShadowBlur}px ${boxShadowColor},
-                1px -1px ${newBoxShadowBlur}px ${boxShadowColor},
-                1px 1px ${newBoxShadowBlur}px ${boxShadowColor};
+                -1px -1px ${activeBoxShadowBlur},
+                -1px 1px ${activeBoxShadowBlur},
+                1px -1px ${activeBoxShadowBlur},
+                1px 1px ${activeBoxShadowBlur};
+                scale: 1.05;
             }
             100% {
-                scale: 1;
                 box-shadow:
-                -1px -1px ${defaultBoxShadowBlur}px ${boxShadowColor},
-                -1px 1px ${defaultBoxShadowBlur}px ${boxShadowColor},
-                1px -1px ${defaultBoxShadowBlur}px ${boxShadowColor},
-                1px 1px ${defaultBoxShadowBlur}px ${boxShadowColor};
+                -1px -1px ${boxShadowBlur},
+                -1px 1px ${boxShadowBlur},
+                1px -1px ${boxShadowBlur},
+                1px 1px ${boxShadowBlur};
+                scale: 1;
             }
         }
         `;
 
-        this.main.addStyles(styles);
+        main.addStyles(styles);
+
+        this.main = main;
+        this.button = button;
     }
-    toggleActiveClass() {
+    animate() {
         this.button.classList.add('button--active');
         setTimeout(() => {
             this.button.classList.remove('button--active');
-        }, this.main.buttonAnimationDuration);
+        }, this.main.styles.buttonAnimationTime);
     }
 }

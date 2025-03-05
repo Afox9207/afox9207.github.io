@@ -1,52 +1,90 @@
-import { createHTMLElements } from "./createHTMLElements.js";
-import { GameContainer } from "./GameContainer.js";
-import { Menu } from "./Menu.js";
+import { Background } from "./Background.js";
+import { ButtonGroup } from "./ButtonGroup.js";
 import { Info } from "./Info.js";
 import { Settings } from "./Settings.js";
-import { Background } from "./Background.js";
 import { Orb } from "./Orb.js";
-import { Button } from "./Button.js";
 import { AskButton } from "./AskButton.js";
-import { Answer } from "./Answer.js";
-import { State } from "./State.js";
 
 class Main {
     constructor() {
-        this.buttonAnimationDuration = 250;
-        this.iconAnimationDuration = 500;
-        this.menuTransitionTime = 250;
-        createHTMLElements();
-        this.shadow = document.getElementById('game-area').shadowRoot;
-        this.gameContainer = new GameContainer(this);
-        this.menu = new Menu(this);
-        this.menu.addStyles();
+        this.styles = {
+            borderColor: 'white',
+            borderRadius: '4px',
+            backgroundColor: 'hsl(0 0 0 / 0.5)',
+            activeBackgroundColor: 'hsl(0 0 0 / 1)',
+            textColor: 'hsl(0 0 100 / 0.85)',
+            boldTextColor: 'white',
+            menuTransitionTime: 250,
+            buttonTransitionTime: 100,
+            buttonAnimationTime: 250,
+            backgroundTransitionTime: 1500,
+            orbGlowTransitionTime: 1500,
+            orbActiveTime: 7000,
+            answerTransitionTime: 1625
+        };
+
+        const gameArea = document.getElementById('game-area');
+        const startingHTML = 
+        `
+        <style id='style'>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                font: inherit;
+                font-family: Arial, Helvetica, sans-serif;
+                text-wrap: pretty;
+            }
+            .container {
+                display: grid;
+                grid-template-rows: auto 1fr;
+                position: relative;
+                padding: 16px;
+                min-height: 100vh;
+                min-height: 100dvh;
+            }
+        </style>
+        <div id='container' class='container'></div>
+        `;
+
+        this.shadow = gameArea.attachShadow({mode: 'open'});
+        this.shadow.innerHTML = startingHTML;
+
+        this.background= new Background(this);
+        this.buttonGroup = new ButtonGroup(this);
+        this.orb = new Orb(this);
         this.info = new Info(this);
         this.settings = new Settings(this);
-        this.background = new Background(this);
-        this.orb = new Orb(this);
-        this.state = new State(this);
-        this.button = new Button(this);
-        this.button.addStyles();
         this.askButton = new AskButton(this);
-        this.answer = new Answer(this);
+
         this.startAnimating();
+    }
+    addHTML(HTML, parentId = 'container') {
+        const parent = this.shadow.getElementById(parentId);
+        const template = document.createElement('template');
+        template.innerHTML = HTML;
+        parent.append(template.content.cloneNode(true));
     }
     addStyles(styles) {
         const styleTag = this.shadow.getElementById('style');
-        styleTag.innerHTML += styles;
+
+        if (!styleTag.innerHTML.includes(styles)) {
+            styleTag.innerHTML += styles;
+        }
     }
     startAnimating() {
         let previousTimestamp = 0;
 
-        const animateNextFrame = timestamp => {
-            requestAnimationFrame(animateNextFrame);
+        const drawNextFrame = (timestamp) => {
+            this.requestId = requestAnimationFrame(drawNextFrame);
             const deltaTime = timestamp - previousTimestamp;
             previousTimestamp = timestamp;
-            this.state.checkState();
-            this.orb.update(deltaTime);
-            this.orb.draw();
+            this.orb.removeSmokeClouds();
+            this.orb.updateSmokeClouds(deltaTime);
+            this.orb.drawSmokeClouds();
+            this.orb.checkIfSmokeCloudsAreGone();
         };
-        animateNextFrame(0);
+        drawNextFrame(0);
     }
 }
 

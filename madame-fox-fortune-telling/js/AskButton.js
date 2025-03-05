@@ -5,9 +5,9 @@ export class AskButton extends Button {
         super(main);
         this.button = main.shadow.getElementById('ask-button');
         this.button.addEventListener('click', () => {
-            if (main.state.checkIfOrbIsOff()) {
-                this.toggleActiveClass();
-                this.main.state.turnOnOrb();
+            if (!main.orb.isActive) {
+                main.orb.activate();
+                this.animate();
             }
         });
     }

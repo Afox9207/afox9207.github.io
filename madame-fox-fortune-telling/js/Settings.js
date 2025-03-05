@@ -1,120 +1,84 @@
 import { Menu } from "./Menu.js";
-import { Button } from "./Button.js";
+import { NumberOfCloudsInput } from "./NumberOfCloudsInput.js";
+import { OrbColorInput } from "./OrbColorInput.js";
+import { DefaultButton } from "./DefaultButton.js";
+import { OpenMenuButton } from "./OpenMenuButton.js";
+import { CloseMenuButton } from "./CloseMenuButton.js";
 
 export class Settings extends Menu {
     constructor(main) {
         super(main);
-        const innerHTML = 
-        `   <form id='form'>
-                <h2>Clouds Per Cycle</h2>
-                <div class='menu-form-grid'>
-                    <div>
-                        <label for='auto'>Auto</label>
-                        <input type='radio' name='clouds-per-cycle' id='auto' value='auto' checked>
-                    </div>
-
-                    <div>
-                        <label for='one'>One</label>
-                        <input type='radio' name='clouds-per-cycle' id='one' value=1>
-                    </div>
-
-                    <div>
-                        <label for='two'>Two</label>
-                        <input type='radio' name='clouds-per-cycle' id='two' value=2>
-                    </div>
-
-                    <div>
-                        <label for='three'>Three</label>
-                        <input type='radio' name='clouds-per-cycle' id='three' value=3>
-                    </div>
-
-                    <div>
-                        <label for='four'>Four</label>
-                        <input type='radio' name='clouds-per-cycle' id='four' value=4>
-                    </div>
-
-                    <div>
-                        <label for='five'>Five</label>
-                        <input type='radio' name='clouds-per-cycle' id='five' value=5>
-                    </div>
-
-                    <div>
-                        <label for='six'>Six</label>
-                        <input type='radio' name='clouds-per-cycle' id='six' value=6>
-                    </div>
-
-                    <div>
-                        <label for='seven'>Seven</label>
-                        <input type='radio' name='clouds-per-cycle' id='seven' value=7>
-                    </div>
-
-                    <div>
-                        <label for='eight'>Eight</label>
-                        <input type='radio' name='clouds-per-cycle' id='eight' value=8>
-                    </div>
-
-                    <div>
-                        <label for='nine'>Nine</label>
-                        <input type='radio' name='clouds-per-cycle' id='nine' value=9>
-                    </div>
-
-                    <div>
-                        <label for='ten'>Ten</label>
-                        <input type='radio' name='clouds-per-cycle' id='ten' value=10>
+        const HTML = 
+        `
+        <div id='settings-container' class='menu-container menu-container--closed'>
+            <div id='settings' class='menu'>
+                <h2 class='menu-title'>Settings</h2>
+                <hr>
+                <div>
+                    <label for='number-of-clouds-input'>Number of Clouds Per Cycle</label>
+                    <div class='input-flex-group'>
+                        <input id='number-of-clouds-input' class='input-flex-group__item' type='range' min='1' max='10' value='5'>
+                        <span id='number-of-clouds-span' class='input-flex-group__item'></span>
                     </div>
                 </div>
-            </form>
-            <button id='settings-close-button' class='button' type='button'>Close</button>
+                <div>
+                    <label for='orb-color-input'>Orb Color (1-360)</label>
+                    <div class='input-flex-group'>
+                        <input id='orb-color-input' class='input-flex-group__item' type='number' min='1' max='360' step='1' value='200'>
+                        <span id='orb-color-input-span' class='orb-color-input-span'></span>
+                    </div>
+                </div>
+                <div class='button-flex-group'>
+                    <button id='settings-default-button' class='button' type='button'>Default</button>
+                    <button id='settings-close-button' class='button' type='button'>Close</button>
+                </div>
+            </div>
+        </div>
         `;
-
-        this.container = main.shadow.getElementById('settings-container');
-        this.settings = main.shadow.getElementById('settings');
-        this.settings.innerHTML = innerHTML;
-
-        this.form = main.shadow.getElementById('form');
-
-        this.openButton = new SettingsOpenButton(main);
-        this.closeButton = new SettingsCloseButton(main);
-    }
-    returnNumberOfClouds() {
-        const radioButtons = this.form.getElementsByTagName('input');
-        const radioButtonsLength = radioButtons.length;
-
-        for (let i = 0; i < radioButtonsLength; ++i) {
-            if (radioButtons[i].checked) {
-                return radioButtons[i].value
-            }
-        }
-    }
-}
-
-class SettingsOpenButton extends Button {
-    constructor(main) {
-        super(main);
-        const innerHTML = 
+        const styles = 
         `
-        <svg class='icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-            <path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"/>
-        </svg>
+        .input-flex-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 32px;
+        }
+        .input-flex-group__item {
+            height: auto;
+        }
+        .orb-color-input-span {
+            display: block;
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+            background: radial-gradient(var(--inner-color), var(--outer-color));
+        }
+        .button-flex-group {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
         `;
 
-        this.button = main.shadow.getElementById('settings-button');
-        this.button.innerHTML = innerHTML;
-        this.button.addEventListener('click', () => {
-            this.toggleActiveClass();
-            this.main.settings.open();
-        });
-    }
-}
+        main.addHTML(HTML);
+        main.addStyles(styles);
 
-class SettingsCloseButton extends Button {
-    constructor(main) {
-        super(main);
-        this.button = main.shadow.getElementById('settings-close-button');
-        this.button.addEventListener('click', () => {
-            this.toggleActiveClass();
-            this.main.settings.close();
-        });
+        const defaultButton = main.shadow.getElementById('settings-default-button');
+        const openButton = main.shadow.getElementById('settings-button');
+        const closeButton = main.shadow.getElementById('settings-close-button');
+        
+        this.menu = main.shadow.getElementById('settings-container');
+        this.numberOfCloudsInput = new NumberOfCloudsInput(main);
+        this.orbColorInput = new OrbColorInput(main);
+        this.defaultButton = new DefaultButton(main, defaultButton);
+        this.openButton = new OpenMenuButton(main, openButton, this);
+        this.closeButton = new CloseMenuButton(main, closeButton, this);
+    }
+    get numberOfClouds() {
+        return this.numberOfCloudsInput.value;
+    }
+    reset() {
+        this.numberOfCloudsInput.reset();
+        this.orbColorInput.reset();
     }
 }

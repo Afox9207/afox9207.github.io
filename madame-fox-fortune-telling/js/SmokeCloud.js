@@ -1,73 +1,69 @@
 export class SmokeCloud {
     static image = new Image();
-    static frameSize = 64;
-    static maxFrame = 14;
-    static minSize = 8;
+    static maxSpeed = 0.14;
+    static maxSpeedOffset = SmokeCloud.maxSpeed / 2;
+    static minSize = 4;
     static maxSize = 64;
-    static growRate = 0.05;
-    static lifespan = 3000;
-    static frameInterval = 1000 / 24;
-    static maxSpeed = 0.04;
+    static lifespan = 2000;
+    static maxFrame = 14;
+    static frameRate = 1000 / 24;
+    static frameSize = 64;
+    static growRate = 0.05
 
     static {
-        this.image.src = '/madame-fox-fortune-telling/images/smoke.png';
+        this.image.src = './madame-fox-fortune-telling/images/smoke.png';
     }
 
-    constructor(orbRadius) {
-        this.x = orbRadius;
-        this.y = orbRadius;
-        this.dx = Math.random() * 2 * SmokeCloud.maxSpeed - SmokeCloud.maxSpeed;
-        this.dy = Math.random() * 2 * SmokeCloud.maxSpeed - SmokeCloud.maxSpeed;
+    constructor(orb) {
+        this.x = orb.radius;
+        this.y = orb.radius;
+        this.dx = Math.random() * SmokeCloud.maxSpeed - SmokeCloud.maxSpeedOffset;
+        this.dy = Math.random() * SmokeCloud.maxSpeed - SmokeCloud.maxSpeedOffset;
         this.size = SmokeCloud.minSize;
         this.frame = 0;
-
+        
         // update frame
         setInterval(() => {
-            this.frame < SmokeCloud.maxFrame ? ++this.frame : this.frame = 0;
-        }, SmokeCloud.frameInterval);
+            if (this.frame < SmokeCloud.maxFrame) {
+                ++this.frame;
+            } else {
+                this.frame = 0;
+            }
+        }, SmokeCloud.frameRate);
 
-        // lifespan
+        // handle lifespan
         setTimeout(() => {
-            this.lifeSpanIsOver = true;
+            this.lifespanIsOver = true;
         }, SmokeCloud.lifespan);
     }
     update(deltaTime) {
-        const updateSize = () => {
-            const change = SmokeCloud.growRate * deltaTime;
-            const offset = change / 2;
+        // size change
+        const sizeChange = SmokeCloud.growRate * deltaTime;
+        const offset = sizeChange * 0.5;
 
-            if (this.lifeSpanIsOver) {
-                // let shrink
-                this.size -= change;
-                this.x += offset;
-                this.y += offset;
-            } else {
-                // let grow to max size
-                if (this.size < SmokeCloud.maxSize) {
-                    this.size += change;
-                    this.x -= offset;
-                    this.y -= offset;
-                }
-            }
-        };
-        const updatePosition = () => {
-            this.x += this.dx * deltaTime;
-            this.y += this.dy * deltaTime;
-        };
-        const removeClouds = () => {
-            if (this.size < SmokeCloud.minSize) {
-                this.markedForDeletion = true;
-            }
-        };
+        if (this.lifespanIsOver) {
+            this.size -= sizeChange;
+            this.x += offset;
+            this.y += offset;
+        } else if (this.size < SmokeCloud.maxSize) {
+            this.size += sizeChange;
+            this.x -= offset;
+            this.y -= offset;
+        }
 
-        updateSize();
-        updatePosition();
-        removeClouds();
+        // check for clouds to remove
+        if (this.size < SmokeCloud.minSize) {
+            this.markedForDeletion = true;
+        }
+        
+        // change position
+        this.x += this.dx * deltaTime;
+        this.y += this.dy * deltaTime;
     }
     draw(ctx) {
         ctx.drawImage(
             SmokeCloud.image,
-            SmokeCloud.frameSize * this.frame,
+            this.frame * SmokeCloud.frameSize,
             0,
             SmokeCloud.frameSize,
             SmokeCloud.frameSize,

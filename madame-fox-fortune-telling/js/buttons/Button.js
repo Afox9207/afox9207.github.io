@@ -7,11 +7,6 @@ export class Button {
 
         const styles = 
         `
-        input,
-        button {
-            -webkit-tap-highlight-color: transparent;
-        }
-
         .button {
             display: block;
             margin-top: ${marginTop};
@@ -88,5 +83,11 @@ export class Button {
         setTimeout(() => {
             this.button.classList.remove('button--active');
         }, this.main.styles.buttonAnimationTime);
+    }
+    addListener() {
+        this.button.addEventListener('click', this.listener);
+    }
+    removeListener() {
+        this.button.removeEventListener('click', this.listener);
     }
 }

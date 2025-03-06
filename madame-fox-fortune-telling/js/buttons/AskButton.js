@@ -4,11 +4,11 @@ export class AskButton extends Button {
     constructor(main) {
         super(main);
         this.button = main.shadow.getElementById('ask-button');
-        this.button.addEventListener('click', () => {
-            if (!main.orb.isActive) {
-                main.orb.activate();
-                this.animate();
-            }
-        });
+        this.listener = function() {
+            main.askButton.removeListener();
+            main.askButton.animate();
+            main.orb.activate();
+        }
+        this.addListener();
     }
 }

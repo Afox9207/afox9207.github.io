@@ -1,9 +1,10 @@
 import { Menu } from "./Menu.js";
-import { NumberOfCloudsInput } from "./NumberOfCloudsInput.js";
-import { OrbColorInput } from "./OrbColorInput.js";
-import { DefaultButton } from "./DefaultButton.js";
-import { OpenMenuButton } from "./OpenMenuButton.js";
-import { CloseMenuButton } from "./CloseMenuButton.js";
+import { NumberOfCloudsInput } from "../inputs/NumberOfCloudsInput.js";
+import { OrbColorInput } from "../inputs/OrbColorInput.js";
+import { DefaultButton } from "../buttons/DefaultButton.js";
+import { SettingsButton } from "../buttons/SettingsButton.js";
+import { SettingsCloseButton } from "../buttons/SettingsCloseButton.js";
+
 
 export class Settings extends Menu {
     constructor(main) {
@@ -13,7 +14,6 @@ export class Settings extends Menu {
         <div id='settings-container' class='menu-container menu-container--closed'>
             <div id='settings' class='menu'>
                 <h2 class='menu-title'>Settings</h2>
-                <hr>
                 <div>
                     <label for='number-of-clouds-input'>Number of Clouds Per Cycle</label>
                     <div class='input-flex-group'>
@@ -24,7 +24,7 @@ export class Settings extends Menu {
                 <div>
                     <label for='orb-color-input'>Orb Color (1-360)</label>
                     <div class='input-flex-group'>
-                        <input id='orb-color-input' class='input-flex-group__item' type='number' min='1' max='360' step='1' value='200'>
+                        <input id='orb-color-input' class='input-flex-group__item' type='number' min='1' max='360' step='1'>
                         <span id='orb-color-input-span' class='orb-color-input-span'></span>
                     </div>
                 </div>
@@ -63,16 +63,16 @@ export class Settings extends Menu {
         main.addHTML(HTML);
         main.addStyles(styles);
 
-        const defaultButton = main.shadow.getElementById('settings-default-button');
-        const openButton = main.shadow.getElementById('settings-button');
-        const closeButton = main.shadow.getElementById('settings-close-button');
+        this.defaultButtonElement = main.shadow.getElementById('settings-default-button');
+        this.openButtonElement = main.shadow.getElementById('settings-button');
+        this.closeButtonElement = main.shadow.getElementById('settings-close-button');
         
-        this.menu = main.shadow.getElementById('settings-container');
+        this.menuElement = main.shadow.getElementById('settings-container');
         this.numberOfCloudsInput = new NumberOfCloudsInput(main);
         this.orbColorInput = new OrbColorInput(main);
-        this.defaultButton = new DefaultButton(main, defaultButton);
-        this.openButton = new OpenMenuButton(main, openButton, this);
-        this.closeButton = new CloseMenuButton(main, closeButton, this);
+        this.defaultButton = new DefaultButton(this);
+        this.openButton = new SettingsButton(this);
+        this.closeButton = new SettingsCloseButton(this);
     }
     get numberOfClouds() {
         return this.numberOfCloudsInput.value;

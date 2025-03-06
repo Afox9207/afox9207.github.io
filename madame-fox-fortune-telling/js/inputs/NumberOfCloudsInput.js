@@ -1,5 +1,8 @@
-export class NumberOfCloudsInput {
+import { Input } from "./Input.js";
+
+export class NumberOfCloudsInput extends Input {
     constructor(main) {
+        super();
         this.input = main.shadow.getElementById('number-of-clouds-input');
         this.span = main.shadow.getElementById('number-of-clouds-span');
         
@@ -7,9 +10,9 @@ export class NumberOfCloudsInput {
         this.value = this.input.value;
         this.span.innerText = this.input.value;
 
-        this.input.addEventListener('input', () => {
-            this.changeValue();
-        });
+        this.listener = function() {
+            main.settings.numberOfCloudsInput.changeValue();
+        }
     }
     changeValue() {
         this.value = this.input.value;

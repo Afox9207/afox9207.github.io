@@ -5,9 +5,7 @@ export class Background {
 
         const HTML = 
         `
-        <div id='background' class='background'>
-            <div id='light' class='light'></div>
-        </div>
+        <div id='background' class='background'></div>
         `;
         const styles = 
         `

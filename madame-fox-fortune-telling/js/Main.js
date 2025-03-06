@@ -1,9 +1,10 @@
 import { Background } from "./Background.js";
+import { Title } from "./Title.js";
 import { ButtonGroup } from "./ButtonGroup.js";
-import { Info } from "./Info.js";
-import { Settings } from "./Settings.js";
+import { Info } from "./menus/Info.js";
+import { Settings } from "./menus/Settings.js";
 import { Orb } from "./Orb.js";
-import { AskButton } from "./AskButton.js";
+import { AskButton } from "./buttons/AskButton.js";
 
 class Main {
     constructor() {
@@ -20,7 +21,8 @@ class Main {
             backgroundTransitionTime: 1500,
             orbGlowTransitionTime: 1500,
             orbActiveTime: 7000,
-            answerTransitionTime: 1625
+            answerTransitionTime: 1625,
+            titleTransitionTime: 1500
         };
 
         const gameArea = document.getElementById('game-area');
@@ -34,6 +36,7 @@ class Main {
                 font: inherit;
                 font-family: Arial, Helvetica, sans-serif;
                 text-wrap: pretty;
+                -webkit-tap-highlight-color: transparent;
             }
             .container {
                 display: grid;
@@ -53,6 +56,7 @@ class Main {
         this.background= new Background(this);
         this.buttonGroup = new ButtonGroup(this);
         this.orb = new Orb(this);
+        this.title = new Title(this);
         this.info = new Info(this);
         this.settings = new Settings(this);
         this.askButton = new AskButton(this);
@@ -82,7 +86,7 @@ class Main {
             this.orb.removeSmokeClouds();
             this.orb.updateSmokeClouds(deltaTime);
             this.orb.drawSmokeClouds();
-            this.orb.checkIfSmokeCloudsAreGone();
+            this.orb.checkForSmokeClouds();
         };
         drawNextFrame(0);
     }

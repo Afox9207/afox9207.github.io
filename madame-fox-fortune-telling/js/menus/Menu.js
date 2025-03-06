@@ -31,12 +31,12 @@ export class Menu {
             color: ${main.styles.textColor};
         }
         .menu-title {
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid ${main.styles.borderColor};
             font-size: 20px;
             font-weight: 700;
             color: ${main.styles.boldTextColor};
-        }
-        hr {
-            margin-block: 8px;
         }
         .menu em {
             color: ${main.styles.boldTextColor};
@@ -50,13 +50,13 @@ export class Menu {
         this.isActive = false;
     }
     open() {
-        this.menu.classList.remove('menu-container--closed');
+        this.menuElement.classList.remove('menu-container--closed');
     }
     close() {
-        this.menu.classList.add('menu-container--closing');
+        this.menuElement.classList.add('menu-container--closing');
         setTimeout(() => {
-            this.menu.classList.remove('menu-container--closing');
-            this.menu.classList.add('menu-container--closed');
+            this.menuElement.classList.remove('menu-container--closing');
+            this.menuElement.classList.add('menu-container--closed');
         }, this.main.styles.menuTransitionTime);
     }
 }

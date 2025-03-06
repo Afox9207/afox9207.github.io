@@ -1,4 +1,4 @@
-import { FullscreenButton } from "./FullscreenButton.js";
+import { FullscreenButton } from "./buttons/FullscreenButton.js";
 
 export class ButtonGroup {
     constructor(main) {

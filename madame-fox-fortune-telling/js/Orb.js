@@ -7,7 +7,8 @@ export class Orb {
         this.diameter = 320;
 
         const HTML = 
-        `<div class='orb-container'>
+        `<div id='orb-container' class='orb-container'>
+            <h1 id='title' class='title'>Madame Fox's Fortune Telling</h1>
             <div id='orb' class='orb'>
                 <p id='answer' class='answer'></p>
                 <canvas id='canvas' class='canvas'></canvas>
@@ -83,7 +84,6 @@ export class Orb {
         this.orb = main.shadow.getElementById('orb');
         this.answer = main.shadow.getElementById('answer');
         this.radius = this.diameter / 2;
-        this.isOff = true;
         this.smokeClouds = [];
 
         const canvas = main.shadow.getElementById('canvas');
@@ -92,15 +92,14 @@ export class Orb {
         this.ctx = canvas.getContext('2d');
 
         this.hue = 225;
-        this.setColor(this.hue);
     }
     get colors() {
         const colors = {
             hue: this.hue,
             saturation: 100,
             innerLightValue: 75,
-            outerLightValue: 50,
-            transparency: 0.5
+            outerLightValue: 0,
+            transparency: 0.25
         };
         return colors;
     }
@@ -121,7 +120,7 @@ export class Orb {
     darken() {
         this.orb.classList.remove('orb--active');
     }
-    generateAnswer() {
+    showAnswer() {
         const answers = [
             'It is certain',
             'It is decidedly so',
@@ -146,27 +145,26 @@ export class Orb {
         ];
         const randomIndex = Math.floor(Math.random() * 20);
 
-        return answers[randomIndex];
-    }
-    showAnswer() {
-        this.answer.innerText = this.generateAnswer();
+        this.answer.innerText = answers[randomIndex];
         this.answer.classList.add('answer--active');
     }
     hideAnswer() {
         this.answer.classList.remove('answer--active');
     }
     activate() {
-        this.isOff = false;
         this.hideAnswer();
         this.lightUp();
         this.main.background.lightUp();
+        this.main.title.lightUp();
         this.createSmokeCloudsInterval = setInterval(() => {
             this.createSmokeClouds();
         }, 1000 / 60);
         setTimeout(() => {
+            this.startCheckingForSmokeClouds = true;
             this.showAnswer();
             this.darken();
             this.main.background.darken();
+            this.main.title.darken();
             clearInterval(this.createSmokeCloudsInterval);
         }, this.main.styles.orbActiveTime);
     }
@@ -191,9 +189,9 @@ export class Orb {
             cloud.draw(this.ctx);
         });
     }
-    checkIfSmokeCloudsAreGone() {
-        if (!this.smokeClouds.length && !this.isOff) {
-            this.isOff = true;
+    checkForSmokeClouds() {
+        if (this.startCheckingForSmokeClouds && !this.smokeClouds.length) {
+            this.main.askButton.addListener();
         }
     }
 }

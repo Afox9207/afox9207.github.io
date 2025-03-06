@@ -34,6 +34,7 @@ export class Orb {
             width: ${this.diameter}px;
             height: ${this.diameter}px;
             border-radius: 50%;
+            overflow: hidden;
             background: radial-gradient(var(--inner-color), var(--outer-color));
             box-shadow:
             -1px -1px ${defaultBoxShadowBlur}px var(--outer-color),

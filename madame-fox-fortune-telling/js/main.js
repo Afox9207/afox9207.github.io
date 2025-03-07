@@ -41,10 +41,9 @@ class Main {
             .container {
                 display: grid;
                 grid-template-rows: auto 1fr;
-                position: relative;
-                padding: 16px;
                 min-height: 100vh;
                 min-height: 100dvh;
+                padding: 16px;
             }
         </style>
         <div id='container' class='container'></div>

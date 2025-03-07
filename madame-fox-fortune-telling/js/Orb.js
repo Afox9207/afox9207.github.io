@@ -3,17 +3,19 @@ import { SmokeCloud } from "./SmokeCloud.js";
 export class Orb {
     constructor(main) {
         const defaultBoxShadowBlur = 0;
-        const activeBoxShadowBlur = 16;
+        const activeBoxShadowBlur = 32;
         this.diameter = 320;
 
         const HTML = 
-        `<div id='orb-container' class='orb-container'>
+        `
+        <div class='content'>
             <h1 id='title' class='title'>Madame Fox's Fortune Telling</h1>
             <div id='orb' class='orb'>
                 <p id='answer' class='answer'></p>
                 <canvas id='canvas' class='canvas'></canvas>
+                <div id='orb-filter' class='orb-filter'></div>
             </div>
-            <button id='ask-button' class='button button--center' type='button'>ASK</button>
+            <button id='ask-button' class='button button--center button--ask' type='button'>ASK</button>
         </div>
         `;
         const styles = 
@@ -22,9 +24,14 @@ export class Orb {
             --inner-color;
             --outer-color;
         }
-        .orb-container {
+        .content {
+            place-self: center;
             display: grid;
-            place-content: center;
+            grid-template-rows: auto;
+            row-gap: 16px;
+            align-items: center;
+            height: 100%;
+            max-height: 640px;
         }
         .orb {
             display: grid;
@@ -35,7 +42,6 @@ export class Orb {
             height: ${this.diameter}px;
             border-radius: 50%;
             overflow: hidden;
-            background: radial-gradient(var(--inner-color), var(--outer-color));
             box-shadow:
             -1px -1px ${defaultBoxShadowBlur}px var(--outer-color),
             -1px 1px ${defaultBoxShadowBlur}px var(--outer-color),
@@ -50,14 +56,21 @@ export class Orb {
             1px -1px ${activeBoxShadowBlur}px var(--outer-color),
             1px 1px ${activeBoxShadowBlur}px var(--outer-color);
         }
+        .orb-filter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(var(--inner-color), var(--outer-color));
+        }
         .answer {
-            position: relative;
             padding: 16px;
             font-size: 32px;
             text-align: center;
             color: ${main.styles.boldTextColor};
             font-weight: 700;
-            z-index: -1;
             opacity: 0;
             scale: 0;
             transition: opacity ${main.styles.answerTransitionTime}ms linear,
@@ -74,7 +87,7 @@ export class Orb {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            z-index: -1;
+            overflow: hidden;
         }
         `;
 

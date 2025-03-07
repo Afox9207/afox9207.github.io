@@ -29,8 +29,8 @@ export class Settings extends Menu {
                     </div>
                 </div>
                 <div class='button-flex-group'>
-                    <button id='settings-default-button' class='button' type='button'>Default</button>
-                    <button id='settings-close-button' class='button' type='button'>Close</button>
+                    <button id='settings-default-button' class='button button--menu' type='button'>Default</button>
+                    <button id='settings-close-button' class='button button--menu' type='button'>Close</button>
                 </div>
             </div>
         </div>

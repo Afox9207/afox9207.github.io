@@ -1,14 +1,12 @@
 export class Title {
     constructor(main) {
-        const marginBottom = '32px';
-
         this.defaultYOffset = 0;
         this.newYOffset = -4;
 
         const styles = 
         `
         .title {
-            margin-bottom: ${marginBottom};
+            align-self: center;
             font-size: 40px;
             text-align: center;
             font-weight: 700;

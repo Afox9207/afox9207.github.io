@@ -15,7 +15,7 @@ export class Info extends Menu {
                     Think of a <em>YES</em> or <em>NO</em> question and press the <em>ASK</em> button.
                     She will use her mystical orb and answer the question that you seek.
                 </p>
-                <button id='info-close-button' class='button button--center' type='button'>Close</button>
+                <button id='info-close-button' class='button button--menu button--center' type='button'>Close</button>
             </div>
         </div>
         `;

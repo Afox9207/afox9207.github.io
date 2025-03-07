@@ -1,6 +1,7 @@
 export class Button {
     constructor(main, button) {
         const padding = '8px 16px';
+        const askButtonPadding = '16px 32px';
         const marginTop = '16px';
         const boxShadowBlur = '1px';
         const activeBoxShadowBlur = '4px'; 
@@ -9,7 +10,6 @@ export class Button {
         `
         .button {
             display: block;
-            margin-top: ${marginTop};
             padding: ${padding};
             border: 1px solid ${main.styles.borderColor};
             border-radius: ${main.styles.borderRadius};
@@ -26,8 +26,15 @@ export class Button {
             animation-timing-function: linear;
             animation-duration: ${main.styles.buttonAnimationTime}ms;
         }
+        .button--ask {
+            align-self: center;
+            padding: ${askButtonPadding};
+        }
         .button--center {
             margin-inline: auto;
+        }
+        .button--menu {
+            margin-top: ${marginTop};
         }
         .icon-button {
             border: none;

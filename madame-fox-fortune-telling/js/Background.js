@@ -10,13 +10,14 @@ export class Background {
         const styles = 
         `
         .background {
-            position: absolute;
-            left: 0;
+            position: fixed;
             top: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url(./madame-fox-fortune-telling/images/background.jpg);
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
             z-index: -1;
+            background-image: url(./madame-fox-fortune-telling/images/background.jpg);
             filter: brightness(${defaultBrightness});
             transition: filter ${main.styles.backgroundTransitionTime}ms ease-in-out;
         }
@@ -35,6 +36,5 @@ export class Background {
     }
     darken() {
         this.background.classList.remove('background--lit-up');
-
     }
 }

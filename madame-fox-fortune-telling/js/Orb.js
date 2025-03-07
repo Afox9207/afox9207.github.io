@@ -42,19 +42,8 @@ export class Orb {
             height: ${this.diameter}px;
             border-radius: 50%;
             overflow: hidden;
-            box-shadow:
-            -1px -1px ${defaultBoxShadowBlur}px var(--outer-color),
-            -1px 1px ${defaultBoxShadowBlur}px var(--outer-color),
-            1px -1px ${defaultBoxShadowBlur}px var(--outer-color),
-            1px 1px ${defaultBoxShadowBlur}px var(--outer-color);
+            
             transition: box-shadow ${main.styles.orbGlowTransitionTime}ms ease-in-out;
-        }
-        .orb--active {
-            box-shadow:
-            -1px -1px ${activeBoxShadowBlur}px var(--outer-color),
-            -1px 1px ${activeBoxShadowBlur}px var(--outer-color),
-            1px -1px ${activeBoxShadowBlur}px var(--outer-color),
-            1px 1px ${activeBoxShadowBlur}px var(--outer-color);
         }
         .orb-filter {
             position: absolute;
@@ -64,6 +53,18 @@ export class Orb {
             height: 100%;
             border-radius: 50%;
             background: radial-gradient(var(--inner-color), var(--outer-color));
+            box-shadow:
+            -1px -1px ${defaultBoxShadowBlur}px var(--outer-color),
+            -1px 1px ${defaultBoxShadowBlur}px var(--outer-color),
+            1px -1px ${defaultBoxShadowBlur}px var(--outer-color),
+            1px 1px ${defaultBoxShadowBlur}px var(--outer-color);
+        }
+        .orb-filter--active {
+            box-shadow:
+            -1px -1px ${activeBoxShadowBlur}px var(--outer-color),
+            -1px 1px ${activeBoxShadowBlur}px var(--outer-color),
+            1px -1px ${activeBoxShadowBlur}px var(--outer-color),
+            1px 1px ${activeBoxShadowBlur}px var(--outer-color);
         }
         .answer {
             padding: 16px;
@@ -95,7 +96,7 @@ export class Orb {
         main.addStyles(styles);
 
         this.main = main;
-        this.orb = main.shadow.getElementById('orb');
+        this.orbFilter = main.shadow.getElementById('orb-filter');
         this.answer = main.shadow.getElementById('answer');
         this.radius = this.diameter / 2;
         this.smokeClouds = [];
@@ -129,10 +130,10 @@ export class Orb {
         this.hue = hue;
     }
     lightUp() {
-        this.orb.classList.add('orb--active');
+        this.orbFilter.classList.add('orb-filter--active');
     }
     darken() {
-        this.orb.classList.remove('orb--active');
+        this.orbFilter.classList.remove('orb--filter-active');
     }
     showAnswer() {
         const answers = [

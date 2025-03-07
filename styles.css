@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+
+.container {
+    --maxWidth: 1184px;
+    --margin-inline: 16px;
+
+    max-width: var(--maxWidth);
+    width: calc(100 - 2 * var(--margin-inline));
+    margin-inline: auto;
+}

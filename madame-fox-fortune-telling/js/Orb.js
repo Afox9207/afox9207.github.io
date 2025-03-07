@@ -41,9 +41,6 @@ export class Orb {
             width: ${this.diameter}px;
             height: ${this.diameter}px;
             border-radius: 50%;
-            overflow: hidden;
-            
-            transition: box-shadow ${main.styles.orbGlowTransitionTime}ms ease-in-out;
         }
         .orb-filter {
             position: absolute;
@@ -58,6 +55,7 @@ export class Orb {
             -1px 1px ${defaultBoxShadowBlur}px var(--outer-color),
             1px -1px ${defaultBoxShadowBlur}px var(--outer-color),
             1px 1px ${defaultBoxShadowBlur}px var(--outer-color);
+            transition: box-shadow ${main.styles.orbGlowTransitionTime}ms ease-in-out;
         }
         .orb-filter--active {
             box-shadow:
@@ -88,7 +86,6 @@ export class Orb {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            overflow: hidden;
         }
         `;
 
@@ -133,7 +130,7 @@ export class Orb {
         this.orbFilter.classList.add('orb-filter--active');
     }
     darken() {
-        this.orbFilter.classList.remove('orb--filter-active');
+        this.orbFilter.classList.remove('orb-filter--active');
     }
     showAnswer() {
         const answers = [

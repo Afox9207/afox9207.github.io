@@ -30,7 +30,7 @@ export class ButtonGroup {
         .button-group {
             display: flex;
             justify-content: flex-end;
-            gap: 8px;
+            gap: 16px;
         }
         `;
         

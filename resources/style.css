@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    font-family: Arial, Helvetica, sans-serif;
+    text-wrap: pretty;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    font-size: 62.5%;
+    --base-font-size: 1.6rem;
+    --font-size-scale: 1.333;
+    --font-size-sm: (var(--base-font-size));
+    --font-size-md: calc(var(--font-size-sm) * var(--font-size-scale));
+    --font-size-lg: calc(var(--font-size-md) * var(--font-size-scale));
+    --font-size-xl: calc(var(--font-size-lg) * var(--font-size-scale));
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+.container {
+    --margin-inline: 2.4rem;
+
+    max-width: 118.4rem;
+    width: calc(100% - 2 * var(--margin-inline));
+    margin-inline: auto;
+}
+
+.page-title {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+}
+
+.heading {
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+}
